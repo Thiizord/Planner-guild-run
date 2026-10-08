@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# GuildRun Team Builder Pro (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Planejador de times para o jogo **GuildRun**: monte 3 titulares + 3 reservas, equipe até 5
+itens por personagem, adicione relíquias globais ilimitadas, veja sinergias ativas e
+estatísticas totais (DPS, HP, defesa...), exporte a build em JSON e persista tudo no
+localStorage.
 
-## Available Scripts
+Migração fiel do projeto original em JavaScript puro (ES6 Modules), mantendo toda a
+lógica de negócio e o visual (CSS global glassmorphism/neon) — ver `CHANGELOG.md` para
+o histórico completo e o `Guia de Migração` na pasta raiz do workspace para as decisões
+arquiteturais.
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+- **React 19** + **Vite 7** (CRA foi descontinuado; conversão documentada no changelog)
+- Estado global: **Context API + useReducer** (um único Context, sem Redux)
+- CSS global único (`src/index.css`, copiado integralmente do vanilla)
+- Persistência: `localStorage` (chave `guildrun_pro`, mesmo formato do original)
+- Drag & drop: **HTML5 nativo** (`onDragStart`/`onDragOver`/`onDrop`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Rodando
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+npm run dev      # servidor de desenvolvimento → http://localhost:5173
+npm run build    # build de produção → dist/
+npm run preview  # pré-visualizar o build
+```
 
-### `npm test`
+> ⚠️ Abra a **URL do dev server** no navegador — abrir `index.html` direto via
+> `file://` não funciona em projetos empacotados (o JS é servido/compilado pelo Vite).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts auxiliares
 
-### `npm run build`
+```bash
+node scripts/sync-game-data.js        # valida os dados do planner contra a pasta do jogo (Steam)
+node scripts/smoke-ssr.mjs            # smoke test: renderiza o app inteiro via SSR e valida o reducer
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Python (usa UnityPy instalado em ../../.pylibs — extração de arte do jogo):
+python scripts/extract-game-images.py --inventory   # inventaria as 4205 texturas/sprites do jogo
+python scripts/extract-game-images.py --extract     # extrai heróis/itens/relíquias para public/assets/
+python scripts/wire-image-fields.py                 # insere image/icon no data.js (idempotente)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+O `sync-game-data.js` é **somente leitura** na pasta do jogo e reporta versão
+(build-guid), inventário dos assets e validação dos 25 heróis e 7 classes contra os
+arquivos legíveis. Ele não altera `src/data/` automaticamente — mudanças de stats
+exigem extração com AssetRipper/UABE (documentado no changelog).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Estrutura
 
-### `npm run eject`
+```
+guildrun-planner/
+├── index.html                  # entrada (Vite)
+├── vite.config.js              # plugin-react + watcher tolerante a edições de agente IA
+├── public/
+│   └── assets/
+│       ├── heroes/             # retratos dos 25 heróis (18 extraídos do jogo + 7 fornecidos pelo usuário)
+│       ├── items/              # ícones oficiais dos itens (163 PNGs)
+│       └── relics/             # ícones oficiais das relíquias (293 PNGs)
+└── src/
+    ├── main.jsx                # render + AppProvider
+    ├── App.jsx                 # layout raiz (espelha o index.html vanilla) + ESC fecha modais
+    ├── index.css               # CSS original do projeto (global)
+    ├── data/
+    │   └── data.js            # HEROES_DATA, ITEMS_DATA, RELICS_DATA, SYNERGY_CONFIG, CLASS_ICONS
+    ├── context/
+    │   ├── AppContext.jsx      # Context + Provider + persistência automática
+    │   ├── initialState.js     # estado inicial + loadState/saveState (chave guildrun_pro)
+    │   └── reducer.js          # todas as ações (incl. toasts, com as mensagens originais)
+    ├── hooks/
+    │   ├── useApp.js           # useContext(AppContext)
+    │   ├── useToast.js         # showToast(msg, type)
+    │   └── useLocalStorage.js  # hook genérico de persistência
+    ├── utils/                   # funções puras (estado passado como parâmetro)
+    │   ├── helpers.js
+    │   ├── synergies.js
+    │   ├── stats.js
+    │   └── exportBuild.js
+    └── components/
+        ├── Header.jsx          # Limpar / Exportar
+        ├── SynergyPanel.jsx    # sinergias ativas
+        ├── StatsPanel.jsx      # estatísticas totais + DPS
+        ├── HeroPool/           # pool com filtros e busca + drag
+        ├── Team/               # grid de slots, mover/remover, mini-itens, tooltip
+        ├── Items/              # 5 slots do personagem selecionado + modal de itens
+        ├── Relics/             # lista de relíquias + modal de seleção
+        └── Toast/              # container de toasts
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Origem dos dados e arte
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Arte**: 25/25 heróis com imagem real — 18 retratos extraídos do jogo via UnityPy
+  (Apêndice A.5 do guia; inclui Grace/Kai via retratos 2048²→256²) e 7 fornecidos pelo
+  usuário (Aria, Karsu, Pollen, Rip, Rowan, Yuuna, Zuri, que não têm arte nesta build
+  da demo). Ícones de 163/170 itens e 293/298 relíquias também extraídos do jogo.
+- **Dados** (stats/classes): os do projeto vanilla. Os stats numéricos do jogo estão
+  serializados em binário; a validação exigiria AssetRipper (ver `CHANGELOG.md`).
+- Os 9 heróis do roster visual novo da demo ficam fora do planner (decisão do usuário;
+  referência em `scripts/preview-new-heroes/`).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> ⚠️ Assets do jogo são propriedade da Leyline/Steam — planner de fã, uso pessoal.
