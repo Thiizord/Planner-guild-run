@@ -1,11 +1,11 @@
-// exportBuild.js - Exportar build (utilitário: recebe estado e showToast por parâmetro)
+// exportBuild.js - Exportar build (utilitário: recebe o estado por parâmetro)
+// Feedback é inline no Header (botão "✔ Copiado!") — sem popups.
 
-import { getCharacter, getRelic } from './helpers.js';
+import { getCharacter, getRelic, getTeamCharactersData } from './helpers.js';
 import { calculateSynergies } from './synergies.js';
 import { calculateTeamStats, calculateDPS } from './stats.js';
-import { getTeamCharactersData } from './helpers.js';
 
-export function exportBuild(state, showToast) {
+export function exportBuild(state) {
   const teamChars = getTeamCharactersData(state.main, state.reserve);
   const stats = calculateTeamStats(teamChars, state.items, state.teamRelics);
   const data = {
@@ -18,10 +18,8 @@ export function exportBuild(state, showToast) {
     dps: calculateDPS(stats)
   };
   const json = JSON.stringify(data, null, 2);
-  navigator.clipboard.writeText(json).then(() => {
-    showToast('📋 Build copiada para a área de transferência!', 'success');
-  }).catch(() => {
-    showToast('📋 Abra o console para ver a build', 'info');
-    console.log('Build exportada:', json);
+  return navigator.clipboard.writeText(json).then(() => true).catch(() => {
+    console.log('Build exportada (clipboard indisponível):', json);
+    return false;
   });
 }

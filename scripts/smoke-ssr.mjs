@@ -61,12 +61,11 @@ try {
   check(html, 'Nível ', 'nível da sinergia');
   check(html, 'Estatísticas do Time', 'painel de estatísticas');
   check(html, 'DPS:', 'display de DPS');
-  check(html, 'id="toastContainer"', 'container de toasts montado');
   check(html, 'Adicionar Relíquia', 'botão de adicionar relíquia');
   check(html, 'Nenhuma relíquia equipada', 'estado vazio de relíquias');
-  const semModais = !html.includes('modal-overlay') && !html.includes('id="itemModal"') && !html.includes('id="relicModal"');
-  console.log(`  ${semModais ? '✔' : '✘'} fluxo sem modais (nenhum modal-overlay/itemModal/relicModal no HTML)`);
-  if (!semModais) failures++;
+  const semPopups = !html.includes('modal-overlay') && !html.includes('id="itemModal"') && !html.includes('id="relicModal"') && !html.includes('toast-container');
+  console.log(`  ${semPopups ? '✔' : '✘'} fluxo 100% sem popups (sem modais, sem toasts)`);
+  if (!semPopups) failures++;
   check(html, 'mini-empty clickable', 'mini-itens do personagem selecionado são clicáveis');
 
   console.log('\nArte do jogo (Apêndice A.5):');
@@ -82,35 +81,39 @@ try {
   console.log(`\ncreateInitialState: ${ok0 ? '✔ time de exemplo + seleção inicial' : '✘ estado inicial errado: ' + JSON.stringify(s0)}`);
 
   const s1 = reducer(s0, { type: 'REMOVE_CHAR', teamType: 'main', index: 0 });
-  const ok1 = s1.main[0] === null && s1.selectedCharId === null && s1.toasts.length === 1;
-  console.log(`reducer REMOVE_CHAR: ${ok1 ? '✔ remove, desseleciona e toast' : '✘ ' + JSON.stringify(s1)}`);
+  const ok1 = s1.main[0] === null && s1.selectedCharId === null;
+  console.log(`reducer REMOVE_CHAR: ${ok1 ? '✔ remove e desseleciona' : '✘ ' + JSON.stringify(s1)}`);
 
   const s2 = reducer(s1, { type: 'SELECT_CHAR', charId: 'kai' });
-  const ok2 = s2.main[0] === 'kai' && s2.toasts.length === 2 && /escalado como titular/.test(s2.toasts[1].message);
-  console.log(`reducer SELECT_CHAR: ${ok2 ? '✔ preenche primeira vaga de titular + toast' : '✘ ' + JSON.stringify(s2)}`);
+  const ok2 = s2.main[0] === 'kai';
+  console.log(`reducer SELECT_CHAR: ${ok2 ? '✔ preenche primeira vaga de titular' : '✘ ' + JSON.stringify(s2)}`);
 
   const s3 = reducer(s2, { type: 'SELECT_CHAR', charId: 'kai' });
-  const ok3 = s3.toasts[s3.toasts.length - 1].message === 'Kai já está no time!' && s3.main[0] === 'kai';
-  console.log(`reducer SELECT_CHAR duplicado: ${ok3 ? '✔ rejeita com toast' : '✘ ' + JSON.stringify(s3)}`);
+  const ok3 = s3 === s2; // duplicado: nenhuma mudança (sem popup)
+  console.log(`reducer SELECT_CHAR duplicado: ${ok3 ? '✔ rejeita silenciosamente (estado intacto)' : '✘ ' + JSON.stringify(s3)}`);
 
   const s4 = reducer(s3, { type: 'ADD_RELIC', relicId: 'rel_001' });
-  const ok4 = s4.teamRelics.includes('rel_001') && s4.toasts.length === s3.toasts.length;
-  console.log(`reducer ADD_RELIC: ${ok4 ? '✔ adiciona, sem popup' : '✘ ' + JSON.stringify(s4)}`);
+  const ok4 = s4.teamRelics.includes('rel_001');
+  console.log(`reducer ADD_RELIC: ${ok4 ? '✔ adiciona relíquia' : '✘ ' + JSON.stringify(s4)}`);
 
-  // SET_ITEM / REMOVE_ITEM: equipar e desequipar sem toasts (seletor inline)
+  // SET_ITEM / REMOVE_ITEM: equipar e desequipar (seletor inline)
   const sEq = reducer(s4, { type: 'SET_ITEM', charId: 'kai', slot: 0, itemId: 'item_001' });
-  const okEq = sEq.items.kai[0] === 'item_001' && sEq.toasts.length === s4.toasts.length;
-  console.log(`reducer SET_ITEM: ${okEq ? '✔ equipa item, sem popup' : '✘ ' + JSON.stringify(sEq)}`);
+  const okEq = sEq.items.kai[0] === 'item_001';
+  console.log(`reducer SET_ITEM: ${okEq ? '✔ equipa item' : '✘ ' + JSON.stringify(sEq)}`);
+
+  const sDup = reducer(sEq, { type: 'SET_ITEM', charId: 'kai', slot: 1, itemId: 'item_001' });
+  const okDup = sDup === sEq; // item duplicado em outro slot: nenhuma mudança
+  console.log(`reducer SET_ITEM duplicado: ${okDup ? '✔ rejeita silenciosamente' : '✘ ' + JSON.stringify(sDup)}`);
 
   const sRm = reducer(sEq, { type: 'REMOVE_ITEM', charId: 'kai', slot: 0 });
-  const okRm = sRm.items.kai[0] === null && sRm.toasts.length === sEq.toasts.length;
-  console.log(`reducer REMOVE_ITEM: ${okRm ? '✔ desequipa item, sem popup' : '✘ ' + JSON.stringify(sRm)}`);
+  const okRm = sRm.items.kai[0] === null;
+  console.log(`reducer REMOVE_ITEM: ${okRm ? '✔ desequipa item' : '✘ ' + JSON.stringify(sRm)}`);
 
-  // SELECT_SLOT: seleciona sem toast (novo fluxo sem popups)
+  // SELECT_SLOT: seleciona personagem (fluxo sem popups)
   // main = ['kai','dragomir','fiona'] — index 1 é o dragomir
   const sSel = reducer(sRm, { type: 'SELECT_SLOT', teamType: 'main', index: 1 });
-  const okSel = sSel.selectedCharId === 'dragomir' && sSel.toasts.length === sRm.toasts.length;
-  console.log(`reducer SELECT_SLOT: ${okSel ? '✔ seleciona, sem popup' : '✘ ' + JSON.stringify(sSel)}`);
+  const okSel = sSel.selectedCharId === 'dragomir';
+  console.log(`reducer SELECT_SLOT: ${okSel ? '✔ seleciona personagem' : '✘ ' + JSON.stringify(sSel)}`);
 
   // SWAP_SLOTS (arrastar dentro do time — trocar/mover posição)
   // estado aqui: main = ['kai','dragomir','fiona'], reserve = ['funke', null, null]
@@ -123,14 +126,14 @@ try {
   console.log(`reducer SWAP_SLOTS (move p/ vazio): ${okMv ? '✔ dragomir main[0] -> reserve[1]' : '✘ ' + JSON.stringify(sMv)}`);
 
   const sSelf = reducer(sMv, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 1, toType: 'main', toIndex: 1 });
-  const okSelf = sSelf.main[1] === 'kai' && sSelf.toasts.length === sMv.toasts.length;
-  console.log(`reducer SWAP_SLOTS (drop em si): ${okSelf ? '✔ no-op sem toast' : '✘ ' + JSON.stringify(sSelf)}`);
+  const okSelf = sSelf === sMv; // no-op: nenhuma mudança
+  console.log(`reducer SWAP_SLOTS (drop em si): ${okSelf ? '✔ no-op' : '✘ ' + JSON.stringify(sSelf)}`);
 
   const s5 = reducer(s4, { type: 'RESET_TEAM' });
   const ok5 = s5.main.every(v => v === null) && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
   console.log(`reducer RESET_TEAM: ${ok5 ? '✔ limpa tudo' : '✘ ' + JSON.stringify(s5)}`);
 
-  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okRm, okSel, okSw, okMv, okSelf, ok5].every(Boolean);
+  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okSw, okMv, okSelf, ok5].every(Boolean);
   console.log(todosOk
     ? '\n✅ SMOKE TEST COMPLETO PASSOU'
     : `\n❌ ${failures} falha(s) no smoke test`);

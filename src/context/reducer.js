@@ -1,61 +1,41 @@
 // reducer.js - Todas as ações do app (guia, Etapa 4)
 // Toda a lógica de modificação de estado passa por aqui (regra 6.3 do guia).
-// Os toasts foram movidos para o reducer (toasts são estado), mantendo
-// as mensagens originais de actions.js/dragdrop.js/modals.js/export.js.
+// Fluxo 100% sem popups (pedido do usuário): nenhum toast, nenhum modal —
+// o feedback visual acontece inline na própria interface.
 
-import { getCharacter, getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
-
-// showToast via reducer: anexa o toast ao estado (equivalente ao toast.js vanilla)
-function withToast(state, message, type = 'info') {
-  const id = state.toastSeq;
-  return {
-    ...state,
-    toasts: [...state.toasts, { id, message, type }],
-    toastSeq: state.toastSeq + 1
-  };
-}
+import { getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
 
 export function reducer(state, action) {
   switch (action.type) {
     // ---------- Escalar personagem (actions.js → selectChar) ----------
     case 'SELECT_CHAR': {
       const charId = action.charId;
-      const char = getCharacter(charId);
-      if (!char) return state;
-      if (isInTeam(state.main, state.reserve, charId)) {
-        return withToast(state, `${char.name} já está no time!`, 'info');
-      }
+      if (isInTeam(state.main, state.reserve, charId)) return state;
       const mainIdx = state.main.indexOf(null);
       if (mainIdx !== -1) {
         const main = [...state.main];
         main[mainIdx] = charId;
-        return withToast({ ...state, main }, `${char.name} escalado como titular!`, 'success');
+        return { ...state, main };
       }
       const reserveIdx = state.reserve.indexOf(null);
       if (reserveIdx !== -1) {
         const reserve = [...state.reserve];
         reserve[reserveIdx] = charId;
-        return withToast({ ...state, reserve }, `${char.name} escalado como reserva!`, 'success');
+        return { ...state, reserve };
       }
-      return withToast(state, 'Time cheio! (6/6)', 'error');
+      return state; // time cheio — sem popup
     }
 
     // ---------- Arrastar para slot (dragdrop.js → dropOnSlot) ----------
     case 'DROP_CHAR': {
       const { charId, teamType, slotIndex } = action;
       if (!charId) return state; // sem dragData (dragdrop.js vanilla)
-      const char = getCharacter(charId);
-      if (!char) return state;
-      if (isInTeam(state.main, state.reserve, charId)) {
-        return withToast(state, `${char.name} já está no time!`, 'info');
-      }
+      if (isInTeam(state.main, state.reserve, charId)) return state;
       const arr = teamType === 'main' ? state.main : state.reserve;
-      if (arr[slotIndex] !== null) {
-        return withToast(state, 'Slot ocupado!', 'error');
-      }
+      if (arr[slotIndex] !== null) return state; // slot ocupado — sem popup
       const newArr = [...arr];
       newArr[slotIndex] = charId;
-      return withToast({ ...state, [teamType]: newArr }, `${char.name} escalado com sucesso!`, 'success');
+      return { ...state, [teamType]: newArr };
     }
 
     // ---------- Arrastar entre slots do time (trocar/mover posição) ----------
@@ -69,27 +49,25 @@ export function reducer(state, action) {
       if (!moving || moving !== charId) return state; // slot de origem mudou desde o dragstart
       if (fromType === toType && fromIndex === toIndex) return state; // dropou em si mesmo
 
-      let main = state.main;
-      let reserve = state.reserve;
       if (fromType === toType) {
         // mesmo grupo: troca os dois (ou move para vazio)
         const arr = [...fromArr];
         const target = arr[toIndex];
         arr[toIndex] = moving;
         arr[fromIndex] = target; // null vira vazio; personagem = swap
-        if (fromType === 'main') main = arr; else reserve = arr;
-      } else {
-        // entre titulares e reservas
-        const from = [...fromArr];
-        const to = [...toArr];
-        const target = to[toIndex];
-        to[toIndex] = moving;
-        from[fromIndex] = target; // swap entre grupos; null vira vazio
-        main = fromType === 'main' ? from : to;
-        reserve = fromType === 'main' ? to : from;
+        return { ...state, [fromType]: arr };
       }
-      const char = getCharacter(moving);
-      return withToast({ ...state, main, reserve }, `🔄 ${char ? char.name : 'Personagem'} movido.`, 'info');
+      // entre titulares e reservas
+      const from = [...fromArr];
+      const to = [...toArr];
+      const target = to[toIndex];
+      to[toIndex] = moving;
+      from[fromIndex] = target; // swap entre grupos; null vira vazio
+      return {
+        ...state,
+        main: fromType === 'main' ? from : to,
+        reserve: fromType === 'main' ? to : from
+      };
     }
 
     // ---------- Remover personagem (actions.js → removeChar) ----------
@@ -98,15 +76,10 @@ export function reducer(state, action) {
       const arr = teamType === 'main' ? state.main : state.reserve;
       const charId = arr[index];
       if (!charId) return state;
-      const char = getCharacter(charId);
       const newArr = [...arr];
       newArr[index] = null;
       const selectedCharId = state.selectedCharId === charId ? null : state.selectedCharId;
-      return withToast(
-        { ...state, [teamType]: newArr, selectedCharId },
-        `${char ? char.name : 'Personagem'} removido.`,
-        'info'
-      );
+      return { ...state, [teamType]: newArr, selectedCharId };
     }
 
     // ---------- Mover entre titulares/reservas (actions.js → moveChar) ----------
@@ -115,29 +88,22 @@ export function reducer(state, action) {
       const arr = teamType === 'main' ? state.main : state.reserve;
       const charId = arr[index];
       if (!charId) return state;
-      const char = getCharacter(charId);
-      if (!char) return state;
       if (teamType === 'main') {
         const reserveIdx = state.reserve.indexOf(null);
-        if (reserveIdx === -1) {
-          return withToast(state, 'Reserva está cheia!', 'error');
-        }
+        if (reserveIdx === -1) return state; // reserva cheia — sem popup
         const reserve = [...state.reserve];
         reserve[reserveIdx] = charId;
         const main = [...state.main];
         main[index] = null;
-        return withToast({ ...state, main, reserve }, `${char.name} movido para reserva.`, 'success');
-      } else {
-        const mainIdx = state.main.indexOf(null);
-        if (mainIdx === -1) {
-          return withToast(state, 'Titulares estão cheios!', 'error');
-        }
-        const main = [...state.main];
-        main[mainIdx] = charId;
-        const reserve = [...state.reserve];
-        reserve[index] = null;
-        return withToast({ ...state, main, reserve }, `${char.name} movido para titulares.`, 'success');
+        return { ...state, main, reserve };
       }
+      const mainIdx = state.main.indexOf(null);
+      if (mainIdx === -1) return state; // titulares cheios — sem popup
+      const main = [...state.main];
+      main[mainIdx] = charId;
+      const reserve = [...state.reserve];
+      reserve[index] = null;
+      return { ...state, main, reserve };
     }
 
     // ---------- Selecionar slot (actions.js → selectSlot; sem popup) ----------
@@ -198,34 +164,16 @@ export function reducer(state, action) {
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.value };
 
-    // ---------- Resetar (export.js → resetTeam) ----------
+    // ---------- Resetar (export.js → resetTeam; confirmação inline no Header) ----------
     case 'RESET_TEAM': {
-      return withToast(
-        {
-          ...state,
-          main: [null, null, null],
-          reserve: [null, null, null],
-          items: {},
-          teamRelics: [],
-          selectedCharId: null
-        },
-        '🔄 Time resetado.',
-        'info'
-      );
-    }
-
-    // ---------- Toasts (toast.js vanilla) ----------
-    case 'ADD_TOAST': {
-      const { id, message, toastType } = action;
       return {
         ...state,
-        toasts: [...state.toasts, { id, message, type: toastType }],
-        toastSeq: state.toastSeq + 1
+        main: [null, null, null],
+        reserve: [null, null, null],
+        items: {},
+        teamRelics: [],
+        selectedCharId: null
       };
-    }
-    case 'REMOVE_TOAST': {
-      const { id } = action;
-      return { ...state, toasts: state.toasts.filter(t => t.id !== id) };
     }
 
     default:

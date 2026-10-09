@@ -1,5 +1,23 @@
 # Changelog — GuildRun Team Builder Pro (migração Vanilla JS → React)
 
+## [0.6.0] — Zero popups: toasts removidos + Limpar corrigido
+
+- **Sistema de toasts inteiro removido**: `ToastContainer`, hook `useToast`, estado
+  `toasts`/`toastSeq`, actions `ADD_TOAST`/`REMOVE_TOAST` e o CSS de toast. Nenhuma
+  notificação flutuante existe mais — o app é 100% silencioso; ações inválidas
+  simplesmente não mudam o estado.
+- **Limpar corrigido**: o `confirm()` nativo era bloqueado em browsers embutidos
+  (VS Code Simple Browser), fazendo o botão falhar em silêncio. Agora a confirmação
+  é inline no próprio botão: 1º clique arma "⚠️ Confirmar limpeza?" (pulsa vermelho,
+  desarma sozinho em 4s), 2º clique limpa.
+- **Exportar com feedback inline**: o botão mostra "✔ Copiado!" por 2s (fallback
+  no console se o clipboard estiver indisponível) — sem toast.
+- **Modelo de itens mais óbvio**: os mini-itens do herói selecionado agora **pulsam
+  em âmbar** (animação sutil), sinalizando que são a entrada para equipar — clique
+  abre o seletor inline; item atual (✅ verde) desequipa.
+- Smoke test atualizado: garante que o HTML renderizado **não tem toasts nem modais**
+  e que ações inválidas devolvem o estado intacto (identidade de referência).
+
 ## [0.5.0] — Fluxo sem modais: seletores inline (pedido do usuário)
 
 - **Removidos**: modal de itens (`ItemModal`), modal de relíquias (`RelicModal`),

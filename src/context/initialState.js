@@ -13,9 +13,7 @@ export const initialState = {
   selectedCharId: null,
   tierFilter: 'all',
   classFilter: 'all',
-  searchQuery: '',
-  toasts: [],              // era: filhos diretos do #toastContainer (toast.js vanilla)
-  toastSeq: 0              // contador de ids de toast (reducer puro)
+  searchQuery: ''
 };
 
 // Equivalente ao loadState() do state.js vanilla (retorna os dados persistidos ou null)

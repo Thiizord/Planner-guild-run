@@ -9,7 +9,6 @@ import StatsPanel from './components/StatsPanel.jsx';
 import HeroPool from './components/HeroPool/HeroPool.jsx';
 import TeamGrid from './components/Team/TeamGrid.jsx';
 import RelicList from './components/Relics/RelicList.jsx';
-import ToastContainer from './components/Toast/ToastContainer.jsx';
 
 export default function App() {
   const { state } = useApp();
@@ -35,7 +34,6 @@ export default function App() {
         </div>
 
         <RelicList />
-        <ToastContainer />
       </div>
     </div>
   );
