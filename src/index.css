@@ -105,11 +105,7 @@ button { font-family: var(--font-body); }
 
 .app { position: relative; z-index: 1; max-width: 1560px; margin: 0 auto; padding: 10px 14px 18px; }
 
-/* padrão hexagonal sutil (utilitário) */
-.hex-grid-bg {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><g fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1'><path d='M28 1 53 15.5v29L28 59 3 44.5v-29z'/><path d='M28 59 53 73.5v0L28 88 3 73.5v0z' stroke-opacity='0.035'/></g></svg>");
-  background-size: 56px 97px;
-}
+/* utilitário removido — o fundo agora é limpo, sem padrão de hexágonos */
 
 /* --------------------------- 3. LAYOUT PRINCIPAL ------------------------ */
 .banner {
@@ -389,20 +385,20 @@ button { font-family: var(--font-body); }
   margin: 8px 12px 4px;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius);
-  padding: 18px 14px 12px;
+  padding: 14px 10px 10px;
   background:
-    radial-gradient(120% 90% at 50% 0%, rgba(47, 107, 63, 0.10), transparent 60%),
+    radial-gradient(140% 80% at 50% 0%, rgba(47, 107, 63, 0.12), transparent 55%),
+    radial-gradient(100% 60% at 50% 100%, rgba(138, 109, 47, 0.05), transparent 50%),
     var(--inset);
   overflow: hidden;
 }
 
-/* padrão hexagonal do campo */
-.battlefield::before {
+/* bruma ambiental sutil — sem padrão de hexágonos */
+.battlefield::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><g fill='none' stroke='%23c9a24b' stroke-opacity='0.07' stroke-width='1'><path d='M28 1 53 15.5v29L28 59 3 44.5v-29z'/></g></svg>");
-  background-size: 56px 97px;
+  background: radial-gradient(80% 50% at 50% 30%, transparent 40%, rgba(10, 14, 11, 0.3));
   pointer-events: none;
 }
 
@@ -1468,25 +1464,368 @@ button { font-family: var(--font-body); }
 }
 
 /* ============================================================
-   TABULEIRO HEXAGONAL
+   TABULEIRO HEXAGONAL — GRID 7x4 (25 celulas, padrao do jogo)
    ============================================================ */
 :root {
-  --hex-w: 96px;
-  --hex-h: 108px;
+  --hex-w: 56px;
+  --hex-h: 64px;
+  --hex-gap: 2px;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --hex-w: 50px;
+    --hex-h: 58px;
+  }
 }
 
 @media (max-width: 760px) {
-  :root { --hex-w: 76px; --hex-h: 86px; }
-  .hex-row { gap: 4px; }
-  .hex-row.offset { margin-top: calc(var(--hex-h) * -0.08); }
+  :root {
+    --hex-w: 38px;
+    --hex-h: 44px;
+    --hex-gap: 1px;
+  }
 }
 
-.hex-board { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
-.hex-row { display: flex; gap: 8px; }
-.hex-row-offset {
-  margin-top: calc(var(--hex-h) * -0.15);
-  margin-left: calc(var(--hex-w) * 0.5);
+.hex-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--hex-h) * -0.22);
+  position: relative;
+  z-index: 1;
+  padding: 4px 0;
 }
+
+.hex-grid-row {
+  display: flex;
+  gap: var(--hex-gap);
+}
+
+/* linhas impares deslocadas meio hex para intercalar (honeycomb) */
+.hex-grid-row.offset {
+  margin-left: calc(var(--hex-w) / 2 + var(--hex-gap) / 2);
+}
+
+/* ---- celula hexagonal ---- */
+.hex-cell {
+  position: relative;
+  width: var(--hex-w);
+  height: var(--hex-h);
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), filter 0.18s var(--ease);
+  animation: unitIn 0.2s var(--ease);
+}
+
+.hex-cell .hex-portrait {
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--gold), var(--gold-dim) 60%, #55401c);
+  padding: 2px;
+  position: relative;
+  transition: filter 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.hex-cell .hex-portrait img,
+.hex-cell .hex-portrait .avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+  object-fit: cover;
+  background: var(--inset);
+  user-select: none;
+}
+
+.hex-cell .hex-portrait .avatar-initial {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+/* overlay DENTRO do hex: nome + mini-itens */
+.hex-cell .hex-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 4px 3px;
+  background: linear-gradient(transparent, rgba(10, 14, 11, 0.92) 55%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hex-cell .hex-overlay-name {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.1;
+}
+
+.hex-cell .hex-overlay-class {
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+  margin: 0;
+  color: var(--text-faint);
+  font-size: 8px;
+}
+
+.hex-cell .hex-overlay .mini-items {
+  justify-content: center;
+  gap: 1px;
+  margin-top: 1px;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.hex-cell .hex-overlay .mini-item {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  max-width: 12px;
+  border-radius: 2px;
+  font-size: 0;
+  border-width: 1px;
+}
+
+.hex-cell .hex-overlay .mini-item .mini-item-icon { width: 9px; height: 9px; }
+.hex-cell .hex-overlay .mini-item .mini-item-fallback { display: none; }
+
+/* contagem de itens */
+.hex-cell .hex-item-count {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: rgba(13, 18, 14, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 3px;
+  z-index: 3;
+  font-variant-numeric: tabular-nums;
+}
+
+.hex-cell .hex-item-count.has { color: var(--gold-bright); border-color: var(--gold-dim); }
+
+/* estados */
+.hex-cell.filled:hover { transform: scale(1.08); z-index: 5; }
+.hex-cell.filled:hover .hex-portrait { filter: brightness(1.15); }
+
+.hex-cell.selected .hex-portrait {
+  box-shadow: 0 0 0 2px rgba(233, 205, 126, 0.6), 0 0 12px rgba(201, 162, 75, 0.25);
+}
+
+.hex-cell.picked {
+  transform: translateY(-4px) scale(1.08);
+  z-index: 6;
+}
+
+.hex-cell.picked .hex-portrait {
+  box-shadow: 0 0 0 3px rgba(233, 205, 126, 0.7), 0 6px 18px rgba(201, 162, 75, 0.35);
+  animation: hexPulse 1.3s ease-in-out infinite;
+}
+
+.hex-cell.drag-over .hex-portrait {
+  box-shadow: 0 0 0 2px rgba(126, 217, 138, 0.5), 0 0 10px rgba(126, 217, 138, 0.2);
+}
+
+/* celula vazia */
+.hex-cell.empty .hex-portrait {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex-cell.empty .empty-portrait {
+  background: rgba(13, 18, 14, 0.35);
+}
+
+.hex-cell.empty .hex-plus {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--gold-dim);
+  opacity: 0.4;
+  transition: opacity 0.15s var(--ease), color 0.15s var(--ease);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+}
+
+.hex-cell.empty:hover .hex-plus,
+.hex-cell.empty.drag-over .hex-plus {
+  opacity: 1;
+  color: var(--green);
+}
+
+.hex-cell.empty.valid-target .hex-plus {
+  color: var(--gold-bright);
+  opacity: 0.8;
+  animation: hexPulse 1.5s ease-in-out infinite;
+}
+
+.hex-cell.filled.valid-target .hex-portrait {
+  box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.4);
+}
+
+/* tooltip */
+.hex-cell .hex-tooltip {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 15, 12, 0.97);
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  font-size: 10px;
+  color: var(--text);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s var(--ease);
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+
+.hex-cell:hover .hex-tooltip { opacity: 1; }
+
+/* ---- painel lateral de reservas ---- */
+.reserve-panel {
+  margin: 8px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+}
+
+.reserve-panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+
+.reserve-panel-title .badge { font-size: 10px; }
+
+.reserve-panel-slots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.reserve-panel-slot {
+  position: relative;
+  width: 78px;
+  padding: 6px 4px 4px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s);
+  background: var(--inset);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.reserve-panel-slot:hover { border-color: var(--gold-dim); }
+.reserve-panel-slot.selected { border-color: var(--gold); box-shadow: var(--glow-gold); }
+
+.reserve-panel-slot .rp-portrait {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--line);
+  display: block;
+}
+
+.reserve-panel-slot.selected .rp-portrait { border-color: var(--gold); }
+
+.reserve-panel-slot .rp-name {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+
+.reserve-panel-slot .rp-class {
+  font-size: 9px;
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 1px;
+}
+
+.reserve-panel-slot.empty {
+  border-style: dashed;
+  justify-content: center;
+  align-items: center;
+}
+
+.reserve-panel-slot.empty .rp-plus {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.reserve-panel-slot.empty:hover .rp-plus { opacity: 0.9; color: var(--green); }
+
+.rp-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(13, 18, 14, 0.9);
+  color: var(--text-faint);
+  font-size: 9px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s var(--ease);
+  padding: 0;
+}
+
+.reserve-panel-slot:hover .rp-remove { opacity: 1; }
+.rp-remove:hover { color: #f0a89f; border-color: var(--red); }
 
 .hex-cell {
   position: relative; width: var(--hex-w); display: flex; flex-direction: column;

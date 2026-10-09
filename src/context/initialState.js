@@ -1,37 +1,35 @@
-// initialState.js - Estado inicial (mesmo formato do state.js vanilla)
-// + carregamento do localStorage (mesma chave: 'guildrun_pro')
+// initialState.js - Estado inicial
+// Tabuleiro: 4 linhas x 7 colunas (honeycomb horizontal) = 26 hexagonos.
+// main tem 26 entradas. Limite: 3 herois ativos no tabuleiro.
+// Reservas ficam num painel lateral separado.
 
 import { getTeamChars } from '../utils/helpers.js';
 
 export const STORAGE_KEY = 'guildrun_pro';
+export const MAX_ACTIVE = 3;
+export const BOARD_SIZE = 26;
 
 export const initialState = {
-  main: [null, null, null],
+  main: new Array(BOARD_SIZE).fill(null),
   reserve: [null, null, null],
-  items: {},              // { charId: [itemId|null, ...5 slots] }
-  teamRelics: [],          // array de relicIds
+  items: {},
+  teamRelics: [],
   selectedCharId: null,
-  placementCharId: null,   // heroi "pego" para posicionamento ou movimentacao
-  placementFrom: null,      // { teamType, index } de origem (null = veio da biblioteca)
+  placementCharId: null,
+  placementFrom: null,
   tierFilter: 'all',
   classFilter: 'all',
   searchQuery: ''
 };
 
-// Equivalente ao loadState() do state.js vanilla (retorna os dados persistidos ou null)
 export function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    const data = JSON.parse(raw);
-    if (!data) return null;
-    return data;
-  } catch (e) {
-    return null;
-  }
+    return JSON.parse(raw);
+  } catch { return null; }
 }
 
-// Equivalente ao saveState() do state.js vanilla (persiste apenas o subconjunto salvo no original)
 export function saveState(data) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
@@ -45,30 +43,44 @@ export function saveState(data) {
   }
 }
 
-// Inicialização idêntica ao main.js vanilla:
-// carrega o estado salvo; se não houver time, cria o time inicial de exemplo
-// e seleciona o primeiro personagem.
+// Expande main de qualquer tamanho para BOARD_SIZE entradas
+function expandMain(oldMain) {
+  const expanded = new Array(BOARD_SIZE).fill(null);
+  if (!Array.isArray(oldMain)) return expanded;
+  if (oldMain.length >= BOARD_SIZE) return oldMain.slice(0, BOARD_SIZE);
+
+  // save antiga: realoca herois para o centro do tabuleiro
+  // centro do grid 4x7: linha 2 (indices 15-17)
+  const centerPositions = [15, 16, 17];
+  let placed = 0;
+  for (const id of oldMain) {
+    if (id && placed < centerPositions.length && placed < MAX_ACTIVE) {
+      expanded[centerPositions[placed]] = id;
+      placed++;
+    }
+  }
+  return expanded;
+}
+
 export function createInitialState() {
   const data = loadState();
-  let main = (data && data.main) || initialState.main;
+  let main = expandMain((data && data.main) || null);
   let reserve = (data && data.reserve) || initialState.reserve;
   const items = (data && data.items) || {};
   const teamRelics = (data && data.teamRelics) || [];
 
   if (!data || getTeamChars(main, reserve).length === 0) {
-    // Time inicial de exemplo
-    main = ['aria', 'dragomir', 'fiona'];
+    main = new Array(BOARD_SIZE).fill(null);
+    main[15] = 'dragomir';
+    main[16] = 'aria';
+    main[17] = 'fiona';
     reserve = ['funke', null, null];
   }
 
-  // Garante array de itens para cada personagem do time (main.js vanilla)
   const nextItems = { ...items };
   for (const id of getTeamChars(main, reserve)) {
     if (!nextItems[id]) nextItems[id] = [null, null, null, null, null];
   }
-
-  // Seleciona o primeiro personagem do time (main.js vanilla)
-  const selectedCharId = getTeamChars(main, reserve)[0] || null;
 
   return {
     ...initialState,
@@ -76,6 +88,6 @@ export function createInitialState() {
     reserve,
     items: nextItems,
     teamRelics,
-    selectedCharId
+    selectedCharId: getTeamChars(main, reserve)[0] || null
   };
 }

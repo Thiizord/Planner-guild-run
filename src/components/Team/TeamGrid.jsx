@@ -1,20 +1,20 @@
-// TeamGrid.jsx - Arena: tabuleiro hexagonal escalonado (3 titulares + 3 reservas).
-// Fluxo de clique: 1o clique seleciona (itens), 2o clique no mesmo heroi o pega
-// para mover, clique noutro hex move/troca. ESC ou clique no heroi cancela.
-// Drag & drop continua funcionando direto (posicionamento imediato).
+// TeamGrid.jsx - Arena: tabuleiro hexagonal 7x4 (25 celulas) + painel lateral de reservas.
+// Fluxo: 1o clique seleciona (itens), 2o clique no mesmo pega para mover,
+// clique em outro hex move/troca. ESC cancela. Drag&drop direto.
 
 import { useEffect, useState } from 'react';
 import { useApp } from '../../hooks/useApp.js';
-import { countMain, countReserve } from '../../utils/helpers.js';
-import HexCell from './HexCell.jsx';
+import { getCharacter, countMain, countReserve } from '../../utils/helpers.js';
+import HexBoard from './HexBoard.jsx';
 import Equipment from './Equipment.jsx';
 import ItemPicker from '../Items/ItemPicker.jsx';
+import ClassIcon from '../ClassIcon.jsx';
 
 export default function TeamGrid({ count }) {
   const { state, dispatch } = useApp();
   const [picker, setPicker] = useState(null);
 
-  // ESC cancela o posicionamento/movimentacao
+  // ESC cancela
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape' && state.placementCharId) {
@@ -25,100 +25,97 @@ export default function TeamGrid({ count }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [state.placementCharId, dispatch]);
 
-  // clique num hex: fluxo completo de selecao, pegar e mover/trocar
-  const handleHexClick = (type, index) => {
-    const arr = type === 'main' ? state.main : state.reserve;
-    const charId = arr[index];
+  // clique num hex do tabuleiro
+  const handleHexClick = (hexIndex) => {
+    const charId = state.main[hexIndex];
 
-    // ---- CASO 1: um heroi esta pego (posicionamento ou movimentacao ativa) ----
     if (state.placementCharId) {
-      // clicou no proprio heroi pego: cancela
       if (state.placementCharId === charId) {
         dispatch({ type: 'CLEAR_PLACEMENT_CHAR' });
         return;
       }
-
-      // veio do tabuleiro: move ou troca para qualquer hex
       if (state.placementFrom) {
         dispatch({
           type: 'SWAP_SLOTS',
           charId: state.placementCharId,
           fromType: state.placementFrom.teamType,
           fromIndex: state.placementFrom.index,
-          toType: type,
-          toIndex: index,
+          toType: 'main',
+          toIndex: hexIndex,
         });
-        return;
-      }
-
-      // veio da biblioteca: so coloca em hex vazio
-      if (!charId) {
+      } else if (!charId) {
         dispatch({
           type: 'DROP_CHAR',
           charId: state.placementCharId,
-          teamType: type,
-          slotIndex: index,
+          teamType: 'main',
+          slotIndex: hexIndex,
         });
       }
-      // hex ocupado + veio da biblioteca = operacao invalida, nao faz nada
       return;
     }
 
-    // ---- CASO 2: nenhum heroi pego ----
     if (charId) {
       if (state.selectedCharId === charId) {
-        // 2o clique no mesmo heroi: pega para MOVER
-        dispatch({ type: 'SET_PLACEMENT_CHAR', charId, fromType: type, fromIndex: index });
+        dispatch({ type: 'SET_PLACEMENT_CHAR', charId, fromType: 'main', fromIndex: hexIndex });
       } else {
-        // 1o clique: seleciona para ver itens
-        dispatch({ type: 'SELECT_SLOT', teamType: type, index });
+        dispatch({ type: 'SELECT_SLOT', teamType: 'main', index: hexIndex });
       }
     }
-    // hex vazio sem placement: nao faz nada
   };
 
-  const handleItemSlotClick = (type, index, slotIdx) => {
+  // clique num slot do painel de reservas
+  const handleReserveClick = (index) => {
+    const charId = state.reserve[index];
+
+    if (state.placementCharId && state.placementFrom) {
+      // move do tabuleiro para reserva
+      dispatch({
+        type: 'SWAP_SLOTS',
+        charId: state.placementCharId,
+        fromType: state.placementFrom.teamType,
+        fromIndex: state.placementFrom.index,
+        toType: 'reserve',
+        toIndex: index,
+      });
+      return;
+    }
+
+    if (charId) {
+      if (state.selectedCharId === charId) {
+        // pega da reserva para posicionar no tabuleiro
+        dispatch({ type: 'SET_PLACEMENT_CHAR', charId, fromType: 'reserve', fromIndex: index });
+      } else {
+        dispatch({ type: 'SELECT_SLOT', teamType: 'reserve', index });
+      }
+    }
+  };
+
+  // drop de drag num slot de reserva
+  const handleReserveDrop = (e, index) => {
+    e.preventDefault();
+    const raw = e.dataTransfer.getData('text/plain');
+    if (!raw) return;
+    try {
+      const drag = JSON.parse(raw);
+      if (drag.charId && drag.source === 'team') {
+        dispatch({
+          type: 'SWAP_SLOTS',
+          charId: drag.charId,
+          fromType: drag.teamType,
+          fromIndex: drag.index,
+          toType: 'reserve',
+          toIndex: index,
+        });
+      }
+    } catch { /* noop */ }
+  };
+
+  const handleItemSlotClick = (type, index, slot) => {
     const arr = type === 'main' ? state.main : state.reserve;
     const charId = arr[index];
     if (!charId) return;
-    setPicker({ charId, slot: slotIdx });
+    setPicker({ charId, slot });
   };
-
-  // determina o estado visual de cada celula
-  const getCellState = (charId, type, idx) => {
-    const isSelected = charId && state.selectedCharId === charId;
-    const isPicked = state.placementCharId === charId;
-    const isPlacementActive = Boolean(state.placementCharId);
-    const isFromBoard = Boolean(state.placementFrom);
-    const isSelf = isPicked && state.placementFrom?.teamType === type && state.placementFrom?.index === idx;
-
-    // alvos validos durante placement:
-    // da biblioteca: so hexes vazios
-    // do tabuleiro: qualquer hex (exceto a origem)
-    const isValidTarget = isPlacementActive && !isSelf && (isFromBoard || !charId);
-
-    return { isSelected, isPicked, isValidTarget, isPlacementActive };
-  };
-
-  const renderRow = (teamArr, type) =>
-    teamArr.map((charId, idx) => {
-      const cellState = getCellState(charId, type, idx);
-      return (
-        <HexCell
-          key={`${type}-${idx}`}
-          cellId={`${type}-${idx}`}
-          charId={charId}
-          type={type}
-          index={idx}
-          isSelected={cellState.isSelected}
-          isPicked={cellState.isPicked}
-          isValidTarget={cellState.isValidTarget}
-          isPlacementActive={cellState.isPlacementActive}
-          onItemSlotClick={handleItemSlotClick}
-          onHexClick={handleHexClick}
-        />
-      );
-    });
 
   return (
     <div className="arena panel">
@@ -129,21 +126,71 @@ export default function TeamGrid({ count }) {
       <div className="arena-sub">
         {state.placementCharId
           ? state.placementFrom
-            ? 'Clique num hexagono para mover/trocar — ESC cancela'
-            : 'Clique num hexagono vazio para posicionar — ESC cancela'
-          : 'Clique num heroi para selecionar · clique de novo para mover'}
+            ? 'Clique num hex ou reserva para mover / ESC cancela'
+            : 'Clique num hex vazio / ESC cancela'
+          : 'Clique num heroi para selecionar / de novo para mover / arraste'}
       </div>
 
-      <div className="battlefield hex-grid-bg">
-        <div className="hex-board">
-          <div className="hex-row" aria-label="Titulares">
-            {renderRow(state.main, 'main')}
-          </div>
-          <span className="visually-hidden" id="mainCount">{countMain(state.main)}/3</span>
-          <div className="hex-row hex-row-offset" aria-label="Reservas">
-            {renderRow(state.reserve, 'reserve')}
-          </div>
-          <span className="visually-hidden" id="reserveCount">{countReserve(state.reserve)}/3</span>
+      <div className="battlefield">
+        <HexBoard onHexClick={handleHexClick} onItemSlotClick={handleItemSlotClick} />
+        <span className="visually-hidden" id="mainCount">{countMain(state.main)}/3</span>
+      </div>
+
+      {/* painel lateral de reservas */}
+      <div className="reserve-panel" aria-label="Reservas">
+        <div className="reserve-panel-title">
+          <span>Reservas</span>
+          <span className="badge" id="reserveCount">{countReserve(state.reserve)}/3</span>
+        </div>
+        <div className="reserve-panel-slots">
+          {state.reserve.map((charId, idx) => {
+            const c = charId ? getCharacter(charId) : null;
+            if (!c) {
+              return (
+                <div
+                  key={`res-${idx}`}
+                  className="reserve-panel-slot empty"
+                  onClick={() => handleReserveClick(idx)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => handleReserveDrop(e, idx)}
+                >
+                  <span className="rp-plus">+</span>
+                </div>
+              );
+            }
+            return (
+              <div
+                key={`res-${idx}`}
+                className={`reserve-panel-slot ${state.selectedCharId === charId ? 'selected' : ''} ${state.placementCharId === charId ? 'picked' : ''}`}
+                onClick={() => handleReserveClick(idx)}
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'team', charId, teamType: 'reserve', index: idx }));
+                  e.dataTransfer.effectAllowed = 'move';
+                }}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => handleReserveDrop(e, idx)}
+                title={`${c.name} -- ${c.role}`}
+              >
+                <img src={c.image} alt={c.name} className="rp-portrait" draggable="false" />
+                <span className="rp-name">{c.name}</span>
+                <span className="rp-class">
+                  <ClassIcon name={c.class} size={10} />
+                  {c.class2 && <ClassIcon name={c.class2} size={10} />}
+                </span>
+                <button
+                  className="rp-remove"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch({ type: 'REMOVE_CHAR', teamType: 'reserve', index: idx });
+                  }}
+                  aria-label={`Remover ${c.name}`}
+                >
+                  X
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 

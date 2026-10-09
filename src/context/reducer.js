@@ -7,35 +7,52 @@ import { getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
 
 export function reducer(state, action) {
   switch (action.type) {
-    // ---------- Escalar personagem (actions.js → selectChar) ----------
+    // ---------- Escalar personagem (limite: MAX_ACTIVE ativos no tabuleiro hex) ----------
     case 'SELECT_CHAR': {
       const charId = action.charId;
       if (isInTeam(state.main, state.reserve, charId)) return state;
-      const mainIdx = state.main.indexOf(null);
-      if (mainIdx !== -1) {
-        const main = [...state.main];
-        main[mainIdx] = charId;
-        return { ...state, main };
+
+      const activeCount = state.main.filter((id) => id !== null).length;
+      if (activeCount < 3) {
+        const mainIdx = state.main.indexOf(null);
+        if (mainIdx !== -1) {
+          const main = [...state.main];
+          main[mainIdx] = charId;
+          return { ...state, main };
+        }
       }
+
+      // tabuleiro cheio: vai para reserva
       const reserveIdx = state.reserve.indexOf(null);
       if (reserveIdx !== -1) {
         const reserve = [...state.reserve];
         reserve[reserveIdx] = charId;
         return { ...state, reserve };
       }
-      return state; // time cheio — sem popup
+      return state;
     }
 
-    // ---------- Arrastar para slot (dragdrop.js → dropOnSlot) ----------
+    // ---------- Posicionar em hexagono especifico (drag/click) ----------
     case 'DROP_CHAR': {
       const { charId, teamType, slotIndex } = action;
-      if (!charId) return state; // sem dragData (dragdrop.js vanilla)
+      if (!charId) return state;
       if (isInTeam(state.main, state.reserve, charId)) return state;
-      const arr = teamType === 'main' ? state.main : state.reserve;
-      if (arr[slotIndex] !== null) return state; // slot ocupado — sem popup
-      const newArr = [...arr];
-      newArr[slotIndex] = charId;
-      return { ...state, [teamType]: newArr, placementCharId: null, placementFrom: null };
+
+      if (teamType === 'main') {
+        // limite de 3 ativos no tabuleiro
+        const activeCount = state.main.filter((id) => id !== null).length;
+        if (activeCount >= 3) return state;
+        if (state.main[slotIndex] !== null) return state;
+        const main = [...state.main];
+        main[slotIndex] = charId;
+        return { ...state, main, placementCharId: null, placementFrom: null };
+      }
+
+      // reserva
+      if (state.reserve[slotIndex] !== null) return state;
+      const reserve = [...state.reserve];
+      reserve[slotIndex] = charId;
+      return { ...state, reserve, placementCharId: null, placementFrom: null };
     }
 
     // ---------- Pegar heroi para posicionamento/movimentacao (2 cliques) ----------
@@ -185,11 +202,13 @@ export function reducer(state, action) {
     case 'RESET_TEAM': {
       return {
         ...state,
-        main: [null, null, null],
+        main: new Array(26).fill(null),
         reserve: [null, null, null],
         items: {},
         teamRelics: [],
-        selectedCharId: null
+        selectedCharId: null,
+        placementCharId: null,
+        placementFrom: null
       };
     }
 
