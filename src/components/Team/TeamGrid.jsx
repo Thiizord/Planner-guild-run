@@ -131,7 +131,8 @@ export default function TeamGrid({ count }) {
           : 'Clique num heroi para selecionar / de novo para mover / arraste'}
       </div>
 
-      <div className="battlefield">
+      {/* tabuleiro hexagonal — os hexágonos SÃO o campo de batalha */}
+      <div className="hex-battlefield">
         <HexBoard onHexClick={handleHexClick} onItemSlotClick={handleItemSlotClick} />
         <span className="visually-hidden" id="mainCount">{countMain(state.main)}/3</span>
       </div>
