@@ -1,4 +1,4 @@
-# ⚔️ GuildRun Team Builder Pro
+# GuildRun Team Builder Pro
 
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vitejs.dev)
@@ -12,7 +12,7 @@ estatísticas totais (DPS, HP, defesa...) — tudo com a **arte oficial do jogo*
 
 ---
 
-## 🎯 Por que este projeto existe
+## Por que este projeto existe
 
 Este planner nasceu de dois motivos:
 
@@ -27,7 +27,7 @@ Este planner nasceu de dois motivos:
    jogar: testar sinergias de classes, distribuir itens e relíquias, e comparar
    estatísticas sem precisar entrar no jogo.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - Pool dos 25 heróis com filtros por tier e classe + busca por nome/função
 - Escalar por clique ou **arrastar**; dentro do time, arrastar **troca posições**
@@ -41,7 +41,7 @@ Este planner nasceu de dois motivos:
 - Persistência automática no `localStorage` (recarregue e o time continua lá)
 - **Fluxo 100% sem popups**: nenhum modal, nenhum toast, nenhum `confirm()` nativo
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 Fluxo de dados unidirecional clássico do React, em camadas bem separadas:
 
@@ -73,7 +73,7 @@ Fluxo de dados unidirecional clássico do React, em camadas bem separadas:
 - **Persistência**: um `useEffect` no Provider sincroniza o subconjunto persistente
   (`main`, `reserve`, `items`, `teamRelics`) com o `localStorage`.
 
-## 🧰 Tecnologias e por que
+## Tecnologias e por que
 
 | Tecnologia | Motivo |
 |---|---|
@@ -86,7 +86,7 @@ Fluxo de dados unidirecional clássico do React, em camadas bem separadas:
 | **Python + UnityPy** (tooling) | Extração de assets Unity (`.assets`, bundles LZ4) direto por script, sem executáveis externos |
 | **AssetRipper** (tooling) | Leitura da `HeroSheet` oficial do jogo (stats reais) via API headless |
 
-## 📊 De onde vêm os dados e as imagens
+## De onde vêm os dados e as imagens
 
 O histórico de proveniência em três camadas (detalhado no `CHANGELOG.md`):
 
@@ -103,11 +103,11 @@ O histórico de proveniência em três camadas (detalhado no `CHANGELOG.md`):
    293 de relíquias). 7 heróis sem arte na build atual da demo foram fornecidos
    pelo autor; o banner do topo também é arte oficial fornecida pelo autor.
 
-> ⚠️ **Aviso legal**: GuildRun é propriedade da **Leyline**. Este é um projeto de
+> **Aviso legal**: GuildRun é propriedade da **Leyline**. Este é um projeto de
 > fã, sem fins comerciais, para uso pessoal/educacional. Os assets do jogo não
 > devem ser redistribuídos.
 
-## 🚀 Rodando
+## Rodando
 
 ```bash
 npm install
@@ -116,7 +116,7 @@ npm run build    # build de produção → dist/
 npm run preview  # pré-visualiza o build
 ```
 
-## 🔧 Scripts auxiliares
+## Scripts auxiliares
 
 ```bash
 # Qualidade
@@ -133,7 +133,7 @@ python scripts/wire-image-fields.py   # insere image/icon no data.js (idempotent
 > Os scripts Python usam o **UnityPy** instalado em `.pylibs/` do workspace (não
 > afetam o Python global).
 
-## 📁 Estrutura
+## Estrutura
 
 ```
 guildrun-planner/
@@ -163,7 +163,7 @@ guildrun-planner/
         └── Relics/             # lista + seletor inline
 ```
 
-## ✅ Qualidade
+## Qualidade
 
 - **Smoke test SSR** (`scripts/smoke-ssr.mjs`): renderiza a aplicação inteira em
   Node, valida time inicial, sinergias, contadores, arte, ausência de popups e 13
