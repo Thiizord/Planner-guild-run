@@ -56,11 +56,13 @@ try {
   check(html, '4/6', 'teamCount 4/6');
   check(html, '3/3', 'mainCount 3/3');
   check(html, '1/3', 'reserveCount 1/3');
+  check(html, 'Campo de Batalha', 'arena do time');
   check(html, 'Sinergias Ativas', 'painel de sinergias');
   check(html, '(2x)', 'sinergia Mage 2x ativa');
   check(html, 'Nível ', 'nível da sinergia');
   check(html, 'Estatísticas do Time', 'painel de estatísticas');
-  check(html, 'DPS:', 'display de DPS');
+  check(html, 'DPS estimado', 'display de DPS');
+  check(html, 'dpsDisplay', 'valor de DPS renderizado');
   check(html, 'Adicionar Relíquia', 'botão de adicionar relíquia');
   check(html, 'Nenhuma relíquia equipada', 'estado vazio de relíquias');
   const semPopups = !html.includes('modal-overlay') && !html.includes('id="itemModal"') && !html.includes('id="relicModal"') && !html.includes('toast-container');

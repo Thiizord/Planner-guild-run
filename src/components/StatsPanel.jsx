@@ -1,4 +1,5 @@
-// StatsPanel.jsx - Estatísticas totais e DPS (render.js → renderStats)
+// StatsPanel.jsx - Estatísticas do time: DPS em destaque + grade compacta de
+// atributos com os ícones oficiais de estatística.
 
 import { useApp } from '../hooks/useApp.js';
 import { getTeamCharactersData } from '../utils/helpers.js';
@@ -21,12 +22,19 @@ export default function StatsPanel() {
   const entries = Object.entries(stats).filter(([key]) => key !== 'id' && key !== 'name');
 
   return (
-    <div className="card glass" id="statsPanel">
-      <div className="card-header">
-        <h2><span className="neon-text">Estatísticas do Time</span></h2>
-        <span className="hint" id="dpsDisplay">DPS: {dps}</span>
+    <div className="panel" id="statsPanel" aria-label="Estatísticas">
+      <div className="panel-title">
+        <h2>Estatísticas do Time</h2>
       </div>
-      <div className="stats-grid" id="statsGrid">
+
+      <div className="dps-hero">
+        <div>
+          <div className="dps-label">DPS estimado</div>
+          <div className="dps-value" id="dpsDisplay">{dps}</div>
+        </div>
+      </div>
+
+      <div id="statsGrid">
         {entries.length === 0 ? (
           <div className="synergy-empty">Equipe heróis, itens e relíquias para ver as estatísticas.</div>
         ) : (
@@ -35,8 +43,8 @@ export default function StatsPanel() {
             const displayValue = typeof value === 'number' ? (Number.isInteger(value) ? value : value.toFixed(1)) : value;
             return (
               <div className="stat-item" key={key}>
-                <div className="stat-value">{displayValue}</div>
-                <div className="stat-label">{label}</div>
+                <span className="stat-label">{label}</span>
+                <span className="stat-value">{displayValue}</span>
               </div>
             );
           })

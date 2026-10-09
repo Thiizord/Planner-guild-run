@@ -24,9 +24,9 @@ export default function ItemPicker({ charId, slot, onClose }) {
   };
 
   return (
-    <div className="item-picker glass" id="itemPicker">
+    <div className="item-picker" id="itemPicker">
       <div className="modal-header">
-        <h3>Itens de <span className="neon-text">{char.name}</span> · Slot {slot + 1}</h3>
+        <h3>Itens de <span className="char-name-highlight">{char.name}</span> · Slot {slot + 1}</h3>
         <button className="close-btn" onClick={onClose} title="Fechar seletor">✕</button>
       </div>
       <div className="item-picker-hint">Clique para equipar · clique no item atual (destacado em verde) para remover</div>

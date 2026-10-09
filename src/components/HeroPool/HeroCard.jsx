@@ -1,32 +1,42 @@
-// HeroCard.jsx - Card de herói da pool (dragStart + selectChar vanilla)
-
-import { CLASS_ICONS } from '../../data/data.js';
+// HeroCard.jsx - Card compacto da biblioteca: retrato em moldura hexagonal
+// (cor por tier), nome, classe(s) e drag para escalar.
 
 export default function HeroCard({ hero, onSelect }) {
   const handleDragStart = (e) => {
-    // dragStart vanilla: { charId, source: 'pool' } + effectAllowed 'move'
     e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'pool', charId: hero.id }));
     e.dataTransfer.effectAllowed = 'move';
   };
 
   return (
     <div
-      className="char-card"
+      className="hero-card"
+      data-tier={hero.tier}
       data-id={hero.id}
       draggable="true"
       onDragStart={handleDragStart}
       onClick={() => onSelect(hero.id)}
+      title={`${hero.name} — ${hero.role}`}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect(hero.id);
+        }
+      }}
+      aria-label={`${hero.name}, ${hero.class}${hero.class2 ? ' e ' + hero.class2 : ''}, tier ${hero.tier}`}
     >
-      <span className="tier-badge">{hero.tier}</span>
-      <span className="class-badge">{CLASS_ICONS[hero.class] || ''} {hero.class}</span>
-      <div className="avatar">
+      <span className="tier-badge" aria-hidden="true">{hero.tier}</span>
+      <div className="hero-frame">
         {hero.image
-          ? <img src={hero.image} alt={hero.name} className="hero-portrait" draggable="false" />
-          : <span className="avatar-initial">{hero.name.charAt(0)}</span>}
+          ? <img src={hero.image} alt={hero.name} draggable="false" />
+          : <div className="avatar-initial">{hero.name.charAt(0)}</div>}
       </div>
-      <div className="name">{hero.name}</div>
-      <div className="role">{hero.role}</div>
-      <div className="drag-hint">↕ Arraste</div>
+      <div className="hero-name">{hero.name}</div>
+      <span className="class-badge">
+        {hero.class}{hero.class2 ? ` / ${hero.class2}` : ''}
+      </span>
+      <span className="drag-hint" aria-hidden="true">↕</span>
     </div>
   );
 }

@@ -1,6 +1,7 @@
-// Filters.jsx - Filtros de tier/classe e busca (main.js vanilla, inputs controlados)
+// Filters.jsx - Busca, chips de tier e classe (ícones oficiais) e ordenação.
 
 import { useApp } from '../../hooks/useApp.js';
+import { CLASS_ICONS } from '../../data/data.js';
 
 const TIER_OPTIONS = [
   { value: 'all', label: 'Todos' },
@@ -21,40 +22,56 @@ const CLASS_OPTIONS = [
   { value: 'Mage', label: '🔮 Mage' }
 ];
 
-export default function Filters() {
+export default function Filters({ sortBy, onSortChange }) {
   const { state, dispatch } = useApp();
 
   return (
     <div className="filters">
-      <div className="tier-filter" id="tierFilters">
-        {TIER_OPTIONS.map(opt => (
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar herói..."
+        value={state.searchQuery}
+        onChange={(e) => dispatch({ type: 'SET_SEARCH_QUERY', value: e.target.value })}
+        aria-label="Buscar herói por nome ou função"
+      />
+
+      <div className="chip-row" id="tierFilters" role="group" aria-label="Filtrar por tier">
+        {TIER_OPTIONS.map((opt) => (
           <button
             key={opt.value}
-            className={state.tierFilter === opt.value ? 'active' : ''}
+            className={`chip tier ${state.tierFilter === opt.value ? 'active' : ''}`}
+            data-tier={opt.value}
             onClick={() => dispatch({ type: 'SET_TIER_FILTER', value: opt.value })}
           >
             {opt.label}
           </button>
         ))}
       </div>
-      <div className="class-filter" id="classFilters">
-        {CLASS_OPTIONS.map(opt => (
+
+      <div className="chip-row" id="classFilters" role="group" aria-label="Filtrar por classe">
+        {CLASS_OPTIONS.map((opt) => (
           <button
             key={opt.value}
-            className={state.classFilter === opt.value ? 'active' : ''}
+            className={`chip ${state.classFilter === opt.value ? 'active' : ''}`}
             onClick={() => dispatch({ type: 'SET_CLASS_FILTER', value: opt.value })}
           >
             {opt.label}
           </button>
         ))}
       </div>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Buscar herói..."
-        value={state.searchQuery}
-        onChange={e => dispatch({ type: 'SET_SEARCH_QUERY', value: e.target.value })}
-      />
+
+      <div className="sort-row">
+        <label htmlFor="sortSelect">Ordenar por</label>
+        <select
+          id="sortSelect"
+          value={sortBy}
+          onChange={(e) => onSortChange(e.target.value)}
+        >
+          <option value="tier">Tier</option>
+          <option value="name">Nome</option>
+        </select>
+      </div>
     </div>
   );
 }

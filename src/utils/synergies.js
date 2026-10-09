@@ -32,3 +32,33 @@ export function calculateSynergies(teamChars) {
   }
   return activeSynergies;
 }
+
+// Análise completa de classes para o painel de sinergias (com limiares e
+// progresso — padrão do builder oficial). Aditivo: calculateSynergies
+// permanece intacta para a exportação da build.
+const THRESHOLDS = [2, 3, 4];
+
+export function analyzeClassCounts(teamChars) {
+  const counts = {};
+  for (const char of teamChars) {
+    for (const cls of [char.class, char.class2].filter(Boolean)) {
+      counts[cls] = (counts[cls] || 0) + 1;
+    }
+  }
+  return Object.entries(counts)
+    .map(([className, count]) => {
+      const config = SYNERGY_CONFIG[className] || {};
+      let level = 0;
+      for (const t of THRESHOLDS) if (count >= t) level = t;
+      const next = THRESHOLDS.find((t) => t > count) ?? null;
+      return {
+        class: className,
+        count,
+        level,
+        next,
+        icon: config.icon || '',
+        bonuses: config.bonuses || {}
+      };
+    })
+    .sort((a, b) => b.count - a.count || a.class.localeCompare(b.class));
+}

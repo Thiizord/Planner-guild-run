@@ -1,11 +1,10 @@
-// MiniItems.jsx - Miniaturas dos itens equipados num slot do time (v2 estética)
-// Antes: pílulas de texto com o nome do item. Agora: 5 mini-slots fixos com
-// os ícones oficiais extraídos do jogo e moldura colorida pela raridade.
+// MiniItems.jsx - Miniaturas dos itens equipados num slot do time.
+// 5 mini-slots fixos com ícones oficiais e moldura colorida pela raridade.
+// Quando o personagem está selecionado, ficam clicáveis (abrem o seletor inline).
 
 import { getItem } from '../../utils/helpers.js';
 
-// 'Épico' -> 'epico', 'Lendário' -> 'lendario' (o CSS original define as
-// classes sem acento — normalizar aqui finalmente ativa as cores da raridade)
+// 'Épico' -> 'epico', 'Lendário' -> 'lendario'
 const rarityClass = (r) => r
   .toLowerCase()
   .normalize('NFD')
@@ -17,14 +16,15 @@ export default function MiniItems({ items, interactive, onSlotClick }) {
       {items.map((itemId, idx) => {
         const item = itemId ? getItem(itemId) : null;
 
-        // slot vazio: quadradinho tracejado discreto (clicável quando interativo)
         if (!item) {
           return (
             <span
               key={idx}
               className={`mini-item mini-empty ${interactive ? 'clickable' : ''}`}
               title={interactive ? 'Equipar item' : undefined}
-              onClick={interactive && onSlotClick ? (e) => { e.stopPropagation(); onSlotClick(idx); } : undefined}
+              onClick={interactive && onSlotClick
+                ? (e) => { e.stopPropagation(); onSlotClick(idx); }
+                : undefined}
             />
           );
         }
@@ -34,8 +34,10 @@ export default function MiniItems({ items, interactive, onSlotClick }) {
           <span
             key={idx}
             className={`mini-item has-item rarity-${rarityClass(item.rarity)} ${interactive ? 'clickable' : ''}`}
-            title={`${item.name} (${statsText})${interactive ? ' — clique para trocar/remover' : ''}`}
-            onClick={interactive && onSlotClick ? (e) => { e.stopPropagation(); onSlotClick(idx); } : undefined}
+            title={`${item.name} (${statsText})${interactive ? ' — clique para trocar' : ''}`}
+            onClick={interactive && onSlotClick
+              ? (e) => { e.stopPropagation(); onSlotClick(idx); }
+              : undefined}
           >
             {item.icon
               ? <img src={item.icon} alt={item.name} className="mini-item-icon" draggable="false" />

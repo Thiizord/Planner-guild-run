@@ -1,13 +1,13 @@
-// App.jsx - Componente raiz (layout do index.html vanilla)
-// Fluxo de itens/relíquias SEM modais: seletores inline (pedido do usuário).
+// App.jsx - Layout raiz: topbar + banner + 3 zonas (análise | arena | biblioteca).
+// Fluxo sem popups preservado; arquitetura e reducer intactos.
 
 import { useApp } from './hooks/useApp.js';
 import { countTeam } from './utils/helpers.js';
 import Header from './components/Header.jsx';
-import SynergyPanel from './components/SynergyPanel.jsx';
-import StatsPanel from './components/StatsPanel.jsx';
 import HeroPool from './components/HeroPool/HeroPool.jsx';
 import TeamGrid from './components/Team/TeamGrid.jsx';
+import SynergyPanel from './components/SynergyPanel.jsx';
+import StatsPanel from './components/StatsPanel.jsx';
 import RelicList from './components/Relics/RelicList.jsx';
 
 export default function App() {
@@ -15,31 +15,32 @@ export default function App() {
 
   return (
     <div>
-      {/* PARTICLES BACKGROUND */}
+      {/* fundo ambiental (vinheta + bruma) */}
       <div id="particles-bg"></div>
 
       <div className="app" id="app">
         <Header />
 
-        {/* BANNER OFICIAL DO JOGO (fornecido pelo usuário) */}
+        {/* banner oficial do jogo (fornecido pelo autor) */}
         <div className="banner">
-          <img src="/assets/banner.webp" alt="GuildRun — Team Builder Pro" draggable="false" />
+          <img src="/assets/banner.webp" alt="GuildRun — banner oficial do jogo" draggable="false" />
         </div>
 
-        <SynergyPanel />
-        <StatsPanel />
-        <HeroPool />
+        <main className="layout">
+          <section className="col-analysis" aria-label="Análise da composição">
+            <SynergyPanel />
+            <StatsPanel />
+            <RelicList />
+          </section>
 
-        {/* TIME */}
-        <div className="card glass">
-          <div className="card-header">
-            <h2><span className="neon-text">Time</span> <span className="badge" id="teamCount">{countTeam(state.main, state.reserve)}/6</span></h2>
-            <span className="hint">Clique no personagem para selecionar · nos mini-itens, para equipar</span>
-          </div>
-          <TeamGrid />
-        </div>
+          <section className="col-arena" aria-label="Composição do time">
+            <TeamGrid count={countTeam(state.main, state.reserve)} />
+          </section>
 
-        <RelicList />
+          <section className="col-library" aria-label="Biblioteca de heróis">
+            <HeroPool />
+          </section>
+        </main>
       </div>
     </div>
   );
