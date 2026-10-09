@@ -3,7 +3,7 @@
 // Os toasts foram movidos para o reducer (toasts são estado), mantendo
 // as mensagens originais de actions.js/dragdrop.js/modals.js/export.js.
 
-import { getCharacter, getItem, getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
+import { getCharacter, getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
 
 // showToast via reducer: anexa o toast ao estado (equivalente ao toast.js vanilla)
 function withToast(state, message, type = 'info') {
@@ -140,43 +140,29 @@ export function reducer(state, action) {
       }
     }
 
-    // ---------- Selecionar slot (actions.js → selectSlot) ----------
+    // ---------- Selecionar slot (actions.js → selectSlot; sem popup) ----------
     case 'SELECT_SLOT': {
       const { teamType, index } = action;
       const arr = teamType === 'main' ? state.main : state.reserve;
       const charId = arr[index];
       if (charId) {
-        const char = getCharacter(charId);
-        return withToast(
-          { ...state, selectedCharId: charId },
-          `👤 ${char.name} selecionado - Edite os itens abaixo`,
-          'info'
-        );
+        return { ...state, selectedCharId: charId };
       }
-      return withToast(state, 'Slot vazio. Clique em um personagem da lista para escalar.', 'info');
+      return state;
     }
 
-    // ---------- Equipar item (modals.js → equipItem) ----------
+    // ---------- Equipar item (modals.js → equipItem; seletor inline, sem popup) ----------
     case 'SET_ITEM': {
       const { charId, slot, itemId } = action;
       if (!charId) return state;
       const items = getCharItems(state.items, charId);
       for (let i = 0; i < items.length; i++) {
         if (items[i] === itemId && i !== slot) {
-          return withToast(state, 'Item já equipado em outro slot!', 'error');
+          return state; // já equipado em outro slot — o seletor inline desabilita esse caso
         }
       }
       const nextCharItems = items.map((id, i) => (i === slot ? itemId : id));
-      const item = getItem(itemId);
-      return withToast(
-        {
-          ...state,
-          items: { ...state.items, [charId]: nextCharItems },
-          itemModal: { ...state.itemModal, open: false }
-        },
-        `✅ ${item ? item.name : 'Item'} equipado!`,
-        'success'
-      );
+      return { ...state, items: { ...state.items, [charId]: nextCharItems } };
     }
 
     // ---------- Remover item (desequipar slot) ----------
@@ -188,26 +174,20 @@ export function reducer(state, action) {
       return { ...state, items: { ...state.items, [charId]: nextCharItems } };
     }
 
-    // ---------- Relíquias (modals.js → addRelic / removeRelic) ----------
+    // ---------- Relíquias (modals.js → addRelic / removeRelic; seletor inline) ----------
     case 'ADD_RELIC': {
       const { relicId } = action;
       if (state.teamRelics.includes(relicId)) {
-        return withToast(state, 'Esta relíquia já está equipada!', 'error');
+        return state; // o seletor inline só lista relíquias disponíveis
       }
-      const relic = getRelic(relicId);
-      return withToast(
-        { ...state, teamRelics: [...state.teamRelics, relicId], relicModalOpen: false },
-        `🔮 ${relic ? relic.name : 'Relíquia'} equipada!`,
-        'success'
-      );
+      return { ...state, teamRelics: [...state.teamRelics, relicId] };
     }
 
     case 'REMOVE_RELIC': {
       const { index } = action;
-      const relic = getRelic(state.teamRelics[index]);
-      if (!relic) return state;
+      if (!getRelic(state.teamRelics[index])) return state;
       const teamRelics = state.teamRelics.filter((_, i) => i !== index);
-      return withToast({ ...state, teamRelics }, `🔄 ${relic.name} removida.`, 'info');
+      return { ...state, teamRelics };
     }
 
     // ---------- Filtros e busca (main.js vanilla) ----------
@@ -218,24 +198,6 @@ export function reducer(state, action) {
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.value };
 
-    // ---------- Modais (modals.js vanilla) ----------
-    case 'OPEN_ITEM_MODAL': {
-      const char = state.selectedCharId ? getCharacter(state.selectedCharId) : null;
-      if (!char) {
-        return withToast(state, 'Selecione um personagem do time primeiro.', 'error');
-      }
-      return {
-        ...state,
-        itemModal: { open: true, charId: char.id, slot: action.slot }
-      };
-    }
-    case 'CLOSE_ITEM_MODAL':
-      return { ...state, itemModal: { ...state.itemModal, open: false } };
-    case 'OPEN_RELIC_MODAL':
-      return { ...state, relicModalOpen: true };
-    case 'CLOSE_RELIC_MODAL':
-      return { ...state, relicModalOpen: false };
-
     // ---------- Resetar (export.js → resetTeam) ----------
     case 'RESET_TEAM': {
       return withToast(
@@ -245,9 +207,7 @@ export function reducer(state, action) {
           reserve: [null, null, null],
           items: {},
           teamRelics: [],
-          selectedCharId: null,
-          itemModal: { open: false, charId: null, slot: null },
-          relicModalOpen: false
+          selectedCharId: null
         },
         '🔄 Time resetado.',
         'info'

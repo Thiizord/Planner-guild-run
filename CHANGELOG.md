@@ -1,5 +1,25 @@
 # Changelog — GuildRun Team Builder Pro (migração Vanilla JS → React)
 
+## [0.5.0] — Fluxo sem modais: seletores inline (pedido do usuário)
+
+- **Removidos**: modal de itens (`ItemModal`), modal de relíquias (`RelicModal`),
+  seção de itens embaixo das reservas (`ItemSlots`), toasts de seleção de
+  personagem/equipar item/adicionar e remover relíquia, e o handler de ESC
+  (não existem mais modais).
+- **Itens direto no personagem selecionado**: os mini-itens do herói selecionado
+  no time ficam clicáveis; o clique abre o `ItemPicker` INLINE logo abaixo das
+  linhas do time (dentro do mesmo card). Clicar num item equipa/troca; clicar no
+  item atual (✅ destacado em verde) **desequipa** — novidade que o modal não tinha.
+- **Relíquias**: o botão "➕ Adicionar Relíquia" expande um grid inline no próprio
+  card, listando apenas as relíquias disponíveis (sem popup).
+- Reducer enxugado: actions `OPEN/CLOSE_ITEM_MODAL` e `OPEN/CLOSE_RELIC_MODAL`
+  removidas; campos `itemModal`/`relicModalOpen` fora do estado.
+- CSS: o chrome de modal saiu (`.modal-overlay`, `.modal`, `#modalCharInfo`);
+  `.modal-header`, `.close-btn`, `.item-list`, `.item-option`, `.relic-grid` e
+  `.relic-option` foram reaproveitados pelos seletores inline.
+- Smoke test atualizado: garante que NÃO há modais no HTML renderizado e valida
+  os fluxos sem popup (`SELECT_SLOT`, `SET_ITEM`, `REMOVE_ITEM`, `ADD_RELIC`).
+
 ## [0.4.0] — Stats oficiais do jogo + itens equipados v2
 
 ### Itens equipados — redesign estético

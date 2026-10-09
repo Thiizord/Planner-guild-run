@@ -61,12 +61,13 @@ try {
   check(html, 'Nível ', 'nível da sinergia');
   check(html, 'Estatísticas do Time', 'painel de estatísticas');
   check(html, 'DPS:', 'display de DPS');
-  check(html, 'id="itemModal"', 'modal de itens montado');
-  check(html, 'id="relicModal"', 'modal de relíquias montado');
   check(html, 'id="toastContainer"', 'container de toasts montado');
   check(html, 'Adicionar Relíquia', 'botão de adicionar relíquia');
   check(html, 'Nenhuma relíquia equipada', 'estado vazio de relíquias');
-  check(html, 'id="selectedCharName">Aria', 'personagem selecionado (Aria) na seção de itens');
+  const semModais = !html.includes('modal-overlay') && !html.includes('id="itemModal"') && !html.includes('id="relicModal"');
+  console.log(`  ${semModais ? '✔' : '✘'} fluxo sem modais (nenhum modal-overlay/itemModal/relicModal no HTML)`);
+  if (!semModais) failures++;
+  check(html, 'mini-empty clickable', 'mini-itens do personagem selecionado são clicáveis');
 
   console.log('\nArte do jogo (Apêndice A.5):');
   check(html, '/assets/heroes/dragomir.png', 'Dragomir renderiza com imagem oficial');
@@ -93,8 +94,23 @@ try {
   console.log(`reducer SELECT_CHAR duplicado: ${ok3 ? '✔ rejeita com toast' : '✘ ' + JSON.stringify(s3)}`);
 
   const s4 = reducer(s3, { type: 'ADD_RELIC', relicId: 'rel_001' });
-  const ok4 = s4.teamRelics.includes('rel_001') && s4.relicModalOpen === false;
-  console.log(`reducer ADD_RELIC: ${ok4 ? '✔ adiciona e fecha modal' : '✘ ' + JSON.stringify(s4)}`);
+  const ok4 = s4.teamRelics.includes('rel_001') && s4.toasts.length === s3.toasts.length;
+  console.log(`reducer ADD_RELIC: ${ok4 ? '✔ adiciona, sem popup' : '✘ ' + JSON.stringify(s4)}`);
+
+  // SET_ITEM / REMOVE_ITEM: equipar e desequipar sem toasts (seletor inline)
+  const sEq = reducer(s4, { type: 'SET_ITEM', charId: 'kai', slot: 0, itemId: 'item_001' });
+  const okEq = sEq.items.kai[0] === 'item_001' && sEq.toasts.length === s4.toasts.length;
+  console.log(`reducer SET_ITEM: ${okEq ? '✔ equipa item, sem popup' : '✘ ' + JSON.stringify(sEq)}`);
+
+  const sRm = reducer(sEq, { type: 'REMOVE_ITEM', charId: 'kai', slot: 0 });
+  const okRm = sRm.items.kai[0] === null && sRm.toasts.length === sEq.toasts.length;
+  console.log(`reducer REMOVE_ITEM: ${okRm ? '✔ desequipa item, sem popup' : '✘ ' + JSON.stringify(sRm)}`);
+
+  // SELECT_SLOT: seleciona sem toast (novo fluxo sem popups)
+  // main = ['kai','dragomir','fiona'] — index 1 é o dragomir
+  const sSel = reducer(sRm, { type: 'SELECT_SLOT', teamType: 'main', index: 1 });
+  const okSel = sSel.selectedCharId === 'dragomir' && sSel.toasts.length === sRm.toasts.length;
+  console.log(`reducer SELECT_SLOT: ${okSel ? '✔ seleciona, sem popup' : '✘ ' + JSON.stringify(sSel)}`);
 
   // SWAP_SLOTS (arrastar dentro do time — trocar/mover posição)
   // estado aqui: main = ['kai','dragomir','fiona'], reserve = ['funke', null, null]
@@ -114,10 +130,11 @@ try {
   const ok5 = s5.main.every(v => v === null) && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
   console.log(`reducer RESET_TEAM: ${ok5 ? '✔ limpa tudo' : '✘ ' + JSON.stringify(s5)}`);
 
-  console.log(failures === 0 && ok0 && ok1 && ok2 && ok3 && ok4 && okSw && okMv && okSelf && ok5
+  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okRm, okSel, okSw, okMv, okSelf, ok5].every(Boolean);
+  console.log(todosOk
     ? '\n✅ SMOKE TEST COMPLETO PASSOU'
     : `\n❌ ${failures} falha(s) no smoke test`);
-  process.exitCode = (failures === 0 && ok0 && ok1 && ok2 && ok3 && ok4 && okSw && okMv && okSelf && ok5) ? 0 : 1;
+  process.exitCode = todosOk ? 0 : 1;
 } finally {
   await vite.close();
 }

@@ -14,8 +14,6 @@ export const initialState = {
   tierFilter: 'all',
   classFilter: 'all',
   searchQuery: '',
-  itemModal: { open: false, charId: null, slot: null }, // era: state.itemModal = { charId, slot }
-  relicModalOpen: false,   // era: classList 'open' no #relicModal
   toasts: [],              // era: filhos diretos do #toastContainer (toast.js vanilla)
   toastSeq: 0              // contador de ids de toast (reducer puro)
 };

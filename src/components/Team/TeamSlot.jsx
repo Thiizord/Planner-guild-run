@@ -4,7 +4,7 @@ import { useApp } from '../../hooks/useApp.js';
 import { getCharacter, getItem, getCharItems, countMain, countReserve } from '../../utils/helpers.js';
 import MiniItems from './MiniItems.jsx';
 
-export default function TeamSlot({ charId, type, index }) {
+export default function TeamSlot({ charId, type, index, onItemSlotClick }) {
   const { state, dispatch } = useApp();
 
   const handleDragOver = (e) => {
@@ -134,8 +134,12 @@ export default function TeamSlot({ charId, type, index }) {
             : c.emoji}
         </div>
         <div className="name">{c.name}</div>
-        <div className="details">{c.tier} · {c.class}</div>
-        <MiniItems items={items} />
+        <div className="details">{c.tier} · {c.class}{c.class2 ? '/' + c.class2 : ''}</div>
+        <MiniItems
+          items={items}
+          interactive={isSelected}
+          onSlotClick={onItemSlotClick ? (slotIdx) => onItemSlotClick(type, index, slotIdx) : undefined}
+        />
       </div>
       <div className="item-tooltip">{tooltipContent}</div>
     </div>

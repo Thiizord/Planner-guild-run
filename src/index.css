@@ -871,48 +871,9 @@ body {
 }
 
 /* ============================================================
-   MODAL
+   SELETORES INLINE (antigos modais; agora expandem na própria página)
+   .modal-header/.close-btn são reutilizados pelo cabeçalho do picker
    ============================================================ */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
-    backdrop-filter: blur(8px);
-}
-
-.modal-overlay.open {
-    display: flex;
-}
-
-.modal {
-    background: rgba(20, 26, 36, 0.95) !important;
-    border-radius: 16px;
-    padding: 24px;
-    max-width: 500px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    border: 1px solid rgba(245, 158, 11, 0.1) !important;
-    box-shadow: 0 8px 64px rgba(0, 0, 0, 0.6) !important;
-}
-
-.modal::-webkit-scrollbar {
-    width: 6px;
-}
-.modal::-webkit-scrollbar-track {
-    background: rgba(26, 31, 42, 0.5);
-    border-radius: 4px;
-}
-.modal::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #f59e0b, #f7c948);
-    border-radius: 4px;
-}
-
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -936,11 +897,6 @@ body {
 .modal-header .close-btn:hover {
     color: #e8edf5;
     transform: rotate(90deg);
-}
-
-#modalCharInfo {
-    margin-bottom: 12px;
-    color: #8a9bb0;
 }
 
 .item-list {
@@ -972,7 +928,7 @@ body {
 }
 
 /* ============================================================
-   MODAL DE RELÍQUIAS
+   SELETOR INLINE DE RELÍQUIAS (expande dentro do card de relíquias)
    ============================================================ */
 .relic-grid {
     display: grid;
@@ -1316,4 +1272,65 @@ body {
     height: 16px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+/* ============================================================
+   FLUXO SEM MODAIS (pedido do usuário)
+   Seletor de itens inline + mini-itens clicáveis do personagem selecionado
+   ============================================================ */
+
+/* Mini-itens do personagem selecionado: clicáveis */
+.team-slot .mini-item.clickable {
+    cursor: pointer;
+}
+
+.team-slot .mini-item.clickable:hover {
+    border-color: rgba(247, 201, 72, 0.6);
+    box-shadow: 0 0 8px rgba(247, 201, 72, 0.2);
+}
+
+/* Painel do seletor de itens (inline, dentro do card do time) */
+.item-picker {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(20, 26, 36, 0.85);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    animation: relicPop 0.25s ease-out;
+}
+
+.item-picker .item-picker-hint {
+    font-size: 11px;
+    color: #6a7b8f;
+    margin: -6px 0 10px;
+}
+
+.item-picker .item-list {
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.item-picker .item-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.item-picker .item-list::-webkit-scrollbar-track {
+    background: rgba(26, 31, 42, 0.5);
+    border-radius: 4px;
+}
+
+.item-picker .item-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #f59e0b, #f7c948);
+    border-radius: 4px;
+}
+
+/* Item atual no seletor: destacado (clique remove) */
+.item-option.current {
+    border-color: rgba(74, 222, 128, 0.4);
+    background: rgba(20, 33, 26, 0.8);
+}
+
+.item-option.current:hover {
+    border-color: rgba(74, 222, 128, 0.6);
 }
