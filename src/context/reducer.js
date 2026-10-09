@@ -35,21 +35,25 @@ export function reducer(state, action) {
       if (arr[slotIndex] !== null) return state; // slot ocupado — sem popup
       const newArr = [...arr];
       newArr[slotIndex] = charId;
-      return { ...state, [teamType]: newArr, placementCharId: null };
+      return { ...state, [teamType]: newArr, placementCharId: null, placementFrom: null };
     }
 
-    // ---------- Pegar heroi da biblioteca para posicionamento (2 cliques) ----------
+    // ---------- Pegar heroi para posicionamento/movimentacao (2 cliques) ----------
     case 'SET_PLACEMENT_CHAR': {
-      const { charId } = action;
-      // se clicou no mesmo herói, cancela (toggle)
+      const { charId, fromType, fromIndex } = action;
+      // toggle: clicar no mesmo heroi cancela
       if (state.placementCharId === charId) {
-        return { ...state, placementCharId: null };
+        return { ...state, placementCharId: null, placementFrom: null };
       }
-      return { ...state, placementCharId: charId };
+      return {
+        ...state,
+        placementCharId: charId,
+        placementFrom: fromType != null ? { teamType: fromType, index: fromIndex } : null,
+      };
     }
 
     case 'CLEAR_PLACEMENT_CHAR':
-      return { ...state, placementCharId: null };
+      return { ...state, placementCharId: null, placementFrom: null };
 
     // ---------- Arrastar entre slots do time (trocar/mover posição) ----------
     // Funcionalidade nova (o vanilla só suportava arrastar da pool; arrastar um
@@ -63,23 +67,23 @@ export function reducer(state, action) {
       if (fromType === toType && fromIndex === toIndex) return state; // dropou em si mesmo
 
       if (fromType === toType) {
-        // mesmo grupo: troca os dois (ou move para vazio)
         const arr = [...fromArr];
         const target = arr[toIndex];
         arr[toIndex] = moving;
-        arr[fromIndex] = target; // null vira vazio; personagem = swap
-        return { ...state, [fromType]: arr };
+        arr[fromIndex] = target;
+        return { ...state, [fromType]: arr, placementCharId: null, placementFrom: null };
       }
-      // entre titulares e reservas
       const from = [...fromArr];
       const to = [...toArr];
       const target = to[toIndex];
       to[toIndex] = moving;
-      from[fromIndex] = target; // swap entre grupos; null vira vazio
+      from[fromIndex] = target;
       return {
         ...state,
         main: fromType === 'main' ? from : to,
-        reserve: fromType === 'main' ? to : from
+        reserve: fromType === 'main' ? to : from,
+        placementCharId: null,
+        placementFrom: null,
       };
     }
 

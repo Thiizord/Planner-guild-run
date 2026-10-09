@@ -11,7 +11,8 @@ export const initialState = {
   items: {},              // { charId: [itemId|null, ...5 slots] }
   teamRelics: [],          // array de relicIds
   selectedCharId: null,
-  placementCharId: null,   // heroi "pego" para posicionamento (transitorio, nao persistido)
+  placementCharId: null,   // heroi "pego" para posicionamento ou movimentacao
+  placementFrom: null,      // { teamType, index } de origem (null = veio da biblioteca)
   tierFilter: 'all',
   classFilter: 'all',
   searchQuery: ''

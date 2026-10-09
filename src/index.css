@@ -1483,7 +1483,10 @@ button { font-family: var(--font-body); }
 
 .hex-board { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .hex-row { display: flex; gap: 8px; }
-.hex-row.offset { margin-top: calc(var(--hex-h) * -0.12); }
+.hex-row-offset {
+  margin-top: calc(var(--hex-h) * -0.15);
+  margin-left: calc(var(--hex-w) * 0.5);
+}
 
 .hex-cell {
   position: relative; width: var(--hex-w); display: flex; flex-direction: column;
@@ -1529,8 +1532,35 @@ button { font-family: var(--font-body); }
   0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,75,0); }
   50% { box-shadow: 0 0 0 4px rgba(201,162,75,0.2); }
 }
-.hex-cell.empty.placement-target .hex-frame { animation: hexPulse 1.8s ease-in-out infinite; }
-.hex-cell.empty.placement-target .hex-plus { color: var(--gold-bright); opacity: 0.9; }
+/* heroi pego para mover: destaque dourado pulsante + leve elevacao */
+.hex-cell.picked {
+  transform: translateY(-4px) scale(1.04);
+  z-index: 5;
+}
+
+.hex-cell.picked .hex-frame {
+  box-shadow: 0 0 0 3px rgba(233, 205, 126, 0.6), 0 8px 20px rgba(201, 162, 75, 0.3);
+  animation: hexPulse 1.4s ease-in-out infinite;
+}
+
+/* alvo valido: pulso verde sutil */
+.hex-cell.valid-target .hex-frame {
+  animation: hexTargetPulse 1.6s ease-in-out infinite;
+}
+
+.hex-cell.valid-target.empty .hex-plus {
+  color: var(--green);
+  opacity: 0.9;
+}
+
+.hex-cell.valid-target.filled .hex-frame {
+  box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.4);
+}
+
+@keyframes hexTargetPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(126, 217, 138, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(126, 217, 138, 0.15); }
+}
 
 .hex-cell .hex-info { text-align: center; padding: 4px 2px 0; width: 100%; }
 .hex-cell .hex-plate { min-height: 16px; }

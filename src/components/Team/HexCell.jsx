@@ -1,7 +1,6 @@
 // HexCell.jsx - Célula hexagonal individual do tabuleiro.
-// Cada hex tem um ID estável (ex: "main-0") que corresponde à posição no array.
-// Suporta: drag & drop (entrada e saída), clique para posicionar/selecionar,
-// retrato com clip-path hexagonal, mini-itens clicáveis do herói selecionado.
+// Estados: vazio, ocupado (selecionado), pego-para-mover, alvo-válido, drag-over.
+// Fluxo: 1o clique seleciona, 2o clique no mesmo pega, clique noutro hex move/troca.
 
 import { useState } from 'react';
 import { useApp } from '../../hooks/useApp.js';
@@ -9,11 +8,15 @@ import { getCharacter, getItem, getCharItems, countMain, countReserve } from '..
 import ClassIcon from '../ClassIcon.jsx';
 import MiniItems from './MiniItems.jsx';
 
-export default function HexCell({ cellId, charId, type, index, isSelected, isPlacementTarget, onItemSlotClick, onHexClick }) {
+export default function HexCell({
+  cellId, charId, type, index,
+  isSelected, isPicked, isValidTarget, isPlacementActive,
+  onItemSlotClick, onHexClick,
+}) {
   const { state, dispatch } = useApp();
   const [dragOver, setDragOver] = useState(false);
 
-  // --- drag & drop ---
+  // --- drag & drop (preservado integralmente) ---
   const handleDragOver = (e) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
@@ -32,7 +35,6 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
     if (!drag.charId) return;
 
     if (drag.source === 'team') {
-      // move/swap entre células
       dispatch({
         type: 'SWAP_SLOTS',
         charId: drag.charId,
@@ -42,7 +44,6 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
         toIndex: index,
       });
     } else {
-      // da pool para uma célula específica
       dispatch({
         type: 'DROP_CHAR',
         charId: drag.charId,
@@ -58,9 +59,7 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
   };
 
   // --- clique ---
-  const handleClick = (e) => {
-    onHexClick(type, index);
-  };
+  const handleClick = () => onHexClick(type, index);
 
   const handleRemove = (e) => {
     e.stopPropagation();
@@ -74,9 +73,16 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
 
   // --- vazio ---
   if (!charId) {
+    const cellClasses = [
+      'hex-cell',
+      'empty',
+      dragOver ? 'drag-over' : '',
+      isValidTarget ? 'valid-target' : '',
+    ].filter(Boolean).join(' ');
+
     return (
       <div
-        className={`hex-cell empty ${dragOver ? 'drag-over' : ''} ${isPlacementTarget ? 'placement-target' : ''}`}
+        className={cellClasses}
         data-cell={cellId}
         data-team={type}
         data-index={index}
@@ -116,9 +122,18 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
     );
   });
 
+  const cellClasses = [
+    'hex-cell',
+    'filled',
+    isSelected ? 'selected' : '',
+    isPicked ? 'picked' : '',
+    isValidTarget ? 'valid-target' : '',
+    dragOver ? 'drag-over' : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <div
-      className={`hex-cell filled ${isSelected ? 'selected' : ''} ${dragOver ? 'drag-over' : ''}`}
+      className={cellClasses}
       data-cell={cellId}
       data-team={type}
       data-index={index}
@@ -161,7 +176,7 @@ export default function HexCell({ cellId, charId, type, index, isSelected, isPla
         </div>
         <MiniItems
           items={items}
-          interactive={isSelected}
+          interactive={isSelected && !isPlacementActive}
           onSlotClick={onItemSlotClick ? (slotIdx) => onItemSlotClick(type, index, slotIdx) : undefined}
         />
       </div>

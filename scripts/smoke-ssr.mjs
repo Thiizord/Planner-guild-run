@@ -80,7 +80,7 @@ try {
   check(html, 'data-cell="main-0"', 'célula hexagonal main-0 com ID estável');
   check(html, 'data-cell="reserve-2"', 'célula hexagonal reserve-2 com ID estável');
   check(html, 'hex-frame', 'molduras hexagonais renderizadas');
-  check(html, 'hex-row offset', 'linha de reservas com offset (formação escalonada)');
+  check(html, 'hex-row-offset', 'linha de reservas com offset (formacao escalonada)');
   const semMojibake = !html.includes('ðŸ') && !html.includes('ï¿½') && !html.includes('Ã');
   console.log(`  ${semMojibake ? '✔' : '✘'} zero mojibake no HTML renderizado`);
   if (!semMojibake) failures++;
@@ -130,26 +130,36 @@ try {
   const okSel = sSel.selectedCharId === 'dragomir';
   console.log(`reducer SELECT_SLOT: ${okSel ? '✔ seleciona personagem' : '✘ ' + JSON.stringify(sSel)}`);
 
-  // SET_PLACEMENT_CHAR: pega herói da biblioteca para posicionamento
+  // SET_PLACEMENT_CHAR: pega herói para posicionamento (da biblioteca)
   const sPl = reducer(s0, { type: 'SET_PLACEMENT_CHAR', charId: 'kai' });
-  const okPl = sPl.placementCharId === 'kai';
-  console.log(`reducer SET_PLACEMENT_CHAR: ${okPl ? '✔ pega herói para posicionamento' : '✘ ' + JSON.stringify(sPl)}`);
+  const okPl = sPl.placementCharId === 'kai' && sPl.placementFrom === null;
+  console.log(`reducer SET_PLACEMENT_CHAR (biblioteca): ${okPl ? '✔ pega, origem=null' : '✘ ' + JSON.stringify(sPl)}`);
+
+  // SET_PLACEMENT_CHAR: pega herói posicionado (do tabuleiro)
+  const sPlB = reducer(s0, { type: 'SET_PLACEMENT_CHAR', charId: 'dragomir', fromType: 'main', fromIndex: 1 });
+  const okPlB = sPlB.placementCharId === 'dragomir' && sPlB.placementFrom?.teamType === 'main' && sPlB.placementFrom?.index === 1;
+  console.log(`reducer SET_PLACEMENT_CHAR (tabuleiro): ${okPlB ? '✔ pega com origem main-1' : '✘ ' + JSON.stringify(sPlB)}`);
 
   // toggle: clicar no mesmo herói cancela
   const sPlT = reducer(sPl, { type: 'SET_PLACEMENT_CHAR', charId: 'kai' });
-  const okPlT = sPlT.placementCharId === null;
-  console.log(`reducer SET_PLACEMENT_CHAR toggle: ${okPlT ? '✔ cancela ao clicar de novo' : '✘ ' + JSON.stringify(sPlT)}`);
+  const okPlT = sPlT.placementCharId === null && sPlT.placementFrom === null;
+  console.log(`reducer SET_PLACEMENT_CHAR toggle: ${okPlT ? '✔ cancela' : '✘ ' + JSON.stringify(sPlT)}`);
 
   // DROP_CHAR com placement: posiciona na célula específica e limpa
   // (remove aria de main[0] primeiro, depois posiciona kai lá)
   const sRmForDrop = reducer(sPl, { type: 'REMOVE_CHAR', teamType: 'main', index: 0 });
   const sDrop = reducer(sRmForDrop, { type: 'DROP_CHAR', charId: 'kai', teamType: 'main', slotIndex: 0 });
-  const okDrop = sDrop.main[0] === 'kai' && sDrop.placementCharId === null;
+  const okDrop = sDrop.main[0] === 'kai' && sDrop.placementCharId === null && sDrop.placementFrom === null;
   console.log(`reducer DROP_CHAR c/ placement: ${okDrop ? '✔ posiciona e limpa placement' : '✘ ' + JSON.stringify(sDrop)}`);
+
+  // SWAP_SLOTS via placement do tabuleiro: move dragomir de main-1 para main-0
+  const sSwapPl = reducer(sPlB, { type: 'SWAP_SLOTS', charId: 'dragomir', fromType: 'main', fromIndex: 1, toType: 'main', toIndex: 0 });
+  const okSwapPl = sSwapPl.main[0] === 'dragomir' && sSwapPl.main[1] === 'aria' && sSwapPl.placementCharId === null;
+  console.log(`reducer SWAP_SLOTS via placement: ${okSwapPl ? '✔ move dragomir, limpa placement' : '✘ ' + JSON.stringify(sSwapPl)}`);
 
   // CLEAR_PLACEMENT_CHAR
   const sClr = reducer(sPl, { type: 'CLEAR_PLACEMENT_CHAR' });
-  const okClr = sClr.placementCharId === null;
+  const okClr = sClr.placementCharId === null && sClr.placementFrom === null;
   console.log(`reducer CLEAR_PLACEMENT_CHAR: ${okClr ? '✔ limpa placement' : '✘ ' + JSON.stringify(sClr)}`);
 
   // SWAP_SLOTS (arrastar dentro do time — trocar/mover posição)
@@ -170,7 +180,7 @@ try {
   const ok5 = s5.main.every(v => v === null) && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
   console.log(`reducer RESET_TEAM: ${ok5 ? '✔ limpa tudo' : '✘ ' + JSON.stringify(s5)}`);
 
-  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okPl, okPlT, okDrop, okClr, okSw, okMv, okSelf, ok5].every(Boolean);
+  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okPl, okPlB, okPlT, okDrop, okSwapPl, okClr, okSw, okMv, okSelf, ok5].every(Boolean);
   console.log(todosOk
     ? '\n✅ SMOKE TEST COMPLETO PASSOU'
     : `\n❌ ${failures} falha(s) no smoke test`);
