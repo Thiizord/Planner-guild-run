@@ -18,20 +18,20 @@ export default function RelicList() {
   return (
     <div className="card glass" id="relicPanel">
       <div className="card-header">
-        <h2>🔮 <span className="neon-text">Relíquias do Time</span></h2>
+        <h2><span className="neon-text">Relíquias do Time</span></h2>
         <span className="hint" id="relicCount">
           {count} relíquia{count !== 1 ? 's' : ''} equipada{count !== 1 ? 's' : ''}
         </span>
       </div>
       <button className="btn-add-relic" onClick={() => setPickerOpen(o => !o)}>
-        {pickerOpen ? '✕ Fechar seleção' : '➕ Adicionar Relíquia'}
+        {pickerOpen ? 'Fechar seleção' : '+ Adicionar Relíquia'}
       </button>
 
       {pickerOpen && (
         <div className="relic-grid" id="relicGrid">
           {available.length === 0 ? (
             <div className="synergy-empty" style={{ gridColumn: '1/-1', padding: '20px' }}>
-              🎉 Todas as relíquias já estão equipadas!
+              Todas as relíquias já estão equipadas!
             </div>
           ) : (
             available.map(relic => {

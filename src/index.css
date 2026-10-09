@@ -986,6 +986,25 @@ body {
 /* (Toast removido — fluxo 100% sem popups, a pedido do usuário) */
 
 /* ============================================================
+   FALLBACK DE AVATAR (inicial do nome — todos os heróis têm imagem hoje)
+   ============================================================ */
+.char-card .avatar .avatar-initial,
+.team-slot .avatar .avatar-initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f7c948;
+    background: rgba(20, 26, 36, 0.9);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* ============================================================
    BANNER OFICIAL DO JOGO (topo da página)
    ============================================================ */
 .banner {

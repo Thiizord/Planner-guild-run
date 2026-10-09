@@ -35,7 +35,7 @@ export default function TeamGrid() {
     <div className="team-section">
       <div className="team-row">
         <div className="row-label">
-          <span>⚡ Titulares</span>
+          <span>Titulares</span>
           <span id="mainCount">{countMain(state.main)}/3</span>
         </div>
         <div className="team-slots" id="mainTeam">
@@ -44,7 +44,7 @@ export default function TeamGrid() {
       </div>
       <div className="team-row">
         <div className="row-label">
-          <span>🔄 Reservas</span>
+          <span>Reservas</span>
           <span id="reserveCount">{countReserve(state.reserve)}/3</span>
         </div>
         <div className="team-slots" id="reserveTeam">

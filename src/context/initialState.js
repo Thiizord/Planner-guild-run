@@ -39,7 +39,7 @@ export function saveState(data) {
       teamRelics: data.teamRelics
     }));
   } catch (e) {
-    console.warn('⚠️ Erro ao salvar:', e);
+    console.warn('Erro ao salvar:', e);
   }
 }
 

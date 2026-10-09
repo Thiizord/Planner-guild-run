@@ -1,5 +1,5 @@
 // exportBuild.js - Exportar build (utilitário: recebe o estado por parâmetro)
-// Feedback é inline no Header (botão "✔ Copiado!") — sem popups.
+// Feedback é inline no Header (botão "Copiado!") — sem popups.
 
 import { getCharacter, getRelic, getTeamCharactersData } from './helpers.js';
 import { calculateSynergies } from './synergies.js';

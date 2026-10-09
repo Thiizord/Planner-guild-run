@@ -11,12 +11,12 @@ export default function SynergyPanel() {
   return (
     <div className="card synergy-panel glass" id="synergyPanel">
       <div className="card-header">
-        <h2>⚡ <span className="neon-text">Sinergias Ativas</span></h2>
+        <h2><span className="neon-text">Sinergias Ativas</span></h2>
         <span className="hint" id="synergyCount">{synergies.length} sinergia{synergies.length > 1 ? 's' : ''}</span>
       </div>
       <div className="synergy-grid" id="synergyGrid">
         {synergies.length === 0 ? (
-          <div className="synergy-empty">⚡ Monte seu time para ativar as sinergias!</div>
+          <div className="synergy-empty">Monte seu time para ativar as sinergias!</div>
         ) : (
           synergies.map(s => (
             <div className="synergy-item" key={s.class}>

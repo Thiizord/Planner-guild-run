@@ -23,12 +23,12 @@ export default function StatsPanel() {
   return (
     <div className="card glass" id="statsPanel">
       <div className="card-header">
-        <h2>📊 <span className="neon-text">Estatísticas do Time</span></h2>
+        <h2><span className="neon-text">Estatísticas do Time</span></h2>
         <span className="hint" id="dpsDisplay">DPS: {dps}</span>
       </div>
       <div className="stats-grid" id="statsGrid">
         {entries.length === 0 ? (
-          <div className="synergy-empty">📊 Equipe heróis, itens e relíquias para ver as estatísticas.</div>
+          <div className="synergy-empty">Equipe heróis, itens e relíquias para ver as estatísticas.</div>
         ) : (
           entries.map(([key, value]) => {
             const label = STAT_ICONS[key] || key;

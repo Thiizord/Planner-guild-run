@@ -70,7 +70,7 @@ export default function TeamSlot({ charId, type, index, onItemSlotClick }) {
         onDrop={handleDrop}
         onClick={handleClick}
       >
-        <span className="empty-label">⬜ Vazio</span>
+        <span className="empty-label">Vazio</span>
       </div>
     );
   }
@@ -123,7 +123,7 @@ export default function TeamSlot({ charId, type, index, onItemSlotClick }) {
           className={`slot-btn move-btn ${type === 'main' ? '' : 'to-main'}`}
           onClick={handleMove}
         >
-          {type === 'main' ? '⬇️' : '⬆️'}
+          {type === 'main' ? '↓' : '↑'}
         </button>
       )}
       <span className={`item-count-badge ${itemCount > 0 ? 'has-items' : ''}`}>{itemCount}/5</span>
@@ -131,7 +131,7 @@ export default function TeamSlot({ charId, type, index, onItemSlotClick }) {
         <div className="avatar">
           {c.image
             ? <img src={c.image} alt={c.name} className="hero-portrait" draggable="false" />
-            : c.emoji}
+            : <span className="avatar-initial">{c.name.charAt(0)}</span>}
         </div>
         <div className="name">{c.name}</div>
         <div className="details">{c.tier} · {c.class}{c.class2 ? '/' + c.class2 : ''}</div>

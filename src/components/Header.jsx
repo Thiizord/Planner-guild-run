@@ -1,6 +1,6 @@
 // Header.jsx - Logo + botões Limpar e Exportar (export.js vanilla)
 // Fluxo sem popups: confirmação de limpeza é INLINE (dois cliques no botão),
-// feedback de exportação é o próprio botão ("✔ Copiado!") — nada de confirm()
+// feedback de exportação é o próprio botão ("Copiado!") — nada de confirm()
 // nativo (bloqueado em browsers embutidos) nem toasts.
 
 import { useState } from 'react';
@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <header className="header glass">
       <div className="logo">
-        <span className="logo-glow">⚔️</span> GuildRun <span className="logo-sub">Team Builder Pro</span>
+        GuildRun <span className="logo-sub">Team Builder Pro</span>
       </div>
       <div className="header-right">
         <div className="actions">
@@ -42,10 +42,10 @@ export default function Header() {
             onClick={handleReset}
             title={confirmReset ? 'Clique de novo para confirmar' : undefined}
           >
-            {confirmReset ? '⚠️ Confirmar limpeza?' : '🔄 Limpar'}
+            {confirmReset ? 'Confirmar limpeza?' : 'Limpar'}
           </button>
           <button id="btnExport" className="btn-primary btn-glow" onClick={handleExport}>
-            {exported ? '✔ Copiado!' : '📋 Exportar'}
+            {exported ? 'Copiado!' : 'Exportar'}
           </button>
         </div>
       </div>

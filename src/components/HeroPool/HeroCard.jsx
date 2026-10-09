@@ -18,11 +18,11 @@ export default function HeroCard({ hero, onSelect }) {
       onClick={() => onSelect(hero.id)}
     >
       <span className="tier-badge">{hero.tier}</span>
-      <span className="class-badge">{CLASS_ICONS[hero.class] || '🎯'} {hero.class}</span>
+      <span className="class-badge">{CLASS_ICONS[hero.class] || ''} {hero.class}</span>
       <div className="avatar">
         {hero.image
           ? <img src={hero.image} alt={hero.name} className="hero-portrait" draggable="false" />
-          : hero.emoji}
+          : <span className="avatar-initial">{hero.name.charAt(0)}</span>}
       </div>
       <div className="name">{hero.name}</div>
       <div className="role">{hero.role}</div>

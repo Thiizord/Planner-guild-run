@@ -4,10 +4,10 @@ import { useApp } from '../../hooks/useApp.js';
 
 const TIER_OPTIONS = [
   { value: 'all', label: 'Todos' },
-  { value: 'S', label: '🌟 S' },
-  { value: 'A', label: '⭐ A' },
-  { value: 'B', label: '✨ B' },
-  { value: 'C', label: '💫 C' }
+  { value: 'S', label: 'S' },
+  { value: 'A', label: 'A' },
+  { value: 'B', label: 'B' },
+  { value: 'C', label: 'C' }
 ];
 
 const CLASS_OPTIONS = [
@@ -51,7 +51,7 @@ export default function Filters() {
       <input
         type="text"
         id="searchInput"
-        placeholder="🔍 Buscar herói..."
+        placeholder="Buscar herói..."
         value={state.searchQuery}
         onChange={e => dispatch({ type: 'SET_SEARCH_QUERY', value: e.target.value })}
       />

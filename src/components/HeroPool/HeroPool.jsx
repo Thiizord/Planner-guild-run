@@ -25,7 +25,7 @@ export default function HeroPool() {
   return (
     <div className="card glass">
       <div className="card-header">
-        <h2>📦 <span className="neon-text">Personagens</span> <span className="badge" id="poolCount">{filtered.length}</span></h2>
+        <h2><span className="neon-text">Personagens</span> <span className="badge" id="poolCount">{filtered.length}</span></h2>
         <span className="hint">Clique ou arraste para escalar</span>
       </div>
       <Filters />

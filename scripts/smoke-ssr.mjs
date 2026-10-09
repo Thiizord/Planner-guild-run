@@ -50,7 +50,7 @@ try {
   check(html, 'Dragomir', 'Dragomir nos titulares');
   check(html, 'Fiona', 'Fiona nos titulares');
   check(html, 'Funke', 'Funke na reserva');
-  check(html, '⬜ Vazio', 'slots vazios renderizados');
+  check(html, 'Vazio', 'slots vazios renderizados');
 
   console.log('\nContadores e painéis:');
   check(html, '4/6', 'teamCount 4/6');

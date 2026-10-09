@@ -33,7 +33,7 @@ export default function App() {
         {/* TIME */}
         <div className="card glass">
           <div className="card-header">
-            <h2>🏹 <span className="neon-text">Time</span> <span className="badge" id="teamCount">{countTeam(state.main, state.reserve)}/6</span></h2>
+            <h2><span className="neon-text">Time</span> <span className="badge" id="teamCount">{countTeam(state.main, state.reserve)}/6</span></h2>
             <span className="hint">Clique no personagem para selecionar · nos mini-itens, para equipar</span>
           </div>
           <TeamGrid />

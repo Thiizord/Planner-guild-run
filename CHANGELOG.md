@@ -1,5 +1,22 @@
 # Changelog — GuildRun Team Builder Pro (migração Vanilla JS → React)
 
+## [0.6.2] — Emojis decorativos removidos do código
+
+- Removidos TODOS os emojis decorativos da interface (pedido do usuário),
+  preservando apenas os **funcionais**: ícones de classes (`CLASS_ICONS`,
+  `SYNERGY_CONFIG`, botões do filtro de classe) e ícones de estatísticas
+  (`STAT_ICONS`). O `✕` tipográfico dos botões de fechar foi mantido.
+- Fora: emojis dos cabeçalhos (Time, Sinergias, Estatísticas, Personagens,
+  Relíquias, Itens), do logo, dos botões (Limpar/Confirmar/Exportar/Copiado/
+  Adicionar Relíquia), dos tiers de filtro (S/A/B/C), do placeholder de busca,
+  "Vazio" nos slots, setas de mover (viraram `↓`/`↑` tipográficos), marca de
+  item equipado (o destaque verde do CSS já comunica) e estados vazios.
+- **Campo `emoji` removido dos 25 heróis** no data.js — era fallback morto
+  (todos têm imagem). Novo fallback de avatar: a inicial do nome num círculo
+  estilizado (`.avatar-initial`).
+- `scripts/scan-emojis.py`: varredura Unicode de emojis no `src/` — o inventário
+  final confirma apenas os funcionais.
+
 ## [0.6.1] — Banner oficial + README profissional
 
 - **Banner do jogo** (arte oficial fornecida pelo autor, `Banner guild run.webp` da
