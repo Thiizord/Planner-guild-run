@@ -1466,17 +1466,17 @@ button { font-family: var(--font-body); }
    TABULEIRO HEXAGONAL — GRID 7x4 (25 celulas, padrao do jogo)
    ============================================================ */
 :root {
-  --hex-w: 58px;
-  --hex-h: 66px;
-  --hex-gap: 2px;
+  --hex-w: 112px;
+  --hex-h: 126px;
+  --hex-gap: 4px;
 }
 
 @media (max-width: 1180px) {
-  :root { --hex-w: 52px; --hex-h: 60px; }
+  :root { --hex-w: 90px; --hex-h: 102px; --hex-gap: 3px; }
 }
 
 @media (max-width: 760px) {
-  :root { --hex-w: 40px; --hex-h: 46px; --hex-gap: 1px; }
+  :root { --hex-w: 46px; --hex-h: 52px; --hex-gap: 2px; }
 }
 
 .hex-grid {
@@ -1534,7 +1534,7 @@ button { font-family: var(--font-body); }
 
 .hex-cell .hex-portrait .avatar-initial {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--gold-bright);
 }
@@ -1559,7 +1559,7 @@ button { font-family: var(--font-body); }
 }
 
 .hex-cell.empty .hex-plus {
-  font-size: 14px;
+  font-size: 26px;
   font-weight: 300;
   color: var(--gold-dim);
   opacity: 0.35;
@@ -1596,10 +1596,10 @@ button { font-family: var(--font-body); }
 /* label "Vazio" abaixo do hex */
 .hex-cell .hex-label {
   position: absolute;
-  bottom: -14px;
+  bottom: -16px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-faint);
@@ -1614,67 +1614,67 @@ button { font-family: var(--font-body); }
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 14px 4px 3px;
-  background: linear-gradient(transparent, rgba(10, 14, 11, 0.92) 55%);
+  padding: 28px 8px 5px;
+  background: linear-gradient(transparent, rgba(10, 14, 11, 0.92) 50%);
   pointer-events: none;
   z-index: 2;
 }
 
 .hex-cell .hex-overlay-name {
   font-family: var(--font-display);
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .hex-cell .hex-overlay-class {
   display: flex;
   justify-content: center;
-  gap: 1px;
-  margin: 0;
+  gap: 3px;
+  margin: 2px 0;
   color: var(--text-faint);
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .hex-cell .hex-overlay .mini-items {
   justify-content: center;
-  gap: 1px;
-  margin-top: 1px;
+  gap: 2px;
+  margin-top: 3px;
   width: 100%;
   flex-wrap: nowrap;
   overflow: hidden;
 }
 
 .hex-cell .hex-overlay .mini-item {
-  width: 12px;
-  height: 12px;
-  min-width: 12px;
-  max-width: 12px;
-  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  border-radius: 3px;
   font-size: 0;
   border-width: 1px;
 }
 
-.hex-cell .hex-overlay .mini-item .mini-item-icon { width: 9px; height: 9px; }
+.hex-cell .hex-overlay .mini-item .mini-item-icon { width: 15px; height: 15px; }
 .hex-cell .hex-overlay .mini-item .mini-item-fallback { display: none; }
 
 /* contagem de itens */
 .hex-cell .hex-item-count {
   position: absolute;
-  top: 4px;
-  right: 6px;
-  font-size: 8px;
+  top: 6px;
+  right: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-dim);
   background: rgba(13, 18, 14, 0.85);
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0 3px;
+  border-radius: 8px;
+  padding: 1px 5px;
   z-index: 3;
   font-variant-numeric: tabular-nums;
 }
