@@ -6,8 +6,10 @@ import { SYNERGY_CONFIG } from '../data/data.js';
 export function calculateSynergies(teamChars) {
   const classCount = {};
   for (const char of teamChars) {
-    if (char.class) {
-      classCount[char.class] = (classCount[char.class] || 0) + 1;
+    // Heróis híbridos têm class2 (fonte da verdade: a sheet do jogo) e
+    // contam para AMBAS as sinergias (ex.: Zuri Tank+Assassin)
+    for (const cls of [char.class, char.class2].filter(Boolean)) {
+      classCount[cls] = (classCount[cls] || 0) + 1;
     }
   }
   const activeSynergies = [];

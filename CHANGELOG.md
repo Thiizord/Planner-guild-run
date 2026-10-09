@@ -1,5 +1,34 @@
 # Changelog — GuildRun Team Builder Pro (migração Vanilla JS → React)
 
+## [0.4.0] — Stats oficiais do jogo + itens equipados v2
+
+### Itens equipados — redesign estético
+
+- `MiniItems`: pílulas de texto viraram **5 mini-slots com os ícones oficiais**,
+  moldura colorida pela raridade, slot vazio tracejado e hover com zoom.
+- `ItemSlots` (personagem selecionado): ícone maior, nome com ellipsis e tipo em pílula.
+- Tooltip do `TeamSlot` agora lista os itens com ícones.
+- Fix de longa data: as classes de raridade do CSS original (`rarity-epico`,
+  `rarity-lendario`) nunca eram atingíveis porque o data tem raridades acentuadas
+  (quirk preservada do vanilla). A normalização (NFD, sem acentos) nas exibições de
+  item finalmente ativa as cores pretendidas pelo CSS original.
+
+### Stats validados contra a fonte da verdade (guia, Apêndice A)
+
+- **AssetRipper 2.0** rodou headless (API HTTP) e, via `/Assets/Yaml`, extraímos a
+  **HeroSheet completa do jogo** — 25 entradas com stats reais. Snapshots salvos em
+  `scripts/game-hero-sheet.yaml` e `scripts/game-hero-class-sheet.yaml`.
+- `scripts/update-hero-stats.py`: **25/25 heróis atualizados — todos os 25 tinham
+  stats divergentes** (a demo foi rebalanceada em relação aos dados manuais do
+  vanilla). Exemplos: Irini def 25→29, crit 25→15, maxMana 50→75; attackSpeed agora
+  é o FP real do jogo (ex.: Irini 0.54, não 0.55).
+- Novo stat em `baseStats`: `startingMana` (o painel de estatísticas já tinha o
+  ícone "⚡ Mana Inicial" — agora ele mostra valor).
+- **Heróis híbridos**: campo `class2` (Rowan Vanguard/Tank, Tilly Warrior/Duelist,
+  Zuri Tank/Assassin) e `calculateSynergies` passa a contar **ambas** as classes —
+  fidelidade à regra real do jogo.
+- Relatório completo antes/depois: `scripts/stats-validation.json`.
+
 ## [0.3.2] — Arte completa: 25/25 heróis com imagem real
 
 - O usuário forneceu imagens (webp) para os 7 heróis sem arte na build da demo:

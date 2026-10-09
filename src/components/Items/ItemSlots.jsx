@@ -1,7 +1,13 @@
-// ItemSlots.jsx - Seção de itens do personagem selecionado (render.js → renderItems)
+// ItemSlots.jsx - Seção de itens do personagem selecionado (render.js → renderItems, v2 estética)
 
 import { useApp } from '../../hooks/useApp.js';
 import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers.js';
+
+// 'Épico' -> 'epico' (classes de raridade do CSS são sem acento)
+const rarityClass = (r) => r
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '');
 
 export default function ItemSlots() {
   const { state, dispatch } = useApp();
@@ -15,18 +21,17 @@ export default function ItemSlots() {
         {items.map((itemId, idx) => {
           const item = itemId ? getItem(itemId) : null;
           if (item) {
-            const rarityClass = `rarity-${item.rarity.toLowerCase()}`;
             const statsText = Object.entries(item.stats).map(([k, v]) => `${k}: ${v}`).join(' ');
             return (
               <div
                 key={idx}
-                className={`item-slot has-item ${rarityClass}`}
+                className={`item-slot has-item rarity-${rarityClass(item.rarity)}`}
                 onClick={() => dispatch({ type: 'OPEN_ITEM_MODAL', slot: idx })}
               >
                 {item.icon && <img src={item.icon} alt={item.name} className="item-icon" draggable="false" />}
-                <span className="item-name">{item.name}</span>
+                <span className="item-name" title={item.name}>{item.name}</span>
                 <span className="item-stat">{statsText}</span>
-                <span style={{ fontSize: '8px', color: '#4a5f78' }}>{item.type}</span>
+                <span className="item-type">{item.type}</span>
               </div>
             );
           }

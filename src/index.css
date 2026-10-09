@@ -1206,3 +1206,114 @@ body {
     display: block;
     margin: 0 auto 4px;
 }
+
+/* ============================================================
+   ITENS EQUIPADOS v2 (redesign estético)
+   Mini-slots com ícones oficiais + moldura por raridade.
+   Regras NOVAS no fim do arquivo (as antigas de .mini-item
+   que colidem são sobrescritas por estas, de mesma especificidade).
+   ============================================================ */
+
+/* Mini-slots dentro do team-slot */
+.team-slot .mini-items {
+    gap: 4px;
+}
+
+.team-slot .mini-item {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    max-width: 24px;
+    padding: 0;
+    font-size: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 14, 22, 0.8);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+}
+
+.team-slot .mini-item .mini-item-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.team-slot .mini-item .mini-item-fallback {
+    font-size: 8px;
+    font-weight: 600;
+    color: #c8d4e0;
+    letter-spacing: -0.5px;
+}
+
+.team-slot .mini-item.mini-empty {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.09);
+}
+
+.team-slot .mini-item.has-item:hover {
+    transform: scale(1.18);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+}
+
+/* Cores por raridade (classes normalizadas sem acento) */
+.team-slot .mini-item.rarity-comum { border-color: rgba(255, 255, 255, 0.12); }
+.team-slot .mini-item.rarity-incomum {
+    border-color: rgba(74, 170, 224, 0.45);
+    background: rgba(74, 170, 224, 0.08);
+}
+.team-slot .mini-item.rarity-raro {
+    border-color: rgba(245, 158, 11, 0.45);
+    background: rgba(245, 158, 11, 0.08);
+}
+.team-slot .mini-item.rarity-epico {
+    border-color: rgba(168, 85, 247, 0.55);
+    background: rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 6px rgba(168, 85, 247, 0.15);
+}
+.team-slot .mini-item.rarity-lendario {
+    border-color: rgba(239, 68, 68, 0.55);
+    background: rgba(239, 68, 68, 0.1);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.15);
+}
+
+/* Slot de item do personagem selecionado (mais legível) */
+.item-slot .item-icon {
+    width: 34px;
+    height: 34px;
+}
+
+.item-slot .item-name {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-slot .item-type {
+    font-size: 8px;
+    color: #4a5f78;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 1px 6px;
+    margin-top: 2px;
+}
+
+/* Ícones nas linhas do tooltip */
+.team-slot .item-tooltip .tooltip-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.team-slot .item-tooltip .tooltip-item-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+}

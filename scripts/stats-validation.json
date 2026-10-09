@@ -1,0 +1,327 @@
+[
+ {
+  "hero": "aria",
+  "antes": {
+   "class": "Mage",
+   "stats": "hp: 600, attack: 23, defense: 26, magic: 25, attackSpeed: 0.4, crit: 15, manaRegen: 4, maxMana: 110"
+  },
+  "depois": {
+   "class": "Mage",
+   "class2": null,
+   "stats": "hp: 600, attack: 23, defense: 26, magic: 25, attackSpeed: 0.4, crit: 15, manaRegen: 4, maxMana: 110, startingMana: 40"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "dragomir",
+  "antes": {
+   "class": "Assassin",
+   "stats": "hp: 800, attack: 35, defense: 40, magic: 0, attackSpeed: 0.45, crit: 50, manaRegen: 4, maxMana: 75"
+  },
+  "depois": {
+   "class": "Assassin",
+   "class2": null,
+   "stats": "hp: 800, attack: 35, defense: 40, magic: 0, attackSpeed: 0.45, crit: 50, manaRegen: 4, maxMana: 75, startingMana: 35"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "fiona",
+  "antes": {
+   "class": "Mystic",
+   "stats": "hp: 750, attack: 25, defense: 30, magic: 20, attackSpeed: 0.3, crit: 10, manaRegen: 6, maxMana: 100"
+  },
+  "depois": {
+   "class": "Mystic",
+   "class2": null,
+   "stats": "hp: 750, attack: 25, defense: 31, magic: 0, attackSpeed: 0.39, crit: 15, manaRegen: 8, maxMana: 100, startingMana: 25"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "funke",
+  "antes": {
+   "class": "Mage",
+   "stats": "hp: 650, attack: 21, defense: 15, magic: 30, attackSpeed: 0.35, crit: 10, manaRegen: 5, maxMana: 120"
+  },
+  "depois": {
+   "class": "Mage",
+   "class2": null,
+   "stats": "hp: 650, attack: 21, defense: 27, magic: 25, attackSpeed: 0.47, crit: 15, manaRegen: 4, maxMana: 85, startingMana: 45"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "grace",
+  "antes": {
+   "class": "Mystic",
+   "stats": "hp: 575, attack: 20, defense: 25, magic: 28, attackSpeed: 0.3, crit: 5, manaRegen: 8, maxMana: 130"
+  },
+  "depois": {
+   "class": "Mystic",
+   "class2": null,
+   "stats": "hp: 575, attack: 20, defense: 25, magic: 0, attackSpeed: 0.38, crit: 15, manaRegen: 8, maxMana: 110, startingMana: 50"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "gustav",
+  "antes": {
+   "class": "Mystic",
+   "stats": "hp: 700, attack: 22, defense: 35, magic: 18, attackSpeed: 0.3, crit: 5, manaRegen: 7, maxMana: 110"
+  },
+  "depois": {
+   "class": "Mystic",
+   "class2": null,
+   "stats": "hp: 700, attack: 22, defense: 30, magic: 0, attackSpeed: 0.36, crit: 15, manaRegen: 8, maxMana: 150, startingMana: 45"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "hoyoung",
+  "antes": {
+   "class": "Assassin",
+   "stats": "hp: 675, attack: 37, defense: 20, magic: 0, attackSpeed: 0.5, crit: 55, manaRegen: 3, maxMana: 60"
+  },
+  "depois": {
+   "class": "Assassin",
+   "class2": null,
+   "stats": "hp: 675, attack: 37, defense: 30, magic: 0, attackSpeed: 0.47, crit: 50, manaRegen: 4, maxMana: 75, startingMana: 40"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "irini",
+  "antes": {
+   "class": "Duelist",
+   "stats": "hp: 650, attack: 31, defense: 25, magic: 0, attackSpeed: 0.55, crit: 25, manaRegen: 3, maxMana: 50"
+  },
+  "depois": {
+   "class": "Duelist",
+   "class2": null,
+   "stats": "hp: 650, attack: 31, defense: 29, magic: 0, attackSpeed: 0.54, crit: 15, manaRegen: 4, maxMana: 75, startingMana: 10"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "kai",
+  "antes": {
+   "class": "Warrior",
+   "stats": "hp: 875, attack: 46, defense: 50, magic: 0, attackSpeed: 0.35, crit: 10, manaRegen: 2, maxMana: 40"
+  },
+  "depois": {
+   "class": "Warrior",
+   "class2": null,
+   "stats": "hp: 875, attack: 46, defense: 41, magic: 0, attackSpeed: 0.39, crit: 15, manaRegen: 4, maxMana: 105, startingMana: 50"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "karsu",
+  "antes": {
+   "class": "Duelist",
+   "stats": "hp: 650, attack: 30, defense: 20, magic: 10, attackSpeed: 0.5, crit: 20, manaRegen: 4, maxMana: 70"
+  },
+  "depois": {
+   "class": "Duelist",
+   "class2": null,
+   "stats": "hp: 650, attack: 33, defense: 29, magic: 0, attackSpeed: 0.53, crit: 15, manaRegen: 4, maxMana: 85, startingMana: 45"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "logan",
+  "antes": {
+   "class": "Warrior",
+   "stats": "hp: 825, attack: 50, defense: 45, magic: 0, attackSpeed: 0.4, crit: 15, manaRegen: 2, maxMana: 45"
+  },
+  "depois": {
+   "class": "Warrior",
+   "class2": null,
+   "stats": "hp: 825, attack: 50, defense: 40, magic: 0, attackSpeed: 0.4, crit: 15, manaRegen: 4, maxMana: 80, startingMana: 30"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "ming",
+  "antes": {
+   "class": "Vanguard",
+   "stats": "hp: 1100, attack: 37, defense: 55, magic: 15, attackSpeed: 0.3, crit: 5, manaRegen: 3, maxMana: 60"
+  },
+  "depois": {
+   "class": "Vanguard",
+   "class2": null,
+   "stats": "hp: 1100, attack: 37, defense: 41, magic: 0, attackSpeed: 0.35, crit: 15, manaRegen: 4, maxMana: 70, startingMana: 30"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "niklas",
+  "antes": {
+   "class": "Vanguard",
+   "stats": "hp: 1150, attack: 40, defense: 50, magic: 0, attackSpeed: 0.25, crit: 5, manaRegen: 2, maxMana: 50"
+  },
+  "depois": {
+   "class": "Vanguard",
+   "class2": null,
+   "stats": "hp: 1150, attack: 40, defense: 44, magic: 0, attackSpeed: 0.4, crit: 15, manaRegen: 4, maxMana: 90, startingMana: 45"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "nyx",
+  "antes": {
+   "class": "Duelist",
+   "stats": "hp: 800, attack: 38, defense: 30, magic: 0, attackSpeed: 0.6, crit: 30, manaRegen: 3, maxMana: 55"
+  },
+  "depois": {
+   "class": "Duelist",
+   "class2": null,
+   "stats": "hp: 800, attack: 38, defense: 38, magic: 0, attackSpeed: 0.53, crit: 15, manaRegen: 4, maxMana: 50, startingMana: 20"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "pimenta",
+  "antes": {
+   "class": "Tank",
+   "stats": "hp: 950, attack: 33, defense: 60, magic: 10, attackSpeed: 0.25, crit: 5, manaRegen: 2, maxMana: 45"
+  },
+  "depois": {
+   "class": "Tank",
+   "class2": null,
+   "stats": "hp: 950, attack: 33, defense: 58, magic: 0, attackSpeed: 0.42, crit: 15, manaRegen: 4, maxMana: 90, startingMana: 35"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "pollen",
+  "antes": {
+   "class": "Mystic",
+   "stats": "hp: 575, attack: 20, defense: 25, magic: 22, attackSpeed: 0.3, crit: 5, manaRegen: 8, maxMana: 120"
+  },
+  "depois": {
+   "class": "Mystic",
+   "class2": null,
+   "stats": "hp: 575, attack: 20, defense: 30, magic: 0, attackSpeed: 0.42, crit: 15, manaRegen: 8, maxMana: 135, startingMana: 35"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "ratna",
+  "antes": {
+   "class": "Mage",
+   "stats": "hp: 575, attack: 20, defense: 15, magic: 28, attackSpeed: 0.4, crit: 20, manaRegen: 6, maxMana: 110"
+  },
+  "depois": {
+   "class": "Mage",
+   "class2": null,
+   "stats": "hp: 575, attack: 20, defense: 27, magic: 25, attackSpeed: 0.43, crit: 15, manaRegen: 4, maxMana: 80, startingMana: 30"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "reyna",
+  "antes": {
+   "class": "Warrior",
+   "stats": "hp: 850, attack: 43, defense: 40, magic: 0, attackSpeed: 0.4, crit: 10, manaRegen: 3, maxMana: 50"
+  },
+  "depois": {
+   "class": "Warrior",
+   "class2": null,
+   "stats": "hp: 850, attack: 43, defense: 39, magic: 0, attackSpeed: 0.44, crit: 15, manaRegen: 4, maxMana: 70, startingMana: 35"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "rip",
+  "antes": {
+   "class": "Vanguard",
+   "stats": "hp: 1250, attack: 41, defense: 60, magic: 0, attackSpeed: 0.3, crit: 5, manaRegen: 2, maxMana: 40"
+  },
+  "depois": {
+   "class": "Vanguard",
+   "class2": null,
+   "stats": "hp: 1250, attack: 41, defense: 42, magic: 0, attackSpeed: 0.42, crit: 15, manaRegen: 4, maxMana: 75, startingMana: 25"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "rowan",
+  "antes": {
+   "class": "Vanguard",
+   "stats": "hp: 1000, attack: 31, defense: 55, magic: 5, attackSpeed: 0.25, crit: 5, manaRegen: 3, maxMana: 60"
+  },
+  "depois": {
+   "class": "Vanguard",
+   "class2": "Tank",
+   "stats": "hp: 1000, attack: 31, defense: 54, magic: 0, attackSpeed: 0.35, crit: 15, manaRegen: 4, maxMana: 115, startingMana: 60"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "sal",
+  "antes": {
+   "class": "Mage",
+   "stats": "hp: 725, attack: 30, defense: 20, magic: 32, attackSpeed: 0.35, crit: 10, manaRegen: 6, maxMana: 115"
+  },
+  "depois": {
+   "class": "Mage",
+   "class2": null,
+   "stats": "hp: 725, attack: 30, defense: 34, magic: 25, attackSpeed: 0.42, crit: 15, manaRegen: 4, maxMana: 100, startingMana: 50"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "skorn",
+  "antes": {
+   "class": "Tank",
+   "stats": "hp: 925, attack: 30, defense: 65, magic: 0, attackSpeed: 0.25, crit: 5, manaRegen: 2, maxMana: 40"
+  },
+  "depois": {
+   "class": "Tank",
+   "class2": null,
+   "stats": "hp: 950, attack: 30, defense: 60, magic: 0, attackSpeed: 0.38, crit: 15, manaRegen: 4, maxMana: 105, startingMana: 30"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "tilly",
+  "antes": {
+   "class": "Warrior",
+   "stats": "hp: 750, attack: 38, defense: 30, magic: 0, attackSpeed: 0.5, crit: 20, manaRegen: 4, maxMana: 60"
+  },
+  "depois": {
+   "class": "Warrior",
+   "class2": "Duelist",
+   "stats": "hp: 750, attack: 38, defense: 34, magic: 0, attackSpeed: 0.5, crit: 15, manaRegen: 4, maxMana: 75, startingMana: 25"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "yuuna",
+  "antes": {
+   "class": "Assassin",
+   "stats": "hp: 800, attack: 40, defense: 25, magic: 0, attackSpeed: 0.5, crit: 60, manaRegen: 3, maxMana: 55"
+  },
+  "depois": {
+   "class": "Assassin",
+   "class2": null,
+   "stats": "hp: 800, attack: 40, defense: 39, magic: 0, attackSpeed: 0.45, crit: 50, manaRegen: 4, maxMana: 75, startingMana: 35"
+  },
+  "mudouClasse": false
+ },
+ {
+  "hero": "zuri",
+  "antes": {
+   "class": "Tank",
+   "stats": "hp: 900, attack: 33, defense: 55, magic: 5, attackSpeed: 0.3, crit: 15, manaRegen: 3, maxMana: 50"
+  },
+  "depois": {
+   "class": "Tank",
+   "class2": "Assassin",
+   "stats": "hp: 900, attack: 33, defense: 52, magic: 0, attackSpeed: 0.38, crit: 50, manaRegen: 4, maxMana: 100, startingMana: 75"
+  },
+  "mudouClasse": false
+ }
+]

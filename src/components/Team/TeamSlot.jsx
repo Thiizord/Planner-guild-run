@@ -88,14 +88,17 @@ export default function TeamSlot({ charId, type, index }) {
   const moveEnabled = type === 'main' ? canMoveToReserve : canMoveToMain;
   const isSelected = state.selectedCharId === charId;
 
-  // Tooltip com itens equipados (renderTeamSlots vanilla)
+  // Tooltip com itens equipados (renderTeamSlots vanilla + ícones oficiais)
   const tooltipItems = equippedItems.map(itemId => {
     const item = getItem(itemId);
     if (!item) return null;
     const statsText = Object.entries(item.stats).map(([k, v]) => `${k}: ${v}`).join(' ');
     return (
       <div className="tooltip-item" key={itemId}>
-        {item.name} <span style={{ color: '#6a7b8f' }}>({statsText})</span>
+        {item.icon && <img src={item.icon} alt="" className="tooltip-item-icon" draggable="false" />}
+        <span>
+          {item.name} <span style={{ color: '#6a7b8f' }}>({statsText})</span>
+        </span>
       </div>
     );
   });

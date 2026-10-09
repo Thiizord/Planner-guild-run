@@ -1,0 +1,2833 @@
+﻿%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 18}
+  m_PrefabInstance: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1001}
+  m_PrefabAsset: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1001480554}
+  m_GameObject: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {m_FileID: 1, m_PathID: 871, m_TargetClassID: 115}
+  m_Name: HeroSheetHolder
+  m_EditorClassIdentifier:
+  <SheetName>k__BackingField: HeroData
+  <LastUpdatedDateTime>k__BackingField:
+    _ticks: 639227238801726157
+  <Entries>k__BackingField:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 1
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60922, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048047206400
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 49152
+    <MaxHealth>k__BackingField: 650
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 10
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 29
+    <BaseAttackDamage>k__BackingField: 31
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 3
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 35389
+    <AttackSpeed>k__BackingField: 20
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 327680
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 10101
+    _activeAbilityID: -1
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 1
+    _class1ID: 5
+    _class2ID: -1
+    _tags:
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Irini
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Irini
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Irini
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Irini
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Irini
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Irini
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Irini
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Irini
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 2
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60921, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177920
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 675
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 40
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 30
+    <BaseAttackDamage>k__BackingField: 37
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 5
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 30802
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 50
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 393216
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 2
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 22937
+    _guildID: 2
+    _class1ID: 4
+    _class2ID: -1
+    _tags:
+    - Crit
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Hoyoung
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Hoyoung
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Hoyoung
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Hoyoung
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Hoyoung
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Hoyoung
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Hoyoung
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Hoyoung
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 3
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60932, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177921
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 850
+    <MaxMana>k__BackingField: 70
+    <StartingMana>k__BackingField: 35
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 39
+    <BaseAttackDamage>k__BackingField: 43
+    <Attack>k__BackingField: 25
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 28836
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 3
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 1
+    _class1ID: 1
+    _class2ID: -1
+    _tags:
+    - Shields
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Reyna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Reyna
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Reyna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Reyna
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Reyna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Reyna
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Reyna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Reyna
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 4
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60914, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177922
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 800
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 35
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 39
+    <BaseAttackDamage>k__BackingField: 40
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 29491
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 50
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 4
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 2
+    _class1ID: 4
+    _class2ID: -1
+    _tags:
+    - Crit
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Yuuna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Yuuna
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Yuuna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Yuuna
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Yuuna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Yuuna
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Yuuna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Yuuna
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 5
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60935, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177923
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 900
+    <MaxMana>k__BackingField: 100
+    <StartingMana>k__BackingField: 75
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 52
+    <BaseAttackDamage>k__BackingField: 33
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 24904
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 50
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 10501
+    _activeAbilityID: 5
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 104857
+    _guildID: 3
+    _class1ID: 2
+    _class2ID: 4
+    _tags:
+    - Crit
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Zuri
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Zuri
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Zuri
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Zuri
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Zuri
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Zuri
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Zuri
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Zuri
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 6
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60936, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177924
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 600
+    <MaxMana>k__BackingField: 110
+    <StartingMana>k__BackingField: 40
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 26
+    <BaseAttackDamage>k__BackingField: 23
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 25
+    <AttackRange>k__BackingField: 4
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 26214
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 327680
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 6
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 38666
+    _guildID: 3
+    _class1ID: 7
+    _class2ID: -1
+    _tags:
+    - Frost
+    - Burn
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Aria
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Aria
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Aria
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Aria
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Aria
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Aria
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Aria
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Aria
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 7
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60929, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177925
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 800
+    <MaxMana>k__BackingField: 50
+    <StartingMana>k__BackingField: 20
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 38
+    <BaseAttackDamage>k__BackingField: 38
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 34734
+    <AttackSpeed>k__BackingField: 20
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 10702
+    _activeAbilityID: -1
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 2
+    _class1ID: 5
+    _class2ID: -1
+    _tags:
+    - Rush
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 2
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Nyx
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Nyx
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Nyx
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Nyx
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Nyx
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Nyx
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Nyx
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Nyx
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 8
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60918, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177926
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 575
+    <MaxMana>k__BackingField: 135
+    <StartingMana>k__BackingField: 35
+    <ManaRegen>k__BackingField: 8
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 30
+    <BaseAttackDamage>k__BackingField: 20
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 4
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 27525
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 262144
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 8
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 5
+    _class1ID: 6
+    _class2ID: -1
+    _tags:
+    - Poison
+    - Shields
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Pollen
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Pollen
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Pollen
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Pollen
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Pollen
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Pollen
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Pollen
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Pollen
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 9
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60928, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177927
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 1150
+    <MaxMana>k__BackingField: 90
+    <StartingMana>k__BackingField: 45
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 44
+    <BaseAttackDamage>k__BackingField: 40
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 26214
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 10901
+    _activeAbilityID: 9
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 65536
+    _guildID: 6
+    _class1ID: 3
+    _class2ID: -1
+    _tags:
+    - Shards
+    - Burn
+    - Rush
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Niklas
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Niklas
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Niklas
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Niklas
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Niklas
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Niklas
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Niklas
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Niklas
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 10
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60917, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177928
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 49152
+    <MaxHealth>k__BackingField: 750
+    <MaxMana>k__BackingField: 100
+    <StartingMana>k__BackingField: 25
+    <ManaRegen>k__BackingField: 8
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 31
+    <BaseAttackDamage>k__BackingField: 25
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 3
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 25559
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 327680
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 10
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 6
+    _class1ID: 6
+    _class2ID: -1
+    _tags:
+    - Shields
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Fiona
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Fiona
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Fiona
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Fiona
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Fiona
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Fiona
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Fiona
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Fiona
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 11
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60933, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177929
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 1000
+    <MaxMana>k__BackingField: 115
+    <StartingMana>k__BackingField: 60
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 54
+    <BaseAttackDamage>k__BackingField: 31
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 22938
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 101101
+    _activeAbilityID: 11
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 5
+    _class1ID: 3
+    _class2ID: 2
+    _tags:
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Rowan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Rowan
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Rowan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Rowan
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Rowan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Rowan
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Rowan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Rowan
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 12
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60937, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177930
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 950
+    <MaxMana>k__BackingField: 105
+    <StartingMana>k__BackingField: 30
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 60
+    <BaseAttackDamage>k__BackingField: 30
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 24904
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 101201
+    _activeAbilityID: 12
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 4
+    _class1ID: 2
+    _class2ID: -1
+    _tags:
+    - Poison
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Skorn
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Skorn
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Skorn
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Skorn
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Skorn
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Skorn
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Skorn
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Skorn
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 13
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60926, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177931
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 825
+    <MaxMana>k__BackingField: 80
+    <StartingMana>k__BackingField: 30
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 40
+    <BaseAttackDamage>k__BackingField: 50
+    <Attack>k__BackingField: 25
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 26214
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 13
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 1
+    _class1ID: 1
+    _class2ID: -1
+    _tags:
+    - 
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Logan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Logan
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Logan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Logan
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Logan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Logan
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Logan
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Logan
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 14
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60919, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177932
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 650
+    <MaxMana>k__BackingField: 85
+    <StartingMana>k__BackingField: 45
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 27
+    <BaseAttackDamage>k__BackingField: 21
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 25
+    <AttackRange>k__BackingField: 4
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 30802
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 393216
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 14
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 4
+    _class1ID: 7
+    _class2ID: -1
+    _tags:
+    - Burn
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Funke
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Funke
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Funke
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Funke
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Funke
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Funke
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Funke
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Funke
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 15
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60938, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177933
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 750
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 25
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 34
+    <BaseAttackDamage>k__BackingField: 38
+    <Attack>k__BackingField: 25
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 2
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 32768
+    <AttackSpeed>k__BackingField: 20
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 101501
+    _activeAbilityID: -1
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 26214
+    _guildID: 3
+    _class1ID: 1
+    _class2ID: 5
+    _tags:
+    - Shards
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Tilly
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Tilly
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Tilly
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Tilly
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Tilly
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Tilly
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Tilly
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Tilly
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 16
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60920, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177934
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 700
+    <MaxMana>k__BackingField: 150
+    <StartingMana>k__BackingField: 45
+    <ManaRegen>k__BackingField: 8
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 30
+    <BaseAttackDamage>k__BackingField: 22
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 3
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 23593
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 262144
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 16
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 6
+    _class1ID: 6
+    _class2ID: -1
+    _tags:
+    - Frost
+    - Shields
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Gustav
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Gustav
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Gustav
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Gustav
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Gustav
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Gustav
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Gustav
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Gustav
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 17
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60931, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177935
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 49152
+    <MaxHealth>k__BackingField: 575
+    <MaxMana>k__BackingField: 80
+    <StartingMana>k__BackingField: 30
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 27
+    <BaseAttackDamage>k__BackingField: 20
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 25
+    <AttackRange>k__BackingField: 4
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 28180
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 393216
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 17
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 3
+    _class1ID: 7
+    _class2ID: -1
+    _tags:
+    - Crit
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Ratna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Ratna
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Ratna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Ratna
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Ratna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Ratna
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Ratna
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Ratna
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 18
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60915, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177936
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 1250
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 25
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 42
+    <BaseAttackDamage>k__BackingField: 41
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 27525
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 101801
+    _activeAbilityID: -1
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 4
+    _class1ID: 3
+    _class2ID: -1
+    _tags:
+    - Rush
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Rip
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Rip
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Rip
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Rip
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Rip
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Rip
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Rip
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Rip
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 20
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60923, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177938
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 650
+    <MaxMana>k__BackingField: 85
+    <StartingMana>k__BackingField: 45
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 29
+    <BaseAttackDamage>k__BackingField: 33
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 5
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 34734
+    <AttackSpeed>k__BackingField: 20
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 327680
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 20
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 4
+    _class1ID: 5
+    _class2ID: -1
+    _tags:
+    - Frost
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Karsu
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Karsu
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Karsu
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Karsu
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Karsu
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Karsu
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Karsu
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Karsu
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 21
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60927, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177939
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 1100
+    <MaxMana>k__BackingField: 70
+    <StartingMana>k__BackingField: 30
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 41
+    <BaseAttackDamage>k__BackingField: 37
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 22938
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 0
+    _passiveAbilityID: 102101
+    _activeAbilityID: -1
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 2
+    _class1ID: 3
+    _class2ID: -1
+    _tags:
+    - Burn
+    - Rush
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Ming
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Ming
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Ming
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Ming
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Ming
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Ming
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Ming
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Ming
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 22
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60930, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177940
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 950
+    <MaxMana>k__BackingField: 90
+    <StartingMana>k__BackingField: 35
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 58
+    <BaseAttackDamage>k__BackingField: 33
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 27525
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 22
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 5
+    _class1ID: 2
+    _class2ID: -1
+    _tags:
+    - Poison
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Pimenta
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Pimenta
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Pimenta
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Pimenta
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Pimenta
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Pimenta
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Pimenta
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Pimenta
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 23
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60934, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177941
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 725
+    <MaxMana>k__BackingField: 100
+    <StartingMana>k__BackingField: 50
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 34
+    <BaseAttackDamage>k__BackingField: 30
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 25
+    <AttackRange>k__BackingField: 2
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 27525
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 393216
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 23
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 5
+    _class1ID: 7
+    _class2ID: -1
+    _tags:
+    - Frost
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Sal
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Sal
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Sal
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Sal
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Sal
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Sal
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Sal
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Sal
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 24
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60916, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177942
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 32768
+    <MaxHealth>k__BackingField: 800
+    <MaxMana>k__BackingField: 75
+    <StartingMana>k__BackingField: 35
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 40
+    <BaseAttackDamage>k__BackingField: 35
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 29491
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 50
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 24
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 6
+    _class1ID: 4
+    _class2ID: -1
+    _tags:
+    - Shards
+    - Crit
+    - Omnivamp
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Dragomir
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Dragomir
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Dragomir
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Dragomir
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Dragomir
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Dragomir
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Dragomir
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Dragomir
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 26
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60924, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177944
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 875
+    <MaxMana>k__BackingField: 105
+    <StartingMana>k__BackingField: 50
+    <ManaRegen>k__BackingField: 4
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 41
+    <BaseAttackDamage>k__BackingField: 46
+    <Attack>k__BackingField: 25
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 1
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 25559
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 1
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 0
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 28
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 2
+    _class1ID: 1
+    _class2ID: -1
+    _tags:
+    - Shields
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 1
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Kai
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Kai
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Kai
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Kai
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Kai
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Kai
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Kai
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Kai
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 27
+      _prefix: Hero
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    <VisualConfig>k__BackingField: {m_FileID: 0, m_PathID: 60925, m_TargetClassID: 0}
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: GUID:9defd87b23fcfdf49beb715a0f174d16
+        m_TableEntryReference:
+          m_KeyId: 11913048068177945
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+    <ManaLockTime>k__BackingField:
+      RawValue: 65536
+    <MaxHealth>k__BackingField: 575
+    <MaxMana>k__BackingField: 110
+    <StartingMana>k__BackingField: 50
+    <ManaRegen>k__BackingField: 8
+    <MoveSpeed>k__BackingField:
+      RawValue: 98304
+    <Defense>k__BackingField: 25
+    <BaseAttackDamage>k__BackingField: 20
+    <Attack>k__BackingField: 0
+    <Magic>k__BackingField: 0
+    <AttackRange>k__BackingField: 4
+    <BaseAttackSpeed>k__BackingField:
+      RawValue: 24904
+    <AttackSpeed>k__BackingField: 0
+    <Crit>k__BackingField: 15
+    <AttackSettings>k__BackingField:
+      <Type>k__BackingField: 5
+      <ProjectileSpeed>k__BackingField:
+        RawValue: 262144
+    <StartWithActiveAbility>k__BackingField: 1
+    _passiveAbilityID: -1
+    _activeAbilityID: 29
+    <CircleCollisorRadius>k__BackingField:
+      RawValue: 32768
+    _guildID: 1
+    _class1ID: 6
+    _class2ID: -1
+    _tags:
+    - Shields
+    - Stall
+    <PriceRange>k__BackingField: {x: 25, y: 25}
+    <Gender>k__BackingField: 0
+    <Alias>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Title.Grace
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Title.Grace
+      _cachedTable: Lore
+    <Subtitle>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Quote.Grace
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Quote.Grace
+      _cachedTable: Lore
+    <CurrentGuild>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.CurrentWork.Grace
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.CurrentWork.Grace
+      _cachedTable: Lore
+    <Motivation>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: Lore
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: Lore.Hero.Motivation.Grace
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: Lore.Hero.Motivation.Grace
+      _cachedTable: Lore
+    <Gameplay>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName:
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key:
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key:
+      _cachedTable:
+  references:
+    version: 2
+    RefIds: []

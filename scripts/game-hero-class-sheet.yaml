@@ -1,0 +1,413 @@
+﻿%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 18}
+  m_PrefabInstance: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1001}
+  m_PrefabAsset: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1001480554}
+  m_GameObject: {m_FileID: 0, m_PathID: 0, m_TargetClassID: 1}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {m_FileID: 1, m_PathID: 4034, m_TargetClassID: 115}
+  m_Name: HeroClassSheetHolder
+  m_EditorClassIdentifier:
+  <SheetName>k__BackingField: HeroClassData
+  <LastUpdatedDateTime>k__BackingField:
+    _ticks: 639107162090846739
+  <Entries>k__BackingField:
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 1
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Warrior
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_1.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_1.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_1.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252566
+        - name: 1
+          variable:
+            rid: 7874262669131252567
+        - name: 2
+          variable:
+            rid: 7874262669131252568
+      _key: HeroClasses.HeroClass_1.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: warrior
+    <IconText>k__BackingField: '<sprite=30>'
+    <PrimaryStat>k__BackingField: 6
+    <SecondaryStats>k__BackingField: 0b0000000100000009000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 2
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Tank
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_2.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_2.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_2.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252569
+        - name: 1
+          variable:
+            rid: 7874262669131252570
+        - name: 2
+          variable:
+            rid: 7874262669131252571
+      _key: HeroClasses.HeroClass_2.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: tank
+    <IconText>k__BackingField: '<sprite=31>'
+    <PrimaryStat>k__BackingField: 4
+    <SecondaryStats>k__BackingField: 01000000070000000c000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 3
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Vanguard
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_3.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_3.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_3.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252572
+        - name: 1
+          variable:
+            rid: 7874262669131252573
+        - name: 2
+          variable:
+            rid: 7874262669131252574
+      _key: HeroClasses.HeroClass_3.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: vanguard
+    <IconText>k__BackingField: '<sprite=32>'
+    <PrimaryStat>k__BackingField: 1
+    <SecondaryStats>k__BackingField: 040000000900000006000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 4
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Assassin
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_4.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_4.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_4.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252575
+        - name: 1
+          variable:
+            rid: 7874262669131252576
+        - name: 2
+          variable:
+            rid: 7874262669131252577
+      _key: HeroClasses.HeroClass_4.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: assassin
+    <IconText>k__BackingField: '<sprite=33>'
+    <PrimaryStat>k__BackingField: 11
+    <SecondaryStats>k__BackingField: 060000000700000004000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 5
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Duelist
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_5.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_5.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_5.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252578
+        - name: 1
+          variable:
+            rid: 7874262669131252579
+        - name: 2
+          variable:
+            rid: 7874262669131252580
+      _key: HeroClasses.HeroClass_5.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: duelist
+    <IconText>k__BackingField: '<sprite=34>'
+    <PrimaryStat>k__BackingField: 9
+    <SecondaryStats>k__BackingField: 0b0000000600000001000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 6
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Mystic
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_6.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_6.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_6.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252581
+        - name: 1
+          variable:
+            rid: 7874262669131252582
+        - name: 2
+          variable:
+            rid: 7874262669131252583
+      _key: HeroClasses.HeroClass_6.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: mystic
+    <IconText>k__BackingField: '<sprite=35>'
+    <PrimaryStat>k__BackingField: 12
+    <SecondaryStats>k__BackingField: 070000000900000004000000
+  - <Id>k__BackingField:
+      _serializedGuid:
+      _sequentialId: 7
+      _prefix: HeroClass
+      _mode: 1
+    <DisabledInGame>k__BackingField: 0
+    _title: Mage
+    <NameLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_7.Name
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      _key: HeroClasses.HeroClass_7.Name
+      _cachedTable: HeroClasses
+    <DescriptionLocaKey>k__BackingField:
+      _localizedString:
+        m_TableReference:
+          m_TableCollectionName: HeroClasses
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: HeroClasses.HeroClass_7.Description
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables:
+        - name: 0
+          variable:
+            rid: 7874262669131252584
+        - name: 1
+          variable:
+            rid: 7874262669131252585
+        - name: 2
+          variable:
+            rid: 7874262669131252586
+      _key: HeroClasses.HeroClass_7.Description
+      _cachedTable: HeroClasses
+    <TagName>k__BackingField: mage
+    <IconText>k__BackingField: '<sprite=36>'
+    <PrimaryStat>k__BackingField: 7
+    <SecondaryStats>k__BackingField: 0c0000000b00000001000000
+  references:
+    version: 2
+    RefIds:
+    - rid: 7874262669131252566
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252567
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252568
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252569
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252570
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252571
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252572
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252573
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252574
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252575
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252576
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252577
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252578
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252579
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252580
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252581
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 2
+    - rid: 7874262669131252582
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252583
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
+    - rid: 7874262669131252584
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 40
+    - rid: 7874262669131252585
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 1
+    - rid: 7874262669131252586
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 20
