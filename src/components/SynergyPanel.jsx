@@ -32,6 +32,7 @@ export default function SynergyPanel() {
               <div
                 key={a.class}
                 className={`synergy-item ${a.level > 0 ? 'active' : 'inactive'}`}
+                title={a.level > 0 ? a.bonuses[a.level] : `Faltam ${a.next - a.count} para ativar`}
               >
                 <span className="class-icon" aria-hidden="true">{a.icon}</span>
                 <div className="synergy-main">

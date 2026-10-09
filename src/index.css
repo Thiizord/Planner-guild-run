@@ -1088,9 +1088,9 @@ button { font-family: var(--font-body); }
 /* --------------------------- 14. SINERGIAS ------------------------------ */
 .synergy-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-s);
   background: var(--inset);
@@ -1098,7 +1098,14 @@ button { font-family: var(--font-body); }
   transition: border-color 0.2s var(--ease), box-shadow 0.25s var(--ease);
 }
 
-.synergy-item .class-icon { font-size: 18px; width: 24px; text-align: center; }
+.synergy-item .class-icon {
+  font-size: 20px;
+  width: 28px;
+  min-width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
 
 .synergy-item .synergy-main { flex: 1; min-width: 0; }
 
@@ -1107,52 +1114,73 @@ button { font-family: var(--font-body); }
   align-items: baseline;
   gap: 6px;
   flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
 .synergy-item strong {
   font-family: var(--font-display);
   font-size: 13px;
   letter-spacing: 0.03em;
+  color: var(--text);
 }
 
 .synergy-item .synergy-count {
   font-size: 11px;
-  color: var(--text-faint);
+  color: var(--text-dim);
   font-variant-numeric: tabular-nums;
 }
 
 .synergy-item .bonus {
   font-size: 11px;
   color: var(--green);
+  font-weight: 600;
 }
 
 .synergy-item .count {
   font-size: 10px;
   color: var(--text-faint);
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* pontos de limiar (2/3/4) */
-.threshold-dots { display: flex; gap: 4px; margin-top: 4px; align-items: center; }
-
-.threshold-dots .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: transparent;
-  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+.threshold-dots {
+  display: flex;
+  gap: 5px;
+  margin: 4px 0;
+  align-items: center;
 }
 
-.threshold-dots .dot.hit { background: var(--green); border-color: var(--green); }
-.synergy-item.active { border-color: rgba(126, 217, 138, 0.35); box-shadow: var(--glow-green); }
-.synergy-item.inactive { opacity: 0.75; }
+.threshold-dots .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--text-faint);
+  background: transparent;
+  flex-shrink: 0;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.threshold-dots .dot.hit {
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 6px rgba(126, 217, 138, 0.3);
+}
+
+.synergy-item.active {
+  border-color: rgba(126, 217, 138, 0.35);
+  box-shadow: var(--glow-green);
+}
+
+.synergy-item.inactive { opacity: 0.85; }
 
 .synergy-progress {
-  height: 4px;
+  height: 5px;
   border-radius: 3px;
   background: var(--line-soft);
-  margin-top: 5px;
+  margin-top: 4px;
   overflow: hidden;
 }
 
@@ -1163,7 +1191,12 @@ button { font-family: var(--font-body); }
   transition: width 0.4s var(--ease);
 }
 
-.synergy-hint { font-size: 10px; color: var(--text-faint); margin-top: 3px; }
+.synergy-hint {
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 3px;
+  letter-spacing: 0.03em;
+}
 
 #synergyGrid { display: block; }
 #synergyGrid .synergy-empty { margin-top: 4px; }
