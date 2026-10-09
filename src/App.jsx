@@ -20,6 +20,12 @@ export default function App() {
 
       <div className="app" id="app">
         <Header />
+
+        {/* BANNER OFICIAL DO JOGO (fornecido pelo usuário) */}
+        <div className="banner">
+          <img src="/assets/banner.webp" alt="GuildRun — Team Builder Pro" draggable="false" />
+        </div>
+
         <SynergyPanel />
         <StatsPanel />
         <HeroPool />

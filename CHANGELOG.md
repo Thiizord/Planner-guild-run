@@ -1,5 +1,18 @@
 # Changelog — GuildRun Team Builder Pro (migração Vanilla JS → React)
 
+## [0.6.1] — Banner oficial + README profissional
+
+- **Banner do jogo** (arte oficial fornecida pelo autor, `Banner guild run.webp` da
+  área de trabalho) integrado ao topo da página: `public/assets/banner.webp`,
+  com moldura glass, crop central responsivo (220px desktop / 130px mobile).
+- **README reescrito em formato profissional**: por que o projeto existe (estudo de
+  migração para React + paixão pelo jogo), arquitetura com diagrama de fluxo de
+  dados, tabela de tecnologias com justificativas, proveniência completa dos dados
+  em três camadas (guias da comunidade → validação oficial via AssetRipper → arte
+  via UnityPy + itens do autor), estrutura atualizada (sem toasts/modais) e seção
+  de qualidade.
+- Smoke test: +check do banner no HTML renderizado.
+
 ## [0.6.0] — Zero popups: toasts removidos + Limpar corrigido
 
 - **Sistema de toasts inteiro removido**: `ToastContainer`, hook `useToast`, estado

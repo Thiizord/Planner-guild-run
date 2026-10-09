@@ -72,6 +72,7 @@ try {
   check(html, '/assets/heroes/dragomir.png', 'Dragomir renderiza com imagem oficial');
   check(html, '/assets/heroes/fiona.png', 'Fiona renderiza com imagem oficial');
   check(html, '/assets/heroes/aria.png', 'Aria renderiza com imagem (fornecida pelo usuário)');
+  check(html, '/assets/banner.webp', 'banner oficial do jogo no topo da página');
 
   // Persistência: saveState roda em efeitos (não no SSR) — testa direto o createInitialState + reducer
   const { createInitialState } = await vite.ssrLoadModule('/src/context/initialState.js');
