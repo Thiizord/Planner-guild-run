@@ -1,10 +1,9 @@
-// SynergyPanel.jsx - Painel de sinergias com limiares e progresso por classe
-// (padrão do builder oficial): ativas em destaque verde, próximas de ativar
-// com barra de progresso e dica. Calculado a partir dos dados reais.
+// SynergyPanel.jsx - Painel de sinergias com SVG icons, limiares e progresso.
 
 import { useApp } from '../hooks/useApp.js';
 import { getTeamCharactersData } from '../utils/helpers.js';
 import { analyzeClassCounts } from '../utils/synergies.js';
+import ClassIcon from './ClassIcon.jsx';
 
 export default function SynergyPanel() {
   const { state } = useApp();
@@ -27,22 +26,20 @@ export default function SynergyPanel() {
         ) : (
           analysis.map((a) => {
             const thresholds = [2, 3, 4];
-            const progress = a.next ? (a.count / a.next) * 100 : 100;
+            const progress = a.next ? Math.min(100, (a.count / a.next) * 100) : 100;
             return (
               <div
                 key={a.class}
                 className={`synergy-item ${a.level > 0 ? 'active' : 'inactive'}`}
                 title={a.level > 0 ? a.bonuses[a.level] : `Faltam ${a.next - a.count} para ativar`}
               >
-                <span className="class-icon" aria-hidden="true">{a.icon}</span>
+                <span className="class-icon"><ClassIcon name={a.class} size={20} /></span>
                 <div className="synergy-main">
                   <div className="synergy-top">
                     <strong>{a.class}</strong>
                     <span className="synergy-count">({a.count}x)</span>
-                    {a.level > 0 && (
-                      <span className="bonus">{a.bonuses[a.level]}</span>
-                    )}
-                    {a.level > 0 && <span className="count">Nível {a.level}</span>}
+                    {a.level > 0 && <span className="bonus">{a.bonuses[a.level]}</span>}
+                    {a.level > 0 && <span className="count">Nivel {a.level}</span>}
                   </div>
                   <div className="threshold-dots" aria-hidden="true">
                     {thresholds.map((t) => (
@@ -53,9 +50,7 @@ export default function SynergyPanel() {
                     <div className="bar" style={{ width: `${progress}%` }} />
                   </div>
                   {a.level === 0 && a.next && (
-                    <div className="synergy-hint">
-                      +{a.next - a.count} para ativar
-                    </div>
+                    <div className="synergy-hint">+{a.next - a.count} para ativar</div>
                   )}
                 </div>
               </div>

@@ -1,7 +1,7 @@
-// Filters.jsx - Busca, chips de tier e classe (ícones oficiais) e ordenação.
+// Filters.jsx - Busca, chips de tier e classe (com SVG icons), ordenação.
 
 import { useApp } from '../../hooks/useApp.js';
-import { CLASS_ICONS } from '../../data/data.js';
+import ClassIcon from '../ClassIcon.jsx';
 
 const TIER_OPTIONS = [
   { value: 'all', label: 'Todos' },
@@ -13,13 +13,13 @@ const TIER_OPTIONS = [
 
 const CLASS_OPTIONS = [
   { value: 'all', label: 'Todas' },
-  { value: 'Warrior', label: '⚔️ Warrior' },
-  { value: 'Tank', label: '🛡️ Tank' },
-  { value: 'Vanguard', label: '💪 Vanguard' },
-  { value: 'Assassin', label: '🗡️ Assassin' },
-  { value: 'Duelist', label: '⚡ Duelist' },
-  { value: 'Mystic', label: '🌀 Mystic' },
-  { value: 'Mage', label: '🔮 Mage' }
+  { value: 'Warrior', label: 'Warrior' },
+  { value: 'Tank', label: 'Tank' },
+  { value: 'Vanguard', label: 'Vanguard' },
+  { value: 'Assassin', label: 'Assassin' },
+  { value: 'Duelist', label: 'Duelist' },
+  { value: 'Mystic', label: 'Mystic' },
+  { value: 'Mage', label: 'Mage' }
 ];
 
 export default function Filters({ sortBy, onSortChange }) {
@@ -30,10 +30,10 @@ export default function Filters({ sortBy, onSortChange }) {
       <input
         type="text"
         id="searchInput"
-        placeholder="Buscar herói..."
+        placeholder="Buscar heroi..."
         value={state.searchQuery}
         onChange={(e) => dispatch({ type: 'SET_SEARCH_QUERY', value: e.target.value })}
-        aria-label="Buscar herói por nome ou função"
+        aria-label="Buscar heroi por nome ou funcao"
       />
 
       <div className="chip-row" id="tierFilters" role="group" aria-label="Filtrar por tier">
@@ -53,9 +53,10 @@ export default function Filters({ sortBy, onSortChange }) {
         {CLASS_OPTIONS.map((opt) => (
           <button
             key={opt.value}
-            className={`chip ${state.classFilter === opt.value ? 'active' : ''}`}
+            className={`chip class-chip ${state.classFilter === opt.value ? 'active' : ''}`}
             onClick={() => dispatch({ type: 'SET_CLASS_FILTER', value: opt.value })}
           >
+            {opt.value !== 'all' && <ClassIcon name={opt.value} size={14} />}
             {opt.label}
           </button>
         ))}
@@ -63,11 +64,7 @@ export default function Filters({ sortBy, onSortChange }) {
 
       <div className="sort-row">
         <label htmlFor="sortSelect">Ordenar por</label>
-        <select
-          id="sortSelect"
-          value={sortBy}
-          onChange={(e) => onSortChange(e.target.value)}
-        >
+        <select id="sortSelect" value={sortBy} onChange={(e) => onSortChange(e.target.value)}>
           <option value="tier">Tier</option>
           <option value="name">Nome</option>
         </select>

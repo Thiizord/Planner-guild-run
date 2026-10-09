@@ -35,8 +35,21 @@ export function reducer(state, action) {
       if (arr[slotIndex] !== null) return state; // slot ocupado — sem popup
       const newArr = [...arr];
       newArr[slotIndex] = charId;
-      return { ...state, [teamType]: newArr };
+      return { ...state, [teamType]: newArr, placementCharId: null };
     }
+
+    // ---------- Pegar heroi da biblioteca para posicionamento (2 cliques) ----------
+    case 'SET_PLACEMENT_CHAR': {
+      const { charId } = action;
+      // se clicou no mesmo herói, cancela (toggle)
+      if (state.placementCharId === charId) {
+        return { ...state, placementCharId: null };
+      }
+      return { ...state, placementCharId: charId };
+    }
+
+    case 'CLEAR_PLACEMENT_CHAR':
+      return { ...state, placementCharId: null };
 
     // ---------- Arrastar entre slots do time (trocar/mover posição) ----------
     // Funcionalidade nova (o vanilla só suportava arrastar da pool; arrastar um

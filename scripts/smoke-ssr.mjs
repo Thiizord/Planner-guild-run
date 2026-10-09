@@ -59,7 +59,7 @@ try {
   check(html, 'Campo de Batalha', 'arena do time');
   check(html, 'Sinergias Ativas', 'painel de sinergias');
   check(html, '(2x)', 'sinergia Mage 2x ativa');
-  check(html, 'Nível ', 'nível da sinergia');
+  check(html, 'Nivel ', 'nivel da sinergia (sem mojibake)');
   check(html, 'Estatísticas do Time', 'painel de estatísticas');
   check(html, 'DPS estimado', 'display de DPS');
   check(html, 'dpsDisplay', 'valor de DPS renderizado');
@@ -75,6 +75,18 @@ try {
   check(html, '/assets/heroes/fiona.png', 'Fiona renderiza com imagem oficial');
   check(html, '/assets/heroes/aria.png', 'Aria renderiza com imagem (fornecida pelo usuário)');
   check(html, '/assets/banner.webp', 'banner oficial do jogo no topo da página');
+
+  console.log('\nTabuleiro hexagonal:');
+  check(html, 'data-cell="main-0"', 'célula hexagonal main-0 com ID estável');
+  check(html, 'data-cell="reserve-2"', 'célula hexagonal reserve-2 com ID estável');
+  check(html, 'hex-frame', 'molduras hexagonais renderizadas');
+  check(html, 'hex-row offset', 'linha de reservas com offset (formação escalonada)');
+  const semMojibake = !html.includes('ðŸ') && !html.includes('ï¿½') && !html.includes('Ã');
+  console.log(`  ${semMojibake ? '✔' : '✘'} zero mojibake no HTML renderizado`);
+  if (!semMojibake) failures++;
+  const temSVG = html.includes('<svg');
+  console.log(`  ${temSVG ? '✔' : '✘'} SVG icons renderizados (sem emojis)`);
+  if (!temSVG) failures++;
 
   // Persistência: saveState roda em efeitos (não no SSR) — testa direto o createInitialState + reducer
   const { createInitialState } = await vite.ssrLoadModule('/src/context/initialState.js');
@@ -118,6 +130,28 @@ try {
   const okSel = sSel.selectedCharId === 'dragomir';
   console.log(`reducer SELECT_SLOT: ${okSel ? '✔ seleciona personagem' : '✘ ' + JSON.stringify(sSel)}`);
 
+  // SET_PLACEMENT_CHAR: pega herói da biblioteca para posicionamento
+  const sPl = reducer(s0, { type: 'SET_PLACEMENT_CHAR', charId: 'kai' });
+  const okPl = sPl.placementCharId === 'kai';
+  console.log(`reducer SET_PLACEMENT_CHAR: ${okPl ? '✔ pega herói para posicionamento' : '✘ ' + JSON.stringify(sPl)}`);
+
+  // toggle: clicar no mesmo herói cancela
+  const sPlT = reducer(sPl, { type: 'SET_PLACEMENT_CHAR', charId: 'kai' });
+  const okPlT = sPlT.placementCharId === null;
+  console.log(`reducer SET_PLACEMENT_CHAR toggle: ${okPlT ? '✔ cancela ao clicar de novo' : '✘ ' + JSON.stringify(sPlT)}`);
+
+  // DROP_CHAR com placement: posiciona na célula específica e limpa
+  // (remove aria de main[0] primeiro, depois posiciona kai lá)
+  const sRmForDrop = reducer(sPl, { type: 'REMOVE_CHAR', teamType: 'main', index: 0 });
+  const sDrop = reducer(sRmForDrop, { type: 'DROP_CHAR', charId: 'kai', teamType: 'main', slotIndex: 0 });
+  const okDrop = sDrop.main[0] === 'kai' && sDrop.placementCharId === null;
+  console.log(`reducer DROP_CHAR c/ placement: ${okDrop ? '✔ posiciona e limpa placement' : '✘ ' + JSON.stringify(sDrop)}`);
+
+  // CLEAR_PLACEMENT_CHAR
+  const sClr = reducer(sPl, { type: 'CLEAR_PLACEMENT_CHAR' });
+  const okClr = sClr.placementCharId === null;
+  console.log(`reducer CLEAR_PLACEMENT_CHAR: ${okClr ? '✔ limpa placement' : '✘ ' + JSON.stringify(sClr)}`);
+
   // SWAP_SLOTS (arrastar dentro do time — trocar/mover posição)
   // estado aqui: main = ['kai','dragomir','fiona'], reserve = ['funke', null, null]
   const sSw = reducer(s3, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 0, toType: 'main', toIndex: 1 });
@@ -136,7 +170,7 @@ try {
   const ok5 = s5.main.every(v => v === null) && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
   console.log(`reducer RESET_TEAM: ${ok5 ? '✔ limpa tudo' : '✘ ' + JSON.stringify(s5)}`);
 
-  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okSw, okMv, okSelf, ok5].every(Boolean);
+  const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okPl, okPlT, okDrop, okClr, okSw, okMv, okSelf, ok5].every(Boolean);
   console.log(todosOk
     ? '\n✅ SMOKE TEST COMPLETO PASSOU'
     : `\n❌ ${failures} falha(s) no smoke test`);

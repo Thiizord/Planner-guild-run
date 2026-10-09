@@ -1,9 +1,10 @@
-// HeroPool.jsx - Biblioteca de heróis (coluna lateral): busca, filtros, ordenação
-// e grid compacto de cards. Gaveta recolhível no mobile.
+// HeroPool.jsx - Biblioteca de heróis: busca, filtros, ordenação.
+// Fluxo de posicionamento: clique no herói pega-o (SET_PLACEMENT_CHAR);
+// clique num hexágono vazio posiciona (DROP_CHAR). Drag ainda funciona direto.
 
 import { useMemo, useState } from 'react';
 import { useApp } from '../../hooks/useApp.js';
-import { getAvailableChars } from '../../utils/helpers.js';
+import { getAvailableChars, isInTeam } from '../../utils/helpers.js';
 import HeroCard from './HeroCard.jsx';
 import Filters from './Filters.jsx';
 
@@ -40,7 +41,11 @@ export default function HeroPool() {
     return list;
   }, [state.main, state.reserve, state.tierFilter, state.classFilter, state.searchQuery, sortBy]);
 
-  const handleSelect = (charId) => dispatch({ type: 'SELECT_CHAR', charId });
+  // clique no card: pega o herói para posicionamento (não coloca direto)
+  const handleSelect = (charId) => {
+    if (isInTeam(state.main, state.reserve, charId)) return;
+    dispatch({ type: 'SET_PLACEMENT_CHAR', charId });
+  };
 
   return (
     <div className={`library panel ${collapsed ? 'collapsed' : ''}`}>
@@ -49,13 +54,13 @@ export default function HeroPool() {
         onClick={() => setCollapsed((c) => !c)}
         aria-expanded={!collapsed}
       >
-        Heróis <span className="badge" id="poolCount">{filtered.length}</span>
-        <span className="toggle-caret" aria-hidden="true">{collapsed ? '▸' : '▾'}</span>
+        Herois <span className="badge" id="poolCount">{filtered.length}</span>
+        <span className="toggle-caret" aria-hidden="true">{collapsed ? '>' : 'v'}</span>
       </button>
 
       <div className="panel-title">
-        <h2>Heróis</h2>
-        <span className="hint">{filtered.length} disponíveis</span>
+        <h2>Herois</h2>
+        <span className="hint">{filtered.length} disponiveis</span>
       </div>
 
       <Filters sortBy={sortBy} onSortChange={setSortBy} />
@@ -64,15 +69,29 @@ export default function HeroPool() {
         {filtered.length === 0 ? (
           <div className="synergy-empty">
             {getAvailableChars(state.main, state.reserve).length === 0
-              ? 'Todos os heróis já estão no time'
-              : 'Nenhum herói encontrado com esses filtros'}
+              ? 'Todos os herois ja estao no time'
+              : 'Nenhum heroi encontrado com esses filtros'}
           </div>
         ) : (
           filtered.map((c) => (
-            <HeroCard key={c.id} hero={c} onSelect={handleSelect} />
+            <HeroCard
+              key={c.id}
+              hero={c}
+              onSelect={handleSelect}
+              picked={state.placementCharId === c.id}
+            />
           ))
         )}
       </div>
+
+      {state.placementCharId && (
+        <div className="placement-hint">
+          Clique num hexagono vazio para posicionar
+          <button className="btn btn-ghost btn-sm" onClick={() => dispatch({ type: 'CLEAR_PLACEMENT_CHAR' })}>
+            Cancelar
+          </button>
+        </div>
+      )}
     </div>
   );
 }
