@@ -2173,3 +2173,42 @@ button { font-family: var(--font-body); }
 }
 
 .inspector-remove:hover { color: #f0a89f; border-color: var(--red); }
+
+/* ============================================================
+   DRAG GHOST — retrato que segue o cursor durante drag custom
+   ============================================================ */
+.hero-drag-ghost {
+  position: fixed;
+  width: 56px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--gold), var(--gold-dim) 60%, #55401c);
+  padding: 2px;
+  box-shadow: 0 8px 24px rgba(201, 162, 75, 0.35);
+  opacity: 0.85;
+  animation: ghostIn 0.15s var(--ease);
+}
+
+.hero-drag-ghost img {
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+  object-fit: cover;
+}
+
+@keyframes ghostIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 0.85; transform: scale(1); }
+}
+
+/* suprimir seleção de texto durante drag */
+body.hero-dragging {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grabbing;
+}

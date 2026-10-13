@@ -1,10 +1,11 @@
 // HexCell.jsx - Célula hexagonal individual do tabuleiro (flor de 7).
-// Conteúdo DENTRO do hex: retrato + overlay com nome/classe/mini-itens.
-// Cada hex corresponde a um índice do array main (0-6).
+// Drag customizado via Pointer Events (permite scroll durante drag).
+// Cada hex corresponde a um índice do array main (0-27).
 
 import { useState } from 'react';
 import { useApp } from '../../hooks/useApp';
 import { getCharacter, getItem, getCharItems } from '../../utils/helpers';
+import { startHeroDrag, isDragging } from '../../hooks/useHeroDrag';
 import ClassIcon from '../ClassIcon.jsx';
 import MiniItems from './MiniItems.jsx';
 
@@ -14,57 +15,29 @@ export default function HexCell({
   onHexClick, onItemSlotClick,
 }) {
   const { state, dispatch } = useApp();
-  const [dragOver, setDragOver] = useState(false);
+  const [hover, setHover] = useState(false);
 
-  // --- drag & drop ---
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    setDragOver(true);
+  const handlePointerDown = (e) => {
+    if (!charId || e.button !== 0) return;
+    // não inicia drag se clicou no botão X
+    if (e.target.closest('.hex-remove')) return;
+    startHeroDrag({ source: 'team', charId, teamType: 'main', index: hexIndex }, e, dispatch);
   };
 
-  const handleDragLeave = () => setDragOver(false);
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setDragOver(false);
-    const raw = e.dataTransfer.getData('text/plain');
-    if (!raw) return;
-    let drag;
-    try { drag = JSON.parse(raw); } catch { drag = { source: 'pool', charId: raw }; }
-    if (!drag.charId) return;
-
-    if (drag.source === 'team') {
-      dispatch({
-        type: 'SWAP_SLOTS',
-        charId: drag.charId,
-        fromType: drag.teamType,
-        fromIndex: drag.index,
-        toType: 'main',
-        toIndex: hexIndex,
-      });
-    } else {
-      dispatch({
-        type: 'DROP_CHAR',
-        charId: drag.charId,
-        teamType: 'main',
-        slotIndex: hexIndex,
-      });
-    }
+  const handleClick = () => {
+    if (isDragging()) return; // suprime click se houve drag
+    onHexClick(hexIndex);
   };
 
-  const handleDragStart = (e) => {
-    e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'team', charId, teamType: 'main', index: hexIndex }));
-    e.dataTransfer.effectAllowed = 'move';
+  const handleRemove = (e) => {
+    e.stopPropagation();
+    dispatch({ type: 'REMOVE_CHAR', teamType: 'main', index: hexIndex });
   };
-
-  const handleClick = () => onHexClick(hexIndex);
 
   // --- vazio ---
   if (!charId) {
     const classes = [
       'hex-cell', 'empty',
-      dragOver ? 'drag-over' : '',
       isValidTarget ? 'valid-target' : '',
     ].filter(Boolean).join(' ');
 
@@ -73,9 +46,6 @@ export default function HexCell({
         className={classes}
         data-hex={hexId}
         data-index={hexIndex}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
         onClick={handleClick}
       >
         <div className="hex-portrait empty-portrait">
@@ -110,7 +80,6 @@ export default function HexCell({
     isSelected ? 'selected' : '',
     isPicked ? 'picked' : '',
     isValidTarget ? 'valid-target' : '',
-    dragOver ? 'drag-over' : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -120,20 +89,15 @@ export default function HexCell({
       data-index={hexIndex}
       data-char={charId}
       onClick={handleClick}
-      draggable
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
+      onPointerDown={handlePointerDown}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       title={`${c.name} -- ${c.class}${c.class2 ? '/' + c.class2 : ''} -- clique de novo para mover`}
     >
-      {/* botao X para remover (aparece no hover) */}
+      {/* botão X para remover (aparece no hover) */}
       <button
         className="hex-remove"
-        onClick={(e) => {
-          e.stopPropagation();
-          dispatch({ type: 'REMOVE_CHAR', teamType: 'main', index: hexIndex });
-        }}
+        onClick={handleRemove}
         aria-label={`Remover ${c.name}`}
         title="Remover do time"
       >
@@ -145,7 +109,6 @@ export default function HexCell({
           ? <img src={c.image} alt={c.name} draggable="false" />
           : <div className="avatar-initial">{c.name.charAt(0)}</div>}
 
-        {/* overlay: nome + classe + mini-itens na base do hex */}
         <div className="hex-overlay">
           <div className="hex-overlay-name">{c.name}</div>
           <div className="hex-overlay-class">
@@ -159,11 +122,9 @@ export default function HexCell({
           />
         </div>
 
-        {/* contagem de itens no canto */}
         <span className={`hex-item-count ${itemCount > 0 ? 'has' : ''}`}>{itemCount}/5</span>
       </div>
 
-      {/* tooltip */}
       {tooltipItems.length > 0 && (
         <div className="hex-tooltip">
           {tooltipItems}

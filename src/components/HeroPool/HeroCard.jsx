@@ -1,20 +1,29 @@
 // HeroCard.jsx - Card compacto da biblioteca: retrato hexagonal, nome, classes (SVG).
+// Drag customizado via Pointer Events (permite scroll do mouse durante drag).
 
 import ClassIcon from '../ClassIcon.jsx';
+import { useApp } from '../../hooks/useApp';
+import { startHeroDrag, isDragging } from '../../hooks/useHeroDrag';
 
 export default function HeroCard({ hero, onSelect, picked }) {
-  const handleDragStart = (e) => {
-    e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'pool', charId: hero.id }));
-    e.dataTransfer.effectAllowed = 'move';
+  const { dispatch } = useApp();
+
+  const handlePointerDown = (e) => {
+    if (e.button !== 0) return;
+    startHeroDrag({ source: 'pool', charId: hero.id }, e, dispatch);
+  };
+
+  const handleClick = () => {
+    if (isDragging()) return; // suprime click se houve drag
+    onSelect(hero.id);
   };
 
   return (
     <div
       className={`hero-card ${picked ? 'picked' : ''}`}
       data-id={hero.id}
-      draggable="true"
-      onDragStart={handleDragStart}
-      onClick={() => onSelect(hero.id)}
+      onPointerDown={handlePointerDown}
+      onClick={handleClick}
       title={`${hero.name} -- ${hero.role}`}
       role="button"
       tabIndex={0}
@@ -37,7 +46,6 @@ export default function HeroCard({ hero, onSelect, picked }) {
         {hero.class2 && <ClassIcon name={hero.class2} size={12} />}
         <span className="class-names">{hero.class}{hero.class2 ? '/' + hero.class2 : ''}</span>
       </span>
-      <span className="drag-hint" aria-hidden="true">+</span>
     </div>
   );
 }

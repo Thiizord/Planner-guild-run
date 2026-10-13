@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import { useApp } from '../../hooks/useApp';
 import { getCharacter, countMain, countReserve } from '../../utils/helpers';
+import { startHeroDrag, isDragging } from '../../hooks/useHeroDrag';
 import HexBoard from './HexBoard.jsx';
 import Equipment from './Equipment.jsx';
 import HeroInspector from './HeroInspector.jsx';
@@ -25,65 +26,6 @@ export default function TeamGrid({ count }) {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [state.placementCharId, dispatch]);
-
-  // auto-scroll durante drag: quando o mouse chega perto do topo/fundo
-  // da tela, a página scrolla + scroll do mouse funciona durante drag
-  useEffect(() => {
-    let raf = null;
-    let isDragging = false;
-    const EDGE = 100;     // pixels da borda que dispara o auto-scroll
-    const SPEED = 14;     // velocidade do auto-scroll
-
-    const onDragStart = () => { isDragging = true; };
-    const onDragEnd = () => { isDragging = false; stopScroll(); };
-
-    // wheel durante drag: browsers que disparam wheel durante drag session
-    const onWheel = (e) => {
-      if (isDragging) {
-        window.scrollBy(0, e.deltaY);
-      }
-    };
-
-    const onDragOver = (e) => {
-      if (!e.dataTransfer) return;
-      const types = e.dataTransfer.types;
-      if (!types || !Array.from(types).includes('text/plain')) return;
-
-      const y = e.clientY;
-      const h = window.innerHeight;
-
-      if (y < EDGE) {
-        if (raf) cancelAnimationFrame(raf);
-        const step = () => { window.scrollBy(0, -SPEED); raf = requestAnimationFrame(step); };
-        raf = requestAnimationFrame(step);
-      } else if (y > h - EDGE) {
-        if (raf) cancelAnimationFrame(raf);
-        const step = () => { window.scrollBy(0, SPEED); raf = requestAnimationFrame(step); };
-        raf = requestAnimationFrame(step);
-      } else if (raf) {
-        cancelAnimationFrame(raf);
-        raf = null;
-      }
-    };
-
-    const stopScroll = () => {
-      if (raf) { cancelAnimationFrame(raf); raf = null; }
-    };
-
-    document.addEventListener('dragstart', onDragStart);
-    document.addEventListener('dragend', onDragEnd);
-    document.addEventListener('wheel', onWheel, { capture: true, passive: true });
-    document.addEventListener('dragover', onDragOver);
-    document.addEventListener('drop', stopScroll);
-    return () => {
-      document.removeEventListener('dragstart', onDragStart);
-      document.removeEventListener('dragend', onDragEnd);
-      document.removeEventListener('wheel', onWheel, { capture: true });
-      document.removeEventListener('dragover', onDragOver);
-      document.removeEventListener('drop', stopScroll);
-      stopScroll();
-    };
-  }, []);
 
   // clique num hex do tabuleiro
   const handleHexClick = (hexIndex) => {
@@ -150,32 +92,6 @@ export default function TeamGrid({ count }) {
     }
   };
 
-  // drop de drag num slot de reserva (aceita do tabuleiro OU direto da biblioteca)
-  const handleReserveDrop = (e, index) => {
-    e.preventDefault();
-    const raw = e.dataTransfer.getData('text/plain');
-    if (!raw) return;
-    try {
-      const drag = JSON.parse(raw);
-      if (!drag.charId) return;
-
-      if (drag.source === 'team') {
-        // ja esta no time: move/troca para a reserva
-        dispatch({
-          type: 'SWAP_SLOTS',
-          charId: drag.charId,
-          fromType: drag.teamType,
-          fromIndex: drag.index,
-          toType: 'reserve',
-          toIndex: index,
-        });
-      } else if (drag.source === 'pool') {
-        // vem direto da biblioteca: adiciona a reserva
-        dispatch({ type: 'DROP_CHAR', charId: drag.charId, teamType: 'reserve', slotIndex: index });
-      }
-    } catch { /* noop */ }
-  };
-
   const handleItemSlotClick = (type, index, slot) => {
     const arr = type === 'main' ? state.main : state.reserve;
     const charId = arr[index];
@@ -217,9 +133,8 @@ export default function TeamGrid({ count }) {
                 <div
                   key={`res-${idx}`}
                   className="reserve-panel-slot empty"
+                  data-reserve={idx}
                   onClick={() => handleReserveClick(idx)}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => handleReserveDrop(e, idx)}
                 >
                   <span className="rp-plus">+</span>
                 </div>
@@ -229,14 +144,16 @@ export default function TeamGrid({ count }) {
               <div
                 key={`res-${idx}`}
                 className={`reserve-panel-slot ${state.selectedCharId === charId ? 'selected' : ''} ${state.placementCharId === charId ? 'picked' : ''}`}
-                onClick={() => handleReserveClick(idx)}
-                draggable
-                onDragStart={(e) => {
-                  e.dataTransfer.setData('text/plain', JSON.stringify({ source: 'team', charId, teamType: 'reserve', index: idx }));
-                  e.dataTransfer.effectAllowed = 'move';
+                data-reserve={idx}
+                onClick={(e) => {
+                  if (isDragging()) return;
+                  handleReserveClick(idx);
                 }}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => handleReserveDrop(e, idx)}
+                onPointerDown={(e) => {
+                  if (e.button !== 0) return;
+                  if (e.target.closest('.rp-remove')) return;
+                  startHeroDrag({ source: 'team', charId, teamType: 'reserve', index: idx }, e, dispatch);
+                }}
                 title={`${c.name} -- ${c.role}`}
               >
                 <img src={c.image} alt={c.name} className="rp-portrait" draggable="false" />

@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
-import { AppProvider } from './context/AppContext.jsx';
+import { AppProvider } from './context/AppContext';
+import { getCharacter } from './utils/helpers';
 
-// Envolve o App com o Provider (guia, Etapa 4)
+// lookup global para o ghost do drag customizado (fora do React)
+window.__HERO_LOOKUP__ = getCharacter;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
