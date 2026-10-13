@@ -196,9 +196,9 @@ export default function TeamGrid({ count }) {
         </div>
       </div>
 
-      <Equipment onSlotClick={(charId, slot) => setPicker({ charId, slot })} />
-
       <HeroInspector />
+
+      <Equipment onSlotClick={(charId, slot) => setPicker({ charId, slot })} />
 
       {picker && (
         <ItemPicker

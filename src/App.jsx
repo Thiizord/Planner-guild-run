@@ -23,7 +23,7 @@ export default function App() {
 
         {/* banner oficial do jogo (fornecido pelo autor) */}
         <div className="banner">
-          <img src="/assets/banner.webp" alt="GuildRun — banner oficial do jogo" draggable="false" />
+          <img src="./assets/banner.webp" alt="GuildRun — banner oficial do jogo" draggable="false" />
         </div>
 
         <main className="layout">
