@@ -27,15 +27,25 @@ export default function TeamGrid({ count }) {
   }, [state.placementCharId, dispatch]);
 
   // auto-scroll durante drag: quando o mouse chega perto do topo/fundo
-  // da tela, a página scrolla — permite arrastar um herói para fora da área visível
+  // da tela, a página scrolla + scroll do mouse funciona durante drag
   useEffect(() => {
     let raf = null;
-    const EDGE = 80;      // pixels da borda que dispara o scroll
-    const SPEED = 12;     // velocidade do scroll
+    let isDragging = false;
+    const EDGE = 100;     // pixels da borda que dispara o auto-scroll
+    const SPEED = 14;     // velocidade do auto-scroll
+
+    const onDragStart = () => { isDragging = true; };
+    const onDragEnd = () => { isDragging = false; stopScroll(); };
+
+    // wheel durante drag: browsers que disparam wheel durante drag session
+    const onWheel = (e) => {
+      if (isDragging) {
+        window.scrollBy(0, e.deltaY);
+      }
+    };
 
     const onDragOver = (e) => {
       if (!e.dataTransfer) return;
-      // apenas durante drag de heróis (nosso payload é JSON com charId)
       const types = e.dataTransfer.types;
       if (!types || !Array.from(types).includes('text/plain')) return;
 
@@ -43,12 +53,10 @@ export default function TeamGrid({ count }) {
       const h = window.innerHeight;
 
       if (y < EDGE) {
-        // perto do topo: scrolla para cima
         if (raf) cancelAnimationFrame(raf);
         const step = () => { window.scrollBy(0, -SPEED); raf = requestAnimationFrame(step); };
         raf = requestAnimationFrame(step);
       } else if (y > h - EDGE) {
-        // perto do fundo: scrolla para baixo
         if (raf) cancelAnimationFrame(raf);
         const step = () => { window.scrollBy(0, SPEED); raf = requestAnimationFrame(step); };
         raf = requestAnimationFrame(step);
@@ -62,13 +70,17 @@ export default function TeamGrid({ count }) {
       if (raf) { cancelAnimationFrame(raf); raf = null; }
     };
 
+    document.addEventListener('dragstart', onDragStart);
+    document.addEventListener('dragend', onDragEnd);
+    document.addEventListener('wheel', onWheel, { capture: true, passive: true });
     document.addEventListener('dragover', onDragOver);
     document.addEventListener('drop', stopScroll);
-    document.addEventListener('dragend', stopScroll);
     return () => {
+      document.removeEventListener('dragstart', onDragStart);
+      document.removeEventListener('dragend', onDragEnd);
+      document.removeEventListener('wheel', onWheel, { capture: true });
       document.removeEventListener('dragover', onDragOver);
       document.removeEventListener('drop', stopScroll);
-      document.removeEventListener('dragend', stopScroll);
       stopScroll();
     };
   }, []);
@@ -188,7 +200,7 @@ export default function TeamGrid({ count }) {
       {/* tabuleiro hexagonal — os hexágonos SÃO o campo de batalha */}
       <div className="hex-battlefield">
         <HexBoard onHexClick={handleHexClick} onItemSlotClick={handleItemSlotClick} />
-        <span className="visually-hidden" id="mainCount">{countMain(state.main)}/3</span>
+        <span className="visually-hidden" id="mainCount">{countMain(state.main)}/6</span>
       </div>
 
       {/* painel lateral de reservas */}

@@ -7,13 +7,21 @@ import type { AppState, AppAction, TeamType } from '../types';
 
 export function reducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
-    // ---------- Escalar personagem (limite: MAX_ACTIVE ativos no tabuleiro hex) ----------
+    // ---------- Escalar personagem ----------
+    // Campo: max 6 | Reserva: max 3 | Total: max 6
     case 'SELECT_CHAR': {
       const charId = action.charId;
       if (isInTeam(state.main, state.reserve, charId)) return state;
 
+      // total do time: main + reserve <= 6
+      const totalCount =
+        state.main.filter((id) => id !== null).length +
+        state.reserve.filter((id) => id !== null).length;
+      if (totalCount >= 6) return state;
+
+      // tenta o tabuleiro primeiro (max 6)
       const activeCount = state.main.filter((id) => id !== null).length;
-      if (activeCount < 3) {
+      if (activeCount < 6) {
         const mainIdx = state.main.indexOf(null);
         if (mainIdx !== -1) {
           const main = [...state.main];
@@ -22,7 +30,7 @@ export function reducer(state: AppState, action: AppAction): AppState {
         }
       }
 
-      // tabuleiro cheio: vai para reserva
+      // campo indisponivel: vai para reserva (max 3)
       const reserveIdx = state.reserve.indexOf(null);
       if (reserveIdx !== -1) {
         const reserve = [...state.reserve];
@@ -38,17 +46,24 @@ export function reducer(state: AppState, action: AppAction): AppState {
       if (!charId) return state;
       if (isInTeam(state.main, state.reserve, charId)) return state;
 
+      // total do time: main + reserve <= 6
+      const totalCount =
+        state.main.filter((id) => id !== null).length +
+        state.reserve.filter((id) => id !== null).length;
+      if (totalCount >= 6) return state;
+
       if (teamType === 'main') {
-        // limite de 3 ativos no tabuleiro
+        // limite de 6 ativos no tabuleiro
         const activeCount = state.main.filter((id) => id !== null).length;
-        if (activeCount >= 3) return state;
+        if (activeCount >= 6) return state;
         if (state.main[slotIndex] !== null) return state;
         const main = [...state.main];
         main[slotIndex] = charId;
         return { ...state, main, placementCharId: null, placementFrom: null };
       }
 
-      // reserva
+      // reserva (max 3)
+      if (state.reserve.filter((id) => id !== null).length >= 3) return state;
       if (state.reserve[slotIndex] !== null) return state;
       const reserve = [...state.reserve];
       reserve[slotIndex] = charId;
@@ -221,7 +236,7 @@ export function reducer(state: AppState, action: AppAction): AppState {
     case 'RESET_TEAM': {
       return {
         ...state,
-        main: new Array(26).fill(null),
+        main: new Array(28).fill(null),
         reserve: [null, null, null],
         items: {},
         teamRelics: [],

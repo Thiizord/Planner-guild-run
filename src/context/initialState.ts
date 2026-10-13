@@ -6,8 +6,10 @@ import { getTeamChars } from '../utils/helpers';
 import type { AppState } from '../types';
 
 export const STORAGE_KEY = 'guildrun_pro';
-export const MAX_ACTIVE = 3;
-export const BOARD_SIZE = 26;
+export const MAX_ACTIVE = 6;     // max 6 herois no tabuleiro (campo)
+export const MAX_RESERVE = 3;    // max 3 herois na reserva
+export const MAX_TEAM = 6;       // total do time: main + reserve <= 6
+export const BOARD_SIZE = 28;    // 4 linhas x 7 colunas
 
 export const initialState: AppState = {
   main: new Array(BOARD_SIZE).fill(null),
@@ -61,7 +63,8 @@ function expandMain(oldMain: (string | null)[] | null): (string | null)[] {
   if (oldMain.length >= BOARD_SIZE) return oldMain.slice(0, BOARD_SIZE);
 
   // save antiga: realoca herois para o centro do tabuleiro
-  const centerPositions = [15, 16, 17];
+  // centro do grid 4x7: linha 2, colunas 2-4 (indices 16-18)
+  const centerPositions = [16, 17, 18];
   let placed = 0;
   for (const id of oldMain) {
     if (id && placed < centerPositions.length && placed < MAX_ACTIVE) {
@@ -82,9 +85,9 @@ export function createInitialState() {
 
   if (!data || getTeamChars(main, reserve).length === 0) {
     main = new Array(BOARD_SIZE).fill(null);
-    main[15] = 'dragomir';
-    main[16] = 'aria';
-    main[17] = 'fiona';
+    main[16] = 'dragomir';
+    main[17] = 'aria';
+    main[18] = 'fiona';
     reserve = ['funke', null, null];
   }
 

@@ -54,7 +54,7 @@ try {
 
   console.log('\nContadores e painÃ©is:');
   check(html, '4/6', 'teamCount 4/6');
-  check(html, '3/3', 'mainCount 3/3');
+  check(html, '3/6', 'mainCount 3/6');
   check(html, '1/3', 'reserveCount 1/3');
   check(html, 'Campo de Batalha', 'arena do time');
   check(html, 'Sinergias Ativas', 'painel de sinergias');
@@ -76,17 +76,17 @@ try {
   check(html, '/assets/heroes/aria.png', 'Aria renderiza com imagem (fornecida pelo usuÃ¡rio)');
   check(html, '/assets/banner.webp', 'banner oficial do jogo no topo da pÃ¡gina');
 
-  console.log('\nTabuleiro hexagonal 4x7 (26 celulas):');
+  console.log('\nTabuleiro hexagonal 4x7 (28 celulas):');
   check(html, 'data-hex="h0"', 'primeiro hex h0');
-  check(html, 'data-hex="h25"', 'ultimo hex h25');
+  check(html, 'data-hex="h27"', 'ultimo hex h27');
   check(html, 'hex-grid-row', 'linhas do tabuleiro');
   check(html, 'hex-grid-row offset', 'linhas com offset (honeycomb)');
   check(html, 'hex-portrait', 'molduras hexagonais');
   check(html, 'reserve-panel', 'painel lateral de reservas');
   check(html, 'reserve-panel-slot', 'slots de reserva');
   const hexCount = (html.match(/data-hex=/g) || []).length;
-  console.log(`  ${hexCount === 26 ? 'âœ”' : 'âœ˜'} 26 hexagonos renderizados (atual: ${hexCount})`);
-  if (hexCount !== 26) failures++;
+  console.log(`  ${hexCount === 28 ? 'OK' : 'FAIL'} 28 hexagonos renderizados (atual: ${hexCount})`);
+  if (hexCount !== 28) failures++;
   const semHexBg = !html.includes('hex-grid-bg');
   console.log(`  ${semHexBg ? 'âœ”' : 'âœ˜'} fundo limpo (sem padrao de hexagonos)`);
   if (!semHexBg) failures++;
@@ -101,11 +101,11 @@ try {
   const { createInitialState } = await vite.ssrLoadModule('/src/context/initialState.js');
   const { reducer } = await vite.ssrLoadModule('/src/context/reducer.js');
   const s0 = createInitialState();
-  const ok0 = s0.main[16] === 'aria' && s0.main[15] === 'dragomir' && s0.main[17] === 'fiona' && s0.reserve[0] === 'funke' && s0.selectedCharId === 'dragomir';
+  const ok0 = s0.main[17] === 'aria' && s0.main[16] === 'dragomir' && s0.main[18] === 'fiona' && s0.reserve[0] === 'funke' && s0.selectedCharId === 'dragomir';
   console.log(`\ncreateInitialState: ${ok0 ? 'âœ” time de exemplo + seleÃ§Ã£o inicial' : 'âœ˜ estado inicial errado: ' + JSON.stringify(s0)}`);
 
-  const s1 = reducer(s0, { type: 'REMOVE_CHAR', teamType: 'main', index: 15 });
-  const ok1 = s1.main[15] === null && s1.selectedCharId === null;
+  const s1 = reducer(s0, { type: 'REMOVE_CHAR', teamType: 'main', index: 16 });
+  const ok1 = s1.main[16] === null && s1.selectedCharId === null;
   console.log(`reducer REMOVE_CHAR: ${ok1 ? 'OK' : 'FAIL ' + JSON.stringify(s1)}`);
 
   const s2 = reducer(s1, { type: 'SELECT_CHAR', charId: 'kai' });
@@ -132,7 +132,7 @@ try {
   const okRm = sRm.items.kai[0] === null;
   console.log(`reducer REMOVE_ITEM: ${okRm ? 'OK' : 'FAIL ' + JSON.stringify(sRm)}`);
 
-  const sSel = reducer(sRm, { type: 'SELECT_SLOT', teamType: 'main', index: 16 });
+  const sSel = reducer(sRm, { type: 'SELECT_SLOT', teamType: 'main', index: 17 });
   const okSel = sSel.selectedCharId === 'aria';
   console.log(`reducer SELECT_SLOT: ${okSel ? 'OK' : 'FAIL ' + JSON.stringify(sSel)}`);
 
@@ -140,41 +140,41 @@ try {
   const okPl = sPl.placementCharId === 'kai' && sPl.placementFrom === null;
   console.log(`reducer SET_PLACEMENT_CHAR (biblioteca): ${okPl ? 'OK' : 'FAIL ' + JSON.stringify(sPl)}`);
 
-  const sPlB = reducer(s0, { type: 'SET_PLACEMENT_CHAR', charId: 'dragomir', fromType: 'main', fromIndex: 15 });
-  const okPlB = sPlB.placementCharId === 'dragomir' && sPlB.placementFrom?.teamType === 'main' && sPlB.placementFrom?.index === 15;
+  const sPlB = reducer(s0, { type: 'SET_PLACEMENT_CHAR', charId: 'dragomir', fromType: 'main', fromIndex: 16 });
+  const okPlB = sPlB.placementCharId === 'dragomir' && sPlB.placementFrom?.teamType === 'main' && sPlB.placementFrom?.index === 16;
   console.log(`reducer SET_PLACEMENT_CHAR (tabuleiro): ${okPlB ? 'OK' : 'FAIL ' + JSON.stringify(sPlB)}`);
 
   const sPlT = reducer(sPl, { type: 'SET_PLACEMENT_CHAR', charId: 'kai' });
   const okPlT = sPlT.placementCharId === null && sPlT.placementFrom === null;
   console.log(`reducer SET_PLACEMENT_CHAR toggle: ${okPlT ? 'OK' : 'FAIL ' + JSON.stringify(sPlT)}`);
 
-  const sRmForDrop = reducer(sPl, { type: 'REMOVE_CHAR', teamType: 'main', index: 16 });
-  const sDrop = reducer(sRmForDrop, { type: 'DROP_CHAR', charId: 'kai', teamType: 'main', slotIndex: 16 });
-  const okDrop = sDrop.main[16] === 'kai' && sDrop.placementCharId === null && sDrop.placementFrom === null;
+  const sRmForDrop = reducer(sPl, { type: 'REMOVE_CHAR', teamType: 'main', index: 17 });
+  const sDrop = reducer(sRmForDrop, { type: 'DROP_CHAR', charId: 'kai', teamType: 'main', slotIndex: 17 });
+  const okDrop = sDrop.main[17] === 'kai' && sDrop.placementCharId === null && sDrop.placementFrom === null;
   console.log(`reducer DROP_CHAR c/ placement: ${okDrop ? 'OK' : 'FAIL ' + JSON.stringify(sDrop)}`);
 
-  const sSwapPl = reducer(sPlB, { type: 'SWAP_SLOTS', charId: 'dragomir', fromType: 'main', fromIndex: 15, toType: 'main', toIndex: 16 });
-  const okSwapPl = sSwapPl.main[16] === 'dragomir' && sSwapPl.main[15] === 'aria' && sSwapPl.placementCharId === null;
+  const sSwapPl = reducer(sPlB, { type: 'SWAP_SLOTS', charId: 'dragomir', fromType: 'main', fromIndex: 16, toType: 'main', toIndex: 17 });
+  const okSwapPl = sSwapPl.main[17] === 'dragomir' && sSwapPl.main[16] === 'aria' && sSwapPl.placementCharId === null;
   console.log(`reducer SWAP_SLOTS via placement: ${okSwapPl ? 'OK' : 'FAIL ' + JSON.stringify(sSwapPl)}`);
 
   const sClr = reducer(sPl, { type: 'CLEAR_PLACEMENT_CHAR' });
   const okClr = sClr.placementCharId === null && sClr.placementFrom === null;
   console.log(`reducer CLEAR_PLACEMENT_CHAR: ${okClr ? 'OK' : 'FAIL ' + JSON.stringify(sClr)}`);
 
-  const sSw = reducer(s3, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 0, toType: 'main', toIndex: 16 });
-  const okSw = sSw.main[16] === 'kai' && sSw.main[0] === 'aria';
+  const sSw = reducer(s3, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 0, toType: 'main', toIndex: 17 });
+  const okSw = sSw.main[17] === 'kai' && sSw.main[0] === 'aria';
   console.log(`reducer SWAP_SLOTS (troca): ${okSw ? 'OK' : 'FAIL ' + JSON.stringify(sSw)}`);
 
   const sMv = reducer(sSw, { type: 'SWAP_SLOTS', charId: 'aria', fromType: 'main', fromIndex: 0, toType: 'reserve', toIndex: 1 });
   const okMv = sMv.main[0] === null && sMv.reserve[1] === 'aria';
   console.log(`reducer SWAP_SLOTS (move p/ reserva): ${okMv ? 'OK' : 'FAIL ' + JSON.stringify(sMv)}`);
 
-  const sSelf = reducer(sMv, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 16, toType: 'main', toIndex: 16 });
+  const sSelf = reducer(sMv, { type: 'SWAP_SLOTS', charId: 'kai', fromType: 'main', fromIndex: 17, toType: 'main', toIndex: 17 });
   const okSelf = sSelf === sMv;
   console.log(`reducer SWAP_SLOTS (drop em si): ${okSelf ? 'OK' : 'FAIL ' + JSON.stringify(sSelf)}`);
 
   const s5 = reducer(s4, { type: 'RESET_TEAM' });
-  const ok5 = s5.main.every(v => v === null) && s5.main.length === 26 && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
+  const ok5 = s5.main.every(v => v === null) && s5.main.length === 28 && s5.items && Object.keys(s5.items).length === 0 && s5.teamRelics.length === 0;
   console.log(`reducer RESET_TEAM: ${ok5 ? 'OK' : 'FAIL ' + JSON.stringify(s5)}`);
 
   const todosOk = failures === 0 && [ok0, ok1, ok2, ok3, ok4, okEq, okDup, okRm, okSel, okPl, okPlB, okPlT, okDrop, okSwapPl, okClr, okSw, okMv, okSelf, ok5].every(Boolean);

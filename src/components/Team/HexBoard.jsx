@@ -1,26 +1,25 @@
-// HexBoard.jsx - Tabuleiro hexagonal 4x7 (4 linhas, 7 colunas na base = 26 celulas).
+// HexBoard.jsx - Tabuleiro hexagonal 4x7 (28 celulas, grid uniforme).
+// Todas as linhas tem 7 hexes; linhas impares tem offset (honeycomb).
 // Herois da reserva ficam FORA do tabuleiro, num painel lateral.
-// Linhas pares: 7 hexes | Linhas impares: 6 hexes com offset (honeycomb horizontal).
 
 import { useApp } from '../../hooks/useApp';
 import HexCell from './HexCell.jsx';
 
 const ROWS = 4;
-const BASE_COLS = 7;
+const COLS = 7;
 
-// gera o layout com indices lineares corretos
+// grid uniforme: todas as linhas tem 7 hexes
 let cell = 0;
 const LAYOUT = [];
 for (let r = 0; r < ROWS; r++) {
-  const cols = r % 2 === 0 ? BASE_COLS : BASE_COLS - 1;
   const row = [];
-  for (let c = 0; c < cols; c++) {
+  for (let c = 0; c < COLS; c++) {
     row.push(cell++);
   }
   LAYOUT.push(row);
 }
 
-export const TOTAL_HEXES = cell; // 7+6+7+6 = 26
+export const TOTAL_HEXES = cell; // 28
 
 export default function HexBoard({ onHexClick, onItemSlotClick }) {
   const { state } = useApp();
