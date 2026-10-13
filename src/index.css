@@ -46,7 +46,7 @@
 
   /* medidas */
   --topbar-h: 54px;
-  --banner-h: 110px;
+  --banner-h: 88px;
   --radius-s: 6px;
   --radius: 10px;
   --radius-l: 14px;
@@ -109,12 +109,13 @@ button { font-family: var(--font-body); }
 
 /* --------------------------- 3. LAYOUT PRINCIPAL ------------------------ */
 .banner {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   position: relative;
+  line-height: 0;
 }
 
 .banner img {
@@ -122,15 +123,16 @@ button { font-family: var(--font-body); }
   width: 100%;
   height: var(--banner-h);
   object-fit: cover;
-  object-position: center 38%;
+  object-position: center 32%;
   user-select: none;
 }
 
+/* gradiente inferior sutil que integra o banner ao layout */
 .banner::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(10, 14, 11, 0.55));
+  background: linear-gradient(180deg, transparent 50%, rgba(10, 14, 11, 0.45));
   pointer-events: none;
 }
 
@@ -359,42 +361,60 @@ button { font-family: var(--font-body); }
 /* --------------------------- 7. ARENA / CAMPO --------------------------- */
 .arena {
   padding: 0;
-  overflow: hidden;
 }
 
 .arena-head {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  padding: 12px 16px 4px;
+  padding: 10px 14px 6px;
 }
 
 .arena-sub {
   font-size: 11px;
   color: var(--text-faint);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0 14px 2px;
+  line-height: 1.4;
 }
 
-/* ---- campo de batalha: os hexágonos SÃO o campo (sem container quadrado) ---- */
+/* ---- campo de batalha: cenário atmosférico + hexágonos ---- */
 .hex-battlefield {
   position: relative;
-  margin: 8px 8px 16px;
+  margin: 10px 0 14px;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  border: 1px solid rgba(74, 92, 64, 0.35);
   display: flex;
   justify-content: center;
-  padding: 8px 0 6px;
+  padding: 18px 12px 16px;
+  min-height: 420px;
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.35),
+    0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* bruma ambiental sutil sob os hexes (nao e um quadrado — e o chao) */
-.hex-battlefield::before {
-  content: '';
+/* imagem de fundo do campo */
+.bf-bg {
   position: absolute;
-  inset: 10% -5%;
-  background:
-    radial-gradient(60% 55% at 50% 45%, rgba(47, 107, 63, 0.08), transparent 70%);
-  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
   z-index: 0;
-  border-radius: 30px;
+  pointer-events: none;
+}
+
+/* vinheta atmosférica: escurece as bordas, ilumina o centro */
+.bf-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(75% 65% at 50% 45%, transparent 30%, rgba(8, 12, 9, 0.55) 100%),
+    linear-gradient(180deg, rgba(8, 12, 9, 0.25) 0%, transparent 15%, transparent 85%, rgba(8, 12, 9, 0.4) 100%);
 }
 
 .bf-row { display: flex; justify-content: center; gap: 14px; position: relative; }
@@ -1406,29 +1426,33 @@ button { font-family: var(--font-body); }
 }
 
 /* ============================================================
-   TABULEIRO HEXAGONAL — GRID 7x4 (25 celulas, padrao do jogo)
+   TABULEIRO HEXAGONAL 4x7 (28 celulas) — geometria honeycomb real
+   Cenário: battlefield-background.png com hexes translúcidos
    ============================================================ */
 :root {
-  --hex-w: 118px;
-  --hex-h: 134px;
-  --hex-gap: 4px;
+  --hex-w: 104px;
+  --hex-h: 120px;
+  --hex-gap: 3px;
 }
 
 @media (max-width: 1180px) {
-  :root { --hex-w: 92px; --hex-h: 104px; --hex-gap: 3px; }
+  :root { --hex-w: 84px; --hex-h: 97px; --hex-gap: 3px; }
 }
 
 @media (max-width: 760px) {
-  :root { --hex-w: 48px; --hex-h: 54px; --hex-gap: 2px; }
+  :root { --hex-w: 44px; --hex-h: 51px; --hex-gap: 2px; }
+  .hex-battlefield { min-height: 220px; padding: 10px 6px 8px; }
 }
 
+/* ---- grid: 4 linhas x 7 colunas, honeycomb ---- */
 .hex-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: calc(var(--hex-h) * -0.22);
+  /* overlap vertical: 25% da altura = encaixe honeycomb perfeito */
+  gap: calc(var(--hex-h) * -0.25);
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hex-grid-row {
@@ -1436,7 +1460,7 @@ button { font-family: var(--font-body); }
   gap: var(--hex-gap);
 }
 
-/* linhas impares deslocadas meio hex para intercalar (honeycomb) */
+/* linhas impares deslocadas meio hex (intercalacao) */
 .hex-grid-row.offset {
   margin-left: calc(var(--hex-w) / 2 + var(--hex-gap) / 2);
 }
@@ -1451,62 +1475,72 @@ button { font-family: var(--font-body); }
   animation: unitIn 0.2s var(--ease);
 }
 
+.hex-cell:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+/* moldura hexagonal: padding cria a borda entre o clip externo e interno */
 .hex-cell .hex-portrait {
   width: 100%;
   height: 100%;
   clip-path: var(--hex);
-  background: linear-gradient(160deg, var(--gold), var(--gold-dim) 60%, #55401c);
   padding: 2px;
   position: relative;
   transition: filter 0.2s var(--ease), box-shadow 0.2s var(--ease);
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
 }
 
+/* imagem do herói dentro do hex */
 .hex-cell .hex-portrait img,
 .hex-cell .hex-portrait .avatar-initial {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
   clip-path: var(--hex);
   object-fit: cover;
-  background: var(--inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   user-select: none;
+  background: var(--inset);
 }
 
 .hex-cell .hex-portrait .avatar-initial {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--gold-bright);
 }
 
-/* ---- hex vazio: tile de terreno (nao e um botao +) ---- */
+/* ---- hex vazio: slot translúcido sobre o terreno ---- */
 .hex-cell.empty .hex-portrait {
-  background: rgba(44, 58, 41, 0.35);  /* contorno sutil verde-terroso */
+  background: rgba(30, 42, 30, 0.45);
   padding: 1px;
-  filter: none;
+  backdrop-filter: blur(1px);
 }
 
 .hex-cell.empty .empty-portrait {
-  background: rgba(13, 18, 14, 0.5);   /* chao escuro dentro do contorno */
+  background: rgba(10, 16, 10, 0.30);
   display: flex;
   align-items: center;
   justify-content: center;
   clip-path: var(--hex);
+  transition: background 0.2s var(--ease);
+}
+
+.hex-cell.empty:hover .empty-portrait {
+  background: rgba(201, 162, 75, 0.12);
 }
 
 .hex-cell.empty:hover .hex-portrait {
-  background: rgba(201, 162, 75, 0.25);  /* contorno dourado no hover */
+  background: rgba(201, 162, 75, 0.35);
 }
 
 .hex-cell.empty .hex-plus {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 300;
-  color: var(--gold-dim);
-  opacity: 0.35;
-  transition: opacity 0.15s var(--ease), color 0.15s var(--ease);
+  color: rgba(220, 215, 190, 0.35);
+  transition: color 0.15s var(--ease), opacity 0.15s var(--ease);
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1517,55 +1551,53 @@ button { font-family: var(--font-body); }
 }
 
 .hex-cell.empty:hover .hex-plus {
-  opacity: 0.7;
-  color: var(--gold);
-}
-
-.hex-cell.empty.drag-over .hex-plus {
-  opacity: 1;
-  color: var(--green);
+  color: rgba(233, 205, 126, 0.75);
 }
 
 .hex-cell.empty.valid-target .hex-portrait {
-  background: rgba(201, 162, 75, 0.3);
-  animation: hexPulse 1.5s ease-in-out infinite;
+  background: rgba(201, 162, 75, 0.40);
+  animation: hexTargetPulse 1.4s ease-in-out infinite;
 }
 
 .hex-cell.empty.valid-target .hex-plus {
-  color: var(--gold-bright);
-  opacity: 0.7;
+  color: rgba(233, 205, 126, 0.85);
 }
 
-/* label "Vazio" abaixo do hex */
+/* label abaixo do hex vazio */
 .hex-cell .hex-label {
   position: absolute;
-  bottom: -16px;
+  bottom: -14px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 9px;
-  letter-spacing: 0.12em;
+  font-size: 8px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-faint);
-  opacity: 0.5;
+  color: rgba(200, 210, 190, 0.30);
   pointer-events: none;
   white-space: nowrap;
 }
 
-/* overlay DENTRO do hex: nome + mini-itens */
+/* ---- hex ocupado: retrato + overlay ---- */
+.hex-cell.filled .hex-portrait {
+  background: linear-gradient(165deg, rgba(201,162,75,0.85), rgba(120,95,40,0.9) 55%, rgba(70,55,25,0.95));
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
+}
+
+/* overlay: nome + classe + mini-itens na base do hex */
 .hex-cell .hex-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 28px 8px 5px;
-  background: linear-gradient(transparent, rgba(10, 14, 11, 0.92) 50%);
+  padding: 24px 6px 4px;
+  background: linear-gradient(transparent, rgba(8, 12, 9, 0.88) 55%);
   pointer-events: none;
   z-index: 2;
 }
 
 .hex-cell .hex-overlay-name {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   text-align: center;
@@ -1573,81 +1605,96 @@ button { font-family: var(--font-body); }
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .hex-cell .hex-overlay-class {
   display: flex;
   justify-content: center;
   gap: 3px;
-  margin: 2px 0;
+  margin: 1px 0;
   color: var(--text-faint);
-  font-size: 10px;
 }
 
 .hex-cell .hex-overlay .mini-items {
   justify-content: center;
   gap: 2px;
-  margin-top: 3px;
+  margin-top: 2px;
   width: 100%;
   flex-wrap: nowrap;
   overflow: hidden;
 }
 
 .hex-cell .hex-overlay .mini-item {
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  max-width: 20px;
-  border-radius: 3px;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  max-width: 16px;
+  border-radius: 2px;
   font-size: 0;
   border-width: 1px;
 }
 
-.hex-cell .hex-overlay .mini-item .mini-item-icon { width: 15px; height: 15px; }
+.hex-cell .hex-overlay .mini-item .mini-item-icon { width: 12px; height: 12px; }
 .hex-cell .hex-overlay .mini-item .mini-item-fallback { display: none; }
 
 /* contagem de itens */
 .hex-cell .hex-item-count {
   position: absolute;
-  top: 6px;
-  right: 10px;
-  font-size: 11px;
+  top: 5px;
+  right: 9px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--text-dim);
-  background: rgba(13, 18, 14, 0.85);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1px 5px;
+  background: rgba(8, 12, 9, 0.75);
+  border: 1px solid rgba(60, 70, 55, 0.5);
+  border-radius: 7px;
+  padding: 1px 4px;
   z-index: 3;
   font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-.hex-cell .hex-item-count.has { color: var(--gold-bright); border-color: var(--gold-dim); }
+.hex-cell .hex-item-count.has {
+  color: var(--gold-bright);
+  border-color: rgba(201, 162, 75, 0.5);
+}
 
-/* estados */
-.hex-cell.filled:hover { transform: scale(1.08); z-index: 5; }
-.hex-cell.filled:hover .hex-portrait { filter: brightness(1.15); }
+/* ---- estados de interacao ---- */
+.hex-cell.filled:hover {
+  transform: scale(1.06);
+  z-index: 5;
+}
 
+.hex-cell.filled:hover .hex-portrait {
+  filter: brightness(1.12) drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+}
+
+/* selecionado: contorno dourado */
 .hex-cell.selected .hex-portrait {
-  box-shadow: 0 0 0 2px rgba(233, 205, 126, 0.6), 0 0 12px rgba(201, 162, 75, 0.25);
+  box-shadow: 0 0 0 2px rgba(233, 205, 126, 0.65), 0 0 16px rgba(201, 162, 75, 0.30);
+  filter: brightness(1.08);
 }
 
+/* pego para mover: elevado com pulso */
 .hex-cell.picked {
-  transform: translateY(-4px) scale(1.08);
+  transform: translateY(-4px) scale(1.06);
   z-index: 6;
 }
 
 .hex-cell.picked .hex-portrait {
-  box-shadow: 0 0 0 3px rgba(233, 205, 126, 0.7), 0 6px 18px rgba(201, 162, 75, 0.35);
+  box-shadow: 0 0 0 3px rgba(233, 205, 126, 0.75), 0 6px 18px rgba(201, 162, 75, 0.35);
   animation: hexPulse 1.3s ease-in-out infinite;
 }
 
+/* destino de drag: realce verde */
 .hex-cell.drag-over .hex-portrait {
-  box-shadow: 0 0 0 2px rgba(126, 217, 138, 0.5), 0 0 10px rgba(126, 217, 138, 0.2);
+  box-shadow: 0 0 0 2px rgba(126, 217, 138, 0.55), 0 0 14px rgba(126, 217, 138, 0.25);
 }
 
+/* destino valido (troca): realce dourado */
 .hex-cell.filled.valid-target .hex-portrait {
-  box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.4);
+  box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.45);
 }
 
 /* tooltip */
@@ -1656,8 +1703,8 @@ button { font-family: var(--font-body); }
   bottom: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(11, 15, 12, 0.97);
-  padding: 5px 8px;
+  background: rgba(8, 12, 9, 0.95);
+  padding: 5px 9px;
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
   font-size: 10px;
@@ -1668,9 +1715,15 @@ button { font-family: var(--font-body); }
   transition: opacity 0.15s var(--ease);
   z-index: 50;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
 }
 
 .hex-cell:hover .hex-tooltip { opacity: 1; }
+
+@keyframes hexTargetPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(233, 205, 126, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(233, 205, 126, 0.18); }
+}
 
 /* ---- painel lateral de reservas ---- */
 .reserve-panel {
@@ -1792,120 +1845,7 @@ button { font-family: var(--font-body); }
 .reserve-panel-slot:hover .rp-remove { opacity: 1; }
 .rp-remove:hover { color: #f0a89f; border-color: var(--red); }
 
-.hex-cell {
-  position: relative; width: var(--hex-w); display: flex; flex-direction: column;
-  align-items: center; cursor: pointer; animation: unitIn 0.25s var(--ease);
-}
 
-.hex-cell .hex-frame {
-  width: var(--hex-w); height: var(--hex-h); clip-path: var(--hex);
-  background: linear-gradient(160deg, var(--gold), var(--gold-dim) 60%, #55401c);
-  padding: 2px; position: relative; flex-shrink: 0;
-  transition: filter 0.25s var(--ease), box-shadow 0.25s var(--ease);
-}
-
-.hex-cell .hex-frame img, .hex-cell .hex-frame .avatar-initial {
-  display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 100%; clip-path: var(--hex);
-  object-fit: cover; background: var(--inset); user-select: none;
-}
-
-.hex-cell .hex-frame .avatar-initial {
-  font-family: var(--font-display); font-size: 20px; font-weight: 700;
-  color: var(--gold-bright); background: var(--inset);
-}
-
-.hex-cell.filled:hover .hex-frame { filter: brightness(1.1); }
-.hex-cell.selected .hex-frame { box-shadow: 0 0 0 3px rgba(233,205,126,0.5), 0 0 16px rgba(201,162,75,0.25); }
-
-.hex-cell.empty .hex-frame { background: transparent; display: flex; align-items: center; justify-content: center; }
-.hex-cell.empty .empty-frame { background: rgba(13,18,14,0.5); }
-
-.hex-cell.empty .hex-plus {
-  font-size: 26px; font-weight: 300; color: var(--gold-dim); opacity: 0.6;
-  transition: opacity 0.2s var(--ease), color 0.2s var(--ease), font-size 0.2s var(--ease);
-  line-height: 1;
-}
-
-.hex-cell.empty:hover .hex-plus, .hex-cell.empty.drag-over .hex-plus { opacity: 1; color: var(--green); font-size: 32px; }
-.hex-cell.empty.drag-over .hex-frame { box-shadow: 0 0 0 2px rgba(126,217,138,0.4), 0 0 12px rgba(126,217,138,0.2); }
-
-.hex-cell.empty .hex-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); margin-top: 4px; }
-
-@keyframes hexPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,75,0); }
-  50% { box-shadow: 0 0 0 4px rgba(201,162,75,0.2); }
-}
-/* heroi pego para mover: destaque dourado pulsante + leve elevacao */
-.hex-cell.picked {
-  transform: translateY(-4px) scale(1.04);
-  z-index: 5;
-}
-
-.hex-cell.picked .hex-frame {
-  box-shadow: 0 0 0 3px rgba(233, 205, 126, 0.6), 0 8px 20px rgba(201, 162, 75, 0.3);
-  animation: hexPulse 1.4s ease-in-out infinite;
-}
-
-/* alvo valido: pulso verde sutil */
-.hex-cell.valid-target .hex-frame {
-  animation: hexTargetPulse 1.6s ease-in-out infinite;
-}
-
-.hex-cell.valid-target.empty .hex-plus {
-  color: var(--green);
-  opacity: 0.9;
-}
-
-.hex-cell.valid-target.filled .hex-frame {
-  box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.4);
-}
-
-@keyframes hexTargetPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(126, 217, 138, 0); }
-  50% { box-shadow: 0 0 0 4px rgba(126, 217, 138, 0.15); }
-}
-
-.hex-cell .hex-info { text-align: center; padding: 4px 2px 0; width: 100%; }
-.hex-cell .hex-plate { min-height: 16px; }
-.hex-cell .hex-name {
-  font-family: var(--font-display); font-size: 12px; font-weight: 600; color: var(--text);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;
-}
-.hex-cell .hex-class {
-  display: flex; align-items: center; justify-content: center; gap: 3px;
-  font-size: 9.5px; color: var(--text-dim); margin-top: 1px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-.hex-cell .slot-btn {
-  position: absolute; top: 4px; width: 22px; height: 22px;
-  border: 1px solid var(--line); border-radius: 50%; background: rgba(13,18,14,0.9);
-  color: var(--text-dim); font-size: 12px; line-height: 1;
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  opacity: 0; transition: opacity 0.18s var(--ease); z-index: 3; padding: 0;
-}
-.hex-cell:hover .slot-btn, .hex-cell .slot-btn:focus-visible { opacity: 1; }
-.hex-cell .remove-btn { right: 4px; }
-.hex-cell .remove-btn:hover { color: #f0a89f; border-color: var(--red); background: var(--red-deep); }
-.hex-cell .move-btn { left: 4px; }
-.hex-cell .move-btn:hover { color: var(--gold-bright); border-color: var(--gold-dim); }
-
-.hex-cell .item-count-badge {
-  position: absolute; top: 4px; right: 30px; font-size: 9px; font-weight: 700;
-  color: var(--text-dim); background: var(--inset); border: 1px solid var(--line);
-  border-radius: 10px; padding: 1px 5px; z-index: 2; font-variant-numeric: tabular-nums;
-}
-.hex-cell .item-count-badge.has-items { color: var(--gold-bright); border-color: var(--gold-dim); }
-
-.hex-cell .item-tooltip {
-  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-  background: rgba(11,15,12,0.97); padding: 8px 12px; border: 1px solid var(--line);
-  border-radius: var(--radius-s); font-size: 11px; color: var(--text);
-  white-space: nowrap; opacity: 0; pointer-events: none;
-  transition: opacity 0.2s var(--ease); backdrop-filter: blur(6px); z-index: 30; box-shadow: var(--shadow);
-}
-.hex-cell:hover .item-tooltip { opacity: 1; }
 
 /* posicionamento e biblioteca */
 .placement-hint {

@@ -108,13 +108,15 @@ export default function TeamGrid({ count }) {
       <div className="arena-sub">
         {state.placementCharId
           ? state.placementFrom
-            ? 'Clique num hex ou reserva para mover / ESC cancela'
-            : 'Clique num hex vazio / ESC cancela'
-          : 'Clique num heroi para selecionar / de novo para mover / arraste'}
+            ? 'Clique num hexágono ou reserva para mover · ESC cancela'
+            : 'Clique num hexágono vazio · ESC cancela'
+          : 'Arraste um herói para o campo · clique para selecionar'}
       </div>
 
-      {/* tabuleiro hexagonal — os hexágonos SÃO o campo de batalha */}
+      {/* campo de batalha: cenário + hexágonos interativos */}
       <div className="hex-battlefield">
+        <img className="bf-bg" src="./assets/battlefield-background.png" alt="" aria-hidden="true" />
+        <div className="bf-vignette" aria-hidden="true"></div>
         <HexBoard onHexClick={handleHexClick} onItemSlotClick={handleItemSlotClick} />
         <span className="visually-hidden" id="mainCount">{countMain(state.main)}/6</span>
       </div>
