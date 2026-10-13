@@ -1981,3 +1981,141 @@ button { font-family: var(--font-body); }
 
 .chip.class-chip { display: inline-flex; align-items: center; gap: 4px; }
 .chip.class-chip svg { color: inherit; flex-shrink: 0; }
+
+/* ============================================================
+   HERO INSPECTOR — rank, especializacao e stats
+   ============================================================ */
+.hero-inspector {
+  margin: 8px 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+  animation: unitIn 0.25s var(--ease);
+}
+
+.inspector-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+
+.inspector-portrait {
+  width: 56px; height: 56px;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--gold), var(--gold-dim) 60%, #55401c);
+  padding: 2px; flex-shrink: 0;
+}
+
+.inspector-portrait img, .inspector-portrait .avatar-initial {
+  width: 100%; height: 100%; clip-path: var(--hex); object-fit: cover;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  color: var(--gold-bright); background: var(--inset);
+}
+
+.inspector-info { flex: 1; min-width: 0; }
+.inspector-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--gold-bright); line-height: 1.2; }
+.inspector-role { font-size: 11px; color: var(--text-dim); margin: 2px 0; }
+.inspector-classes { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-dim); }
+
+.inspector-section { margin-bottom: 12px; }
+.inspector-section:last-child { margin-bottom: 0; }
+
+.inspector-label {
+  display: block; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px;
+}
+
+.inspector-hint { color: var(--text-faint); font-style: italic; text-transform: none; letter-spacing: 0; }
+
+/* rank pills */
+.rank-pills { display: flex; gap: 6px; }
+
+.rank-pill {
+  width: 36px; height: 36px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--inset); color: var(--text-dim);
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s var(--ease);
+}
+
+.rank-pill:hover { border-color: var(--gold-dim); color: var(--text); }
+
+.rank-pill.active {
+  border-color: var(--gold); background: var(--gold-faint);
+  color: var(--gold-bright); box-shadow: var(--glow-gold);
+}
+
+.rank-pill.rank-c.active { border-color: #93a893; color: #93a893; box-shadow: 0 0 0 1px rgba(147,168,147,0.3); }
+.rank-pill.rank-b.active { border-color: #7ab8e8; color: #7ab8e8; box-shadow: 0 0 0 1px rgba(122,184,232,0.3); }
+.rank-pill.rank-a.active { border-color: var(--tier-a); color: var(--tier-a); box-shadow: 0 0 0 1px rgba(122,184,232,0.4); }
+.rank-pill.rank-s.active { border-color: var(--tier-s); color: var(--tier-s); box-shadow: var(--glow-gold); }
+
+/* spec cards */
+.spec-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.spec-cards.locked { opacity: 0.4; pointer-events: none; }
+
+.spec-card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-s);
+  background: var(--inset); padding: 8px 6px;
+  text-align: center; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease), transform 0.15s var(--ease);
+}
+
+.spec-card:hover { border-color: var(--gold-dim); transform: translateY(-1px); }
+
+.spec-card.selected {
+  border-color: var(--gold); background: var(--gold-faint); box-shadow: var(--glow-gold);
+}
+
+.spec-tier {
+  font-size: 9px; font-weight: 800; width: 22px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 3px; background: var(--line); color: var(--text-dim);
+}
+
+.spec-tier.spec-tier-s { background: rgba(233,205,126,0.15); color: var(--tier-s); }
+.spec-tier.spec-tier-a { background: rgba(122,184,232,0.15); color: var(--tier-a); }
+.spec-tier.spec-tier-b { background: rgba(122,184,232,0.1); color: #7ab8e8; }
+.spec-tier.spec-tier-c { background: rgba(180,138,224,0.1); color: #b48ae0; }
+.spec-tier.spec-tier-d { background: rgba(147,168,147,0.1); color: #93a893; }
+
+.spec-name {
+  font-family: var(--font-display); font-size: 11px; font-weight: 600;
+  color: var(--text); line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+
+.spec-card.selected .spec-name { color: var(--gold-bright); }
+.spec-slots { font-size: 9px; color: var(--green); font-weight: 600; }
+.spec-kind { font-size: 8px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.spec-description {
+  margin-top: 8px; padding: 8px 10px;
+  border: 1px solid var(--line-soft); border-radius: var(--radius-s);
+  background: var(--inset); font-size: 11px; color: var(--text-dim); line-height: 1.5;
+}
+
+/* stats grid */
+.inspector-stats { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.insp-stat {
+  display: flex; align-items: baseline; gap: 4px;
+  padding: 3px 8px; border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s); background: var(--inset); font-size: 11px;
+}
+
+.insp-stat-label { color: var(--text-faint); font-size: 10px; }
+.insp-stat-value { color: var(--gold-bright); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* equipped items */
+.inspector-items { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.insp-item {
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 6px; border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s); background: var(--inset);
+  font-size: 10px; color: var(--text-dim);
+}
+
+.insp-item-icon { width: 16px; height: 16px; object-fit: contain; }
+.insp-item-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }

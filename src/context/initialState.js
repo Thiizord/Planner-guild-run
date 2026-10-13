@@ -14,6 +14,7 @@ export const initialState = {
   reserve: [null, null, null],
   items: {},
   teamRelics: [],
+  heroConfigs: {},             // { charId: { rank: 'C', spec: null } }
   selectedCharId: null,
   placementCharId: null,
   placementFrom: null,
@@ -36,7 +37,8 @@ export function saveState(data) {
       main: data.main,
       reserve: data.reserve,
       items: data.items,
-      teamRelics: data.teamRelics
+      teamRelics: data.teamRelics,
+      heroConfigs: data.heroConfigs || {}
     }));
   } catch (e) {
     console.warn('Erro ao salvar:', e);
@@ -68,6 +70,7 @@ export function createInitialState() {
   let reserve = (data && data.reserve) || initialState.reserve;
   const items = (data && data.items) || {};
   const teamRelics = (data && data.teamRelics) || [];
+  const heroConfigs = (data && data.heroConfigs) || {};
 
   if (!data || getTeamChars(main, reserve).length === 0) {
     main = new Array(BOARD_SIZE).fill(null);

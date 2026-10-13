@@ -7,6 +7,7 @@ import { useApp } from '../../hooks/useApp.js';
 import { getCharacter, countMain, countReserve } from '../../utils/helpers.js';
 import HexBoard from './HexBoard.jsx';
 import Equipment from './Equipment.jsx';
+import HeroInspector from './HeroInspector.jsx';
 import ItemPicker from '../Items/ItemPicker.jsx';
 import ClassIcon from '../ClassIcon.jsx';
 
@@ -196,6 +197,8 @@ export default function TeamGrid({ count }) {
       </div>
 
       <Equipment onSlotClick={(charId, slot) => setPicker({ charId, slot })} />
+
+      <HeroInspector />
 
       {picker && (
         <ItemPicker

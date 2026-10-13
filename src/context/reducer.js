@@ -190,6 +190,25 @@ export function reducer(state, action) {
       return { ...state, teamRelics };
     }
 
+    // ---------- Rank e especializacao do heroi ----------
+    case 'SET_HERO_RANK': {
+      const { charId, rank } = action;
+      if (!charId) return state;
+      const prev = state.heroConfigs[charId] || {};
+      const next = { ...prev, rank };
+      if (rank === 'C') delete next.spec;
+      return { ...state, heroConfigs: { ...state.heroConfigs, [charId]: next } };
+    }
+
+    case 'SET_HERO_SPEC': {
+      const { charId, spec } = action;
+      if (!charId) return state;
+      const prev = state.heroConfigs[charId] || {};
+      if ((prev.rank || 'C') === 'C') return state;
+      const next = { ...prev, spec };
+      return { ...state, heroConfigs: { ...state.heroConfigs, [charId]: next } };
+    }
+
     // ---------- Filtros e busca (main.js vanilla) ----------
     case 'SET_TIER_FILTER':
       return { ...state, tierFilter: action.value };
@@ -206,6 +225,7 @@ export function reducer(state, action) {
         reserve: [null, null, null],
         items: {},
         teamRelics: [],
+        heroConfigs: {},
         selectedCharId: null,
         placementCharId: null,
         placementFrom: null
