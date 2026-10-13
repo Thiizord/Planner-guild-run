@@ -11,7 +11,6 @@ export default function HeroCard({ hero, onSelect, picked }) {
   return (
     <div
       className={`hero-card ${picked ? 'picked' : ''}`}
-      data-tier={hero.tier}
       data-id={hero.id}
       draggable="true"
       onDragStart={handleDragStart}
@@ -25,9 +24,8 @@ export default function HeroCard({ hero, onSelect, picked }) {
           onSelect(hero.id);
         }
       }}
-      aria-label={`${hero.name}, ${hero.class}${hero.class2 ? ' e ' + hero.class2 : ''}, tier ${hero.tier}`}
+      aria-label={`${hero.name}, ${hero.class}${hero.class2 ? ' e ' + hero.class2 : ''}`}
     >
-      <span className="tier-badge" aria-hidden="true">{hero.tier}</span>
       <div className="hero-frame">
         {hero.image
           ? <img src={hero.image} alt={hero.name} draggable="false" />

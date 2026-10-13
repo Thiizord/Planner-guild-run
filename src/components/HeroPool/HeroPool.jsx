@@ -1,4 +1,4 @@
-// HeroPool.jsx - Biblioteca de heróis: busca, filtros, ordenação.
+// HeroPool.jsx - Biblioteca de heróis: busca e filtro por classe.
 // Fluxo de posicionamento: clique no herói pega-o (SET_PLACEMENT_CHAR);
 // clique num hexágono vazio posiciona (DROP_CHAR). Drag ainda funciona direto.
 
@@ -8,40 +8,28 @@ import { getAvailableChars, isInTeam } from '../../utils/helpers';
 import HeroCard from './HeroCard.jsx';
 import Filters from './Filters.jsx';
 
-const TIER_ORDER = { S: 0, A: 1, B: 2, C: 3 };
-
 export default function HeroPool() {
   const { state, dispatch } = useApp();
-  const [sortBy, setSortBy] = useState('tier');
   const [collapsed, setCollapsed] = useState(false);
 
   const filtered = useMemo(() => {
     const available = getAvailableChars(state.main, state.reserve);
-    const list = available.filter((c) => {
-      const matchTier = state.tierFilter === 'all' || c.tier === state.tierFilter;
-      const matchClass =
-        state.classFilter === 'all' ||
-        c.class === state.classFilter ||
-        c.class2 === state.classFilter;
-      const q = state.searchQuery.toLowerCase();
-      const matchSearch =
-        c.name.toLowerCase().includes(q) ||
-        c.role.toLowerCase().includes(q) ||
-        c.class.toLowerCase().includes(q);
-      return matchTier && matchClass && matchSearch;
-    });
-    if (sortBy === 'name') {
-      return [...list].sort((a, b) => a.name.localeCompare(b.name));
-    }
-    if (sortBy === 'tier') {
-      return [...list].sort(
-        (a, b) => (TIER_ORDER[a.tier] ?? 9) - (TIER_ORDER[b.tier] ?? 9) || a.name.localeCompare(b.name)
-      );
-    }
-    return list;
-  }, [state.main, state.reserve, state.tierFilter, state.classFilter, state.searchQuery, sortBy]);
+    return available
+      .filter((c) => {
+        const matchClass =
+          state.classFilter === 'all' ||
+          c.class === state.classFilter ||
+          c.class2 === state.classFilter;
+        const q = state.searchQuery.toLowerCase();
+        const matchSearch =
+          c.name.toLowerCase().includes(q) ||
+          c.role.toLowerCase().includes(q) ||
+          c.class.toLowerCase().includes(q);
+        return matchClass && matchSearch;
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [state.main, state.reserve, state.classFilter, state.searchQuery]);
 
-  // clique no card: pega o herói para posicionamento (não coloca direto)
   const handleSelect = (charId) => {
     if (isInTeam(state.main, state.reserve, charId)) return;
     dispatch({ type: 'SET_PLACEMENT_CHAR', charId });
@@ -63,7 +51,7 @@ export default function HeroPool() {
         <span className="hint">{filtered.length} disponiveis</span>
       </div>
 
-      <Filters sortBy={sortBy} onSortChange={setSortBy} />
+      <Filters />
 
       <div className="char-grid" id="characterPool">
         {filtered.length === 0 ? (

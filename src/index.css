@@ -139,7 +139,6 @@ button { font-family: var(--font-body); }
   grid-template-areas: "analysis arena library";
   grid-template-columns: 330px minmax(0, 1fr) 350px;
   gap: var(--gap);
-  align-items: start;
 }
 
 .col-analysis { grid-area: analysis; min-width: 0; }
@@ -148,8 +147,12 @@ button { font-family: var(--font-body); }
 
 @media (min-width: 1181px) {
   .layout { height: calc(100dvh - var(--topbar-h) - var(--banner-h) - 46px); }
-  .col-analysis, .col-library { overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
-  .col-arena { overflow-y: auto; overscroll-behavior: contain; }
+  .col-analysis, .col-library, .col-arena {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    min-height: 0;
+    padding-right: 4px;
+  }
 }
 
 @media (max-width: 1180px) {
@@ -918,23 +921,6 @@ button { font-family: var(--font-body); }
   font-weight: 600;
 }
 
-.chip.tier.active[data-tier="S"] { color: var(--tier-s); border-color: var(--tier-s); background: rgba(233, 205, 126, 0.1); }
-.chip.tier.active[data-tier="A"] { color: var(--tier-a); border-color: var(--tier-a); background: rgba(122, 184, 232, 0.1); }
-.chip.tier.active[data-tier="B"] { color: var(--tier-b); border-color: var(--tier-b); background: rgba(180, 138, 224, 0.1); }
-.chip.tier.active[data-tier="C"] { color: var(--tier-c); border-color: var(--tier-c); background: rgba(147, 168, 147, 0.1); }
-
-.sort-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-faint); }
-
-.sort-row select {
-  background: var(--inset);
-  color: var(--text);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-s);
-  font-size: 12px;
-  padding: 4px 8px;
-  cursor: pointer;
-}
-
 .char-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
@@ -1010,28 +996,6 @@ button { font-family: var(--font-body); }
   text-overflow: ellipsis;
   margin-top: 1px;
 }
-
-.hero-card .tier-badge {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  border-radius: 4px;
-  background: rgba(10, 14, 11, 0.85);
-  border: 1px solid var(--line);
-  font-variant-numeric: tabular-nums;
-}
-
-.hero-card[data-tier="S"] .tier-badge { color: var(--tier-s); border-color: var(--tier-s); }
-.hero-card[data-tier="A"] .tier-badge { color: var(--tier-a); border-color: var(--tier-a); }
-.hero-card[data-tier="B"] .tier-badge { color: var(--tier-b); border-color: var(--tier-b); }
-.hero-card[data-tier="C"] .tier-badge { color: var(--tier-c); border-color: var(--tier-c); }
 
 .hero-card .drag-hint {
   position: absolute;
