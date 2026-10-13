@@ -3,8 +3,8 @@
 // clique em outro hex move/troca. ESC cancela. Drag&drop direto.
 
 import { useEffect, useState } from 'react';
-import { useApp } from '../../hooks/useApp.js';
-import { getCharacter, countMain, countReserve } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getCharacter, countMain, countReserve } from '../../utils/helpers';
 import HexBoard from './HexBoard.jsx';
 import Equipment from './Equipment.jsx';
 import HeroInspector from './HeroInspector.jsx';

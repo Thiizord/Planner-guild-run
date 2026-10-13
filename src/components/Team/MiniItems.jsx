@@ -2,7 +2,7 @@
 // 5 mini-slots fixos com ícones oficiais e moldura colorida pela raridade.
 // Quando o personagem está selecionado, ficam clicáveis (abrem o seletor inline).
 
-import { getItem } from '../../utils/helpers.js';
+import { getItem } from '../../utils/helpers';
 
 // 'Épico' -> 'epico', 'Lendário' -> 'lendario'
 const rarityClass = (r) => r

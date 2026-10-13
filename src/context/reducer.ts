@@ -1,11 +1,11 @@
-// reducer.js - Todas as ações do app (guia, Etapa 4)
-// Toda a lógica de modificação de estado passa por aqui (regra 6.3 do guia).
-// Fluxo 100% sem popups (pedido do usuário): nenhum toast, nenhum modal —
-// o feedback visual acontece inline na própria interface.
+// reducer.ts - Todas as ações do app.
+// Toda a lógica de modificação de estado passa por aqui.
+// Fluxo 100% sem popups: nenhum toast, nenhum modal.
 
-import { getRelic, isInTeam, getCharItems } from '../utils/helpers.js';
+import { getRelic, isInTeam, getCharItems } from '../utils/helpers';
+import type { AppState, AppAction, TeamType } from '../types';
 
-export function reducer(state, action) {
+export function reducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     // ---------- Escalar personagem (limite: MAX_ACTIVE ativos no tabuleiro hex) ----------
     case 'SELECT_CHAR': {
@@ -65,7 +65,7 @@ export function reducer(state, action) {
       return {
         ...state,
         placementCharId: charId,
-        placementFrom: fromType != null ? { teamType: fromType, index: fromIndex } : null,
+        placementFrom: fromType != null && fromIndex != null ? { teamType: fromType, index: fromIndex } : null,
       };
     }
 

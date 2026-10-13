@@ -3,8 +3,8 @@
 // clique num hexágono vazio posiciona (DROP_CHAR). Drag ainda funciona direto.
 
 import { useMemo, useState } from 'react';
-import { useApp } from '../../hooks/useApp.js';
-import { getAvailableChars, isInTeam } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getAvailableChars, isInTeam } from '../../utils/helpers';
 import HeroCard from './HeroCard.jsx';
 import Filters from './Filters.jsx';
 

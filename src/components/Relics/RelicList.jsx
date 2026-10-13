@@ -2,8 +2,8 @@
 // filtro por raridade (padrão do builder oficial). Sem popups.
 
 import { useMemo, useState } from 'react';
-import { useApp } from '../../hooks/useApp.js';
-import { RELICS_DATA } from '../../data/data.js';
+import { useApp } from '../../hooks/useApp';
+import { RELICS_DATA } from '../../data/data';
 import RelicItem from './RelicItem.jsx';
 
 const RARITY_OPTIONS = [

@@ -3,9 +3,9 @@
 // Sem popups: confirmação inline + feedback inline.
 
 import { useEffect, useState } from 'react';
-import { useApp } from '../hooks/useApp.js';
-import { countTeam } from '../utils/helpers.js';
-import { exportBuild } from '../utils/exportBuild.js';
+import { useApp } from '../hooks/useApp';
+import { countTeam } from '../utils/helpers';
+import { exportBuild } from '../utils/exportBuild';
 
 const BUILD_NAME_KEY = 'guildrun_build_name';
 

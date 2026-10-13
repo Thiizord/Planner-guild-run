@@ -1,7 +1,7 @@
 // RelicItem.jsx - Uma relíquia equipada na lista (com ícone oficial e raridade).
 
-import { useApp } from '../../hooks/useApp.js';
-import { getRelic } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getRelic } from '../../utils/helpers';
 
 export default function RelicItem({ relicId, index }) {
   const { dispatch } = useApp();

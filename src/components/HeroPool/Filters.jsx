@@ -1,6 +1,6 @@
 // Filters.jsx - Busca, chips de tier e classe (com SVG icons), ordenação.
 
-import { useApp } from '../../hooks/useApp.js';
+import { useApp } from '../../hooks/useApp';
 import ClassIcon from '../ClassIcon.jsx';
 
 const TIER_OPTIONS = [

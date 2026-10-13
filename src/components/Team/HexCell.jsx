@@ -3,8 +3,8 @@
 // Cada hex corresponde a um índice do array main (0-6).
 
 import { useState } from 'react';
-import { useApp } from '../../hooks/useApp.js';
-import { getCharacter, getItem, getCharItems } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getCharacter, getItem, getCharItems } from '../../utils/helpers';
 import ClassIcon from '../ClassIcon.jsx';
 import MiniItems from './MiniItems.jsx';
 

@@ -1,9 +1,9 @@
 // ItemPicker.jsx - Seletor de itens INLINE (substitui o modal de itens).
 // Abre direto do personagem selecionado no time (clicando nos mini-itens).
 
-import { useApp } from '../../hooks/useApp.js';
-import { getCharacter, getCharItems } from '../../utils/helpers.js';
-import { ITEMS_DATA } from '../../data/data.js';
+import { useApp } from '../../hooks/useApp';
+import { getCharacter, getCharItems } from '../../utils/helpers';
+import { ITEMS_DATA } from '../../data/data';
 
 export default function ItemPicker({ charId, slot, onClose }) {
   const { state, dispatch } = useApp();

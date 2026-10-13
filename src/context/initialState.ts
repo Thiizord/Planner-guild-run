@@ -1,20 +1,20 @@
-// initialState.js - Estado inicial
+// initialState.ts - Estado inicial
 // Tabuleiro: 4 linhas x 7 colunas (honeycomb horizontal) = 26 hexagonos.
 // main tem 26 entradas. Limite: 3 herois ativos no tabuleiro.
-// Reservas ficam num painel lateral separado.
 
-import { getTeamChars } from '../utils/helpers.js';
+import { getTeamChars } from '../utils/helpers';
+import type { AppState } from '../types';
 
 export const STORAGE_KEY = 'guildrun_pro';
 export const MAX_ACTIVE = 3;
 export const BOARD_SIZE = 26;
 
-export const initialState = {
+export const initialState: AppState = {
   main: new Array(BOARD_SIZE).fill(null),
   reserve: [null, null, null],
   items: {},
   teamRelics: [],
-  heroConfigs: {},             // { charId: { rank: 'C', spec: null } }
+  heroConfigs: {},
   selectedCharId: null,
   placementCharId: null,
   placementFrom: null,
@@ -23,7 +23,16 @@ export const initialState = {
   searchQuery: ''
 };
 
-export function loadState() {
+// dados persistidos (subconjunto do estado)
+interface PersistedData {
+  main?: (string | null)[];
+  reserve?: (string | null)[];
+  items?: Record<string, (string | null)[]>;
+  teamRelics?: string[];
+  heroConfigs?: Record<string, { rank: string; spec?: string | null }>;
+}
+
+export function loadState(): PersistedData | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -31,7 +40,7 @@ export function loadState() {
   } catch { return null; }
 }
 
-export function saveState(data) {
+export function saveState(data: AppState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       main: data.main,
@@ -46,13 +55,12 @@ export function saveState(data) {
 }
 
 // Expande main de qualquer tamanho para BOARD_SIZE entradas
-function expandMain(oldMain) {
-  const expanded = new Array(BOARD_SIZE).fill(null);
+function expandMain(oldMain: (string | null)[] | null): (string | null)[] {
+  const expanded: (string | null)[] = new Array(BOARD_SIZE).fill(null);
   if (!Array.isArray(oldMain)) return expanded;
   if (oldMain.length >= BOARD_SIZE) return oldMain.slice(0, BOARD_SIZE);
 
   // save antiga: realoca herois para o centro do tabuleiro
-  // centro do grid 4x7: linha 2 (indices 15-17)
   const centerPositions = [15, 16, 17];
   let placed = 0;
   for (const id of oldMain) {

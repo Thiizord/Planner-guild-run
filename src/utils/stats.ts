@@ -1,10 +1,14 @@
-// stats.js - Cálculo de estatísticas do time
-// (adaptado: recebe time, itens e relíquias como parâmetros)
+// stats.ts - Cálculo de estatísticas do time (recebe time, itens e relíquias como parâmetros)
 
-import { getItem, getRelic } from './helpers.js';
+import { getItem, getRelic } from './helpers';
+import type { Hero } from '../types';
 
-export function calculateTeamStats(teamChars, items, teamRelics) {
-  const totalStats = {};
+export function calculateTeamStats(
+  teamChars: Hero[],
+  items: Record<string, (string | null)[]>,
+  teamRelics: string[]
+): Record<string, number> {
+  const totalStats: Record<string, number> = {};
   // Stats base dos heróis
   for (const char of teamChars) {
     if (char.baseStats) {
@@ -15,6 +19,7 @@ export function calculateTeamStats(teamChars, items, teamRelics) {
     // Stats dos itens equipados
     const charItems = items[char.id] || [null, null, null, null, null];
     for (const itemId of charItems) {
+      if (!itemId) continue;
       const item = getItem(itemId);
       if (item && item.stats) {
         for (const [key, value] of Object.entries(item.stats)) {
@@ -35,7 +40,7 @@ export function calculateTeamStats(teamChars, items, teamRelics) {
   return totalStats;
 }
 
-export function calculateDPS(stats) {
+export function calculateDPS(stats: Record<string, number>): number {
   const attack = stats.attack || 0;
   const magic = stats.magic || 0;
   const attackSpeed = stats.attackSpeed || 0.4;

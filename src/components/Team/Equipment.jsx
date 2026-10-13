@@ -1,8 +1,8 @@
 // Equipment.jsx - Inspector de loadout do herói selecionado (padrão do builder
 // oficial): 5 slots grandes de item, clique abre o seletor inline.
 
-import { useApp } from '../../hooks/useApp.js';
-import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers';
 
 const rarityClass = (r) => r
   .toLowerCase()

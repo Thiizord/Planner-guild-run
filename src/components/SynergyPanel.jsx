@@ -1,8 +1,8 @@
 // SynergyPanel.jsx - Painel de sinergias com SVG icons, limiares e progresso.
 
-import { useApp } from '../hooks/useApp.js';
-import { getTeamCharactersData } from '../utils/helpers.js';
-import { analyzeClassCounts } from '../utils/synergies.js';
+import { useApp } from '../hooks/useApp';
+import { getTeamCharactersData } from '../utils/helpers';
+import { analyzeClassCounts } from '../utils/synergies';
 import ClassIcon from './ClassIcon.jsx';
 
 export default function SynergyPanel() {

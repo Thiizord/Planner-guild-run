@@ -3,8 +3,8 @@
 // Drag & drop, seleção e cliques preservados do fluxo sem popups.
 
 import { useState } from 'react';
-import { useApp } from '../../hooks/useApp.js';
-import { getCharacter, getItem, getCharItems, countMain, countReserve } from '../../utils/helpers.js';
+import { useApp } from '../../hooks/useApp';
+import { getCharacter, getItem, getCharItems, countMain, countReserve } from '../../utils/helpers';
 import MiniItems from './MiniItems.jsx';
 
 export default function TeamSlot({ charId, type, index, size, onItemSlotClick }) {

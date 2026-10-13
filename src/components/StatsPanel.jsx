@@ -1,9 +1,9 @@
 // StatsPanel.jsx - Estatísticas do time: DPS em destaque + grade compacta de
 // atributos com os ícones oficiais de estatística.
 
-import { useApp } from '../hooks/useApp.js';
-import { getTeamCharactersData } from '../utils/helpers.js';
-import { calculateTeamStats, calculateDPS } from '../utils/stats.js';
+import { useApp } from '../hooks/useApp';
+import { getTeamCharactersData } from '../utils/helpers';
+import { calculateTeamStats, calculateDPS } from '../utils/stats';
 
 const STAT_ICONS = {
   hp: '❤️ HP', attack: '⚔️ Ataque', magic: '🔮 Magia', defense: '🛡️ Defesa',

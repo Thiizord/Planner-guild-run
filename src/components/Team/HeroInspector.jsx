@@ -2,9 +2,9 @@
 // retrato, rank (C/B/A/S), especializacao (3 cards com tier), stats base.
 // Padrao visual inspirado no guildrundb.gg/builder.
 
-import { useApp } from '../../hooks/useApp.js';
-import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers.js';
-import { SPECIALIZATIONS, RANKS } from '../../data/specializations.js';
+import { useApp } from '../../hooks/useApp';
+import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers';
+import { SPECIALIZATIONS, RANKS } from '../../data/specializations';
 import ClassIcon from '../ClassIcon.jsx';
 
 export default function HeroInspector() {

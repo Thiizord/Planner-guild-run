@@ -2,7 +2,7 @@
 // Herois da reserva ficam FORA do tabuleiro, num painel lateral.
 // Linhas pares: 7 hexes | Linhas impares: 6 hexes com offset (honeycomb horizontal).
 
-import { useApp } from '../../hooks/useApp.js';
+import { useApp } from '../../hooks/useApp';
 import HexCell from './HexCell.jsx';
 
 const ROWS = 4;

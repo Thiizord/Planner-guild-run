@@ -1,8 +1,8 @@
 // App.jsx - Layout raiz: topbar + banner + 3 zonas (análise | arena | biblioteca).
 // Fluxo sem popups preservado; arquitetura e reducer intactos.
 
-import { useApp } from './hooks/useApp.js';
-import { countTeam } from './utils/helpers.js';
+import { useApp } from './hooks/useApp';
+import { countTeam } from './utils/helpers';
 import Header from './components/Header.jsx';
 import HeroPool from './components/HeroPool/HeroPool.jsx';
 import TeamGrid from './components/Team/TeamGrid.jsx';
