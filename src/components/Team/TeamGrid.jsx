@@ -26,6 +26,53 @@ export default function TeamGrid({ count }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [state.placementCharId, dispatch]);
 
+  // auto-scroll durante drag: quando o mouse chega perto do topo/fundo
+  // da tela, a página scrolla — permite arrastar um herói para fora da área visível
+  useEffect(() => {
+    let raf = null;
+    const EDGE = 80;      // pixels da borda que dispara o scroll
+    const SPEED = 12;     // velocidade do scroll
+
+    const onDragOver = (e) => {
+      if (!e.dataTransfer) return;
+      // apenas durante drag de heróis (nosso payload é JSON com charId)
+      const types = e.dataTransfer.types;
+      if (!types || !Array.from(types).includes('text/plain')) return;
+
+      const y = e.clientY;
+      const h = window.innerHeight;
+
+      if (y < EDGE) {
+        // perto do topo: scrolla para cima
+        if (raf) cancelAnimationFrame(raf);
+        const step = () => { window.scrollBy(0, -SPEED); raf = requestAnimationFrame(step); };
+        raf = requestAnimationFrame(step);
+      } else if (y > h - EDGE) {
+        // perto do fundo: scrolla para baixo
+        if (raf) cancelAnimationFrame(raf);
+        const step = () => { window.scrollBy(0, SPEED); raf = requestAnimationFrame(step); };
+        raf = requestAnimationFrame(step);
+      } else if (raf) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
+    };
+
+    const stopScroll = () => {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    };
+
+    document.addEventListener('dragover', onDragOver);
+    document.addEventListener('drop', stopScroll);
+    document.addEventListener('dragend', stopScroll);
+    return () => {
+      document.removeEventListener('dragover', onDragOver);
+      document.removeEventListener('drop', stopScroll);
+      document.removeEventListener('dragend', stopScroll);
+      stopScroll();
+    };
+  }, []);
+
   // clique num hex do tabuleiro
   const handleHexClick = (hexIndex) => {
     const charId = state.main[hexIndex];
@@ -91,14 +138,17 @@ export default function TeamGrid({ count }) {
     }
   };
 
-  // drop de drag num slot de reserva
+  // drop de drag num slot de reserva (aceita do tabuleiro OU direto da biblioteca)
   const handleReserveDrop = (e, index) => {
     e.preventDefault();
     const raw = e.dataTransfer.getData('text/plain');
     if (!raw) return;
     try {
       const drag = JSON.parse(raw);
-      if (drag.charId && drag.source === 'team') {
+      if (!drag.charId) return;
+
+      if (drag.source === 'team') {
+        // ja esta no time: move/troca para a reserva
         dispatch({
           type: 'SWAP_SLOTS',
           charId: drag.charId,
@@ -107,6 +157,9 @@ export default function TeamGrid({ count }) {
           toType: 'reserve',
           toIndex: index,
         });
+      } else if (drag.source === 'pool') {
+        // vem direto da biblioteca: adiciona a reserva
+        dispatch({ type: 'DROP_CHAR', charId: drag.charId, teamType: 'reserve', slotIndex: index });
       }
     } catch { /* noop */ }
   };
@@ -119,7 +172,7 @@ export default function TeamGrid({ count }) {
   };
 
   return (
-    <div className="arena panel">
+    <div className="arena">
       <div className="arena-head">
         <h2 className="arena-title">Campo de Batalha</h2>
         <span className="badge" id="teamCount">{count}/6</span>

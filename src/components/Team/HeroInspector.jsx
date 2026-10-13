@@ -1,10 +1,11 @@
 // HeroInspector.jsx - Painel de detalhes do herói selecionado:
-// retrato, rank (C/B/A/S), especializacao (3 cards com tier), stats base.
-// Padrao visual inspirado no guildrundb.gg/builder.
+// retrato, habilidade base (rank C), rank pills, especializacao, stats.
+// Redesenhado com foco UI/UX — X para remover do time.
 
 import { useApp } from '../../hooks/useApp';
 import { getSelectedChar, getCharItems, getItem } from '../../utils/helpers';
 import { SPECIALIZATIONS, RANKS } from '../../data/specializations';
+import { HERO_BASE_ABILITIES } from '../../data/heroAbilities';
 import ClassIcon from '../ClassIcon.jsx';
 
 export default function HeroInspector() {
@@ -16,8 +17,13 @@ export default function HeroInspector() {
   const rank = config.rank || 'C';
   const spec = config.spec || null;
   const specs = SPECIALIZATIONS[char.id] || [];
+  const base = HERO_BASE_ABILITIES[char.id];
   const items = getCharItems(state.items, char.id);
   const equipped = items.filter((id) => id !== null);
+
+  // encontra onde o heroi esta (main ou reserve) para o botao X
+  const mainIdx = state.main.indexOf(char.id);
+  const resIdx = state.reserve.indexOf(char.id);
 
   const handleRank = (r) => {
     dispatch({ type: 'SET_HERO_RANK', charId: char.id, rank: r });
@@ -25,6 +31,14 @@ export default function HeroInspector() {
 
   const handleSpec = (specId) => {
     dispatch({ type: 'SET_HERO_SPEC', charId: char.id, spec: specId });
+  };
+
+  const handleRemove = () => {
+    if (mainIdx !== -1) {
+      dispatch({ type: 'REMOVE_CHAR', teamType: 'main', index: mainIdx });
+    } else if (resIdx !== -1) {
+      dispatch({ type: 'REMOVE_CHAR', teamType: 'reserve', index: resIdx });
+    }
   };
 
   return (
@@ -36,7 +50,12 @@ export default function HeroInspector() {
             : <div className="avatar-initial">{char.name.charAt(0)}</div>}
         </div>
         <div className="inspector-info">
-          <div className="inspector-name">{char.name}</div>
+          <div className="inspector-name-row">
+            <span className="inspector-name">{char.name}</span>
+            <button className="inspector-remove" onClick={handleRemove} aria-label={`Remover ${char.name}`} title="Remover do time">
+              X
+            </button>
+          </div>
           <div className="inspector-role">{char.role}</div>
           <div className="inspector-classes">
             <ClassIcon name={char.class} size={14} />
@@ -45,6 +64,21 @@ export default function HeroInspector() {
           </div>
         </div>
       </div>
+
+      {/* habilidade base (rank C) */}
+      {base && (
+        <div className="inspector-section">
+          <span className="inspector-label">
+            {base.kind === 'active' ? 'Habilidade Ativa' : 'Habilidade Passiva'}
+            <span className="base-tag">base</span>
+          </span>
+          <div className={`base-ability ${base.kind}`}>
+            <span className={`ba-kind ${base.kind}`}>{base.kind === 'active' ? 'Ativa' : 'Passiva'}</span>
+            <span className="ba-name">{base.name}</span>
+            <p className="ba-desc">{base.description}</p>
+          </div>
+        </div>
+      )}
 
       {/* rank selector */}
       <div className="inspector-section">
@@ -64,7 +98,7 @@ export default function HeroInspector() {
         </div>
       </div>
 
-      {/* specialization selector (unlocked at rank B) */}
+      {/* especializacao (rank B+) */}
       <div className="inspector-section">
         <span className="inspector-label">
           Especialização
@@ -93,7 +127,7 @@ export default function HeroInspector() {
         )}
       </div>
 
-      {/* base stats */}
+      {/* stats base */}
       <div className="inspector-section">
         <span className="inspector-label">Atributos base</span>
         <div className="inspector-stats">
@@ -106,7 +140,7 @@ export default function HeroInspector() {
         </div>
       </div>
 
-      {/* equipped items summary */}
+      {/* itens equipados */}
       {equipped.length > 0 && (
         <div className="inspector-section">
           <span className="inspector-label">Itens equipados ({equipped.length}/5)</span>

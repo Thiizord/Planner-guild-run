@@ -127,6 +127,19 @@ export default function HexCell({
       onDrop={handleDrop}
       title={`${c.name} -- ${c.class}${c.class2 ? '/' + c.class2 : ''} -- clique de novo para mover`}
     >
+      {/* botao X para remover (aparece no hover) */}
+      <button
+        className="hex-remove"
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch({ type: 'REMOVE_CHAR', teamType: 'main', index: hexIndex });
+        }}
+        aria-label={`Remover ${c.name}`}
+        title="Remover do time"
+      >
+        X
+      </button>
+
       <div className="hex-portrait">
         {c.image
           ? <img src={c.image} alt={c.name} draggable="false" />

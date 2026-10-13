@@ -1409,17 +1409,17 @@ button { font-family: var(--font-body); }
    TABULEIRO HEXAGONAL — GRID 7x4 (25 celulas, padrao do jogo)
    ============================================================ */
 :root {
-  --hex-w: 112px;
-  --hex-h: 126px;
+  --hex-w: 118px;
+  --hex-h: 134px;
   --hex-gap: 4px;
 }
 
 @media (max-width: 1180px) {
-  :root { --hex-w: 90px; --hex-h: 102px; --hex-gap: 3px; }
+  :root { --hex-w: 92px; --hex-h: 104px; --hex-gap: 3px; }
 }
 
 @media (max-width: 760px) {
-  :root { --hex-w: 46px; --hex-h: 52px; --hex-gap: 2px; }
+  :root { --hex-w: 48px; --hex-h: 54px; --hex-gap: 2px; }
 }
 
 .hex-grid {
@@ -2062,3 +2062,114 @@ button { font-family: var(--font-body); }
 
 .insp-item-icon { width: 16px; height: 16px; object-fit: contain; }
 .insp-item-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }
+
+/* botao X para remover do hex (aparece no hover) */
+.hex-remove {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(13, 18, 14, 0.92);
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
+  z-index: 10;
+  padding: 0;
+}
+
+.hex-cell:hover .hex-remove { opacity: 1; }
+.hex-remove:hover { color: #f0a89f; border-color: var(--red); background: rgba(208, 90, 78, 0.15); }
+
+/* ---- habilidade base no inspector ---- */
+.base-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: none;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+.base-ability {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-s);
+  background: var(--inset);
+  padding: 10px 12px;
+  position: relative;
+}
+
+.base-ability.active { border-left: 3px solid var(--gold); }
+.base-ability.passive { border-left: 3px solid var(--green); }
+
+.ba-kind {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.ba-kind.active { background: rgba(201, 162, 75, 0.15); color: var(--gold-bright); }
+.ba-kind.passive { background: rgba(126, 217, 138, 0.12); color: var(--green); }
+
+.ba-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin-bottom: 4px;
+}
+
+.ba-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* botao X no inspector (remover do time) */
+.inspector-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inspector-remove {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--inset);
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+
+.inspector-remove:hover { color: #f0a89f; border-color: var(--red); }
