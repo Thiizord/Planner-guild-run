@@ -119,7 +119,7 @@ export function reducer(state: AppState, action: AppAction): AppState {
       };
     }
 
-    // ---------- Remover personagem (actions.js → removeChar) ----------
+    // ---------- Remover personagem ----------
     case 'REMOVE_CHAR': {
       const { teamType, index } = action;
       const arr = teamType === 'main' ? state.main : state.reserve;
@@ -128,7 +128,10 @@ export function reducer(state: AppState, action: AppAction): AppState {
       const newArr = [...arr];
       newArr[index] = null;
       const selectedCharId = state.selectedCharId === charId ? null : state.selectedCharId;
-      return { ...state, [teamType]: newArr, selectedCharId };
+      // limpa heroConfigs e items do heroi removido
+      const { [charId]: _rmConfig, ...restConfigs } = state.heroConfigs;
+      const { [charId]: _rmItems, ...restItems } = state.items;
+      return { ...state, [teamType]: newArr, selectedCharId, heroConfigs: restConfigs, items: restItems };
     }
 
     // ---------- Mover entre titulares/reservas (actions.js → moveChar) ----------
