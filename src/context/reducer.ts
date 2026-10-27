@@ -1,6 +1,17 @@
-// reducer.ts - Todas as ações do app.
-// Toda a lógica de modificação de estado passa por aqui.
-// Fluxo 100% sem popups: nenhum toast, nenhum modal.
+/**
+ * @file reducer.ts
+ * @description Redutor central e maquina de transicao de estados da aplicacao (Context API).
+ * 
+ * Principios e garantias:
+ * - Mutacao estritamente imutavel: todas as transicoes produzem novos objetos de estado via spread.
+ * - Invariantes de equipe:
+ *   * Capacidade maxima total de 6 herois (main + reserve <= 6).
+ *   * Capacidade maxima no tabuleiro principal: 6 posicoes ocupadas dentre as 28 celulas.
+ *   * Capacidade maxima na reserva: 3 posicoes de banco.
+ *   * Unicidade: impede a presenca duplicada do mesmo ID de heroi no conjunto ativo.
+ * - Zero modais bloqueantes: todas as confirmacoes (ex: limpar time) sao tratadas via estados
+ *   inline efemeros, garantindo ergonomia de uso continuo.
+ */
 
 import { getRelic, isInTeam, getCharItems } from '../utils/helpers';
 import type { AppState, AppAction, TeamType } from '../types';

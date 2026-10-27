@@ -1,6 +1,20 @@
-// HexBoard.jsx - Tabuleiro hexagonal 4x7 (28 celulas, grid uniforme).
-// Todas as linhas tem 7 hexes; linhas impares tem offset (honeycomb).
-// Herois da reserva ficam FORA do tabuleiro, num painel lateral.
+/**
+ * @file HexBoard.jsx
+ * @description Tabuleiro tatico hexagonal 4x7 (28 celulas uniformes em malha favo de mel).
+ * 
+ * Arquitetura de renderizacao:
+ * - Grade matematica uniforme: 4 linhas x 7 colunas = 28 posicoes taticas.
+ * - Deslocamento horizontal (offset): linhas impares recebem classe CSS offset (meio hexagono de recuo)
+ *   para formar o encaixe perfeito de colmeia (honeycomb geometry).
+ * - Desacoplamento da reserva: herois no banco (reserva) ficam fora do grid, num painel lateral dedicado,
+ *   garantindo foco exclusivo das celulas do tabuleiro na formacao em combate.
+ * 
+ * Ciclo de interacao e estados de celula:
+ * - isSelected: heroi na celula esta inspecionado no painel de detalhes.
+ * - isPicked: heroi nesta celula foi selecionado para movimentacao tatica.
+ * - isValidTarget: celula elegivel para drop via drag-and-drop ou segundo clique de movimentacao.
+ * - isPlacementActive: modo de posicionamento ativo globalmente no contexto da aplicacao.
+ */
 
 import { useApp } from '../../hooks/useApp';
 import HexCell from './HexCell.jsx';

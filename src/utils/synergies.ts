@@ -1,4 +1,14 @@
-// synergies.ts - Cálculo de sinergias (recebe o time como parâmetro)
+/**
+ * @file synergies.ts
+ * @description Modulo analitico para computo matematico e agregacao de sinergias de classe.
+ * 
+ * Regras de negocio:
+ * - Suporta herois com dual-class (classe primaria e secundaria), incrementando contadores
+ *   de forma concorrente em ambos os grupos.
+ * - Avalia faixas escalonadas de ativacao (thresholds em 2, 3 e 4 membros).
+ * - Fornece calculo prospectivo (quantos membros faltam para o proximo tier de sinergia)
+ *   utilizado pelo componente visual SynergyPanel.
+ */
 
 import { SYNERGY_CONFIG } from '../data/data';
 import type { Hero, Synergy, ClassAnalysis } from '../types';

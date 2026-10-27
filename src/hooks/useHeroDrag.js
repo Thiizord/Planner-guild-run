@@ -1,14 +1,22 @@
-// useHeroDrag.js - Sistema de drag customizado baseado em Pointer Events.
-// Substitui o HTML5 Drag & Drop nativo, que suprime eventos de wheel
-// durante a operação de drag. Com Pointer Events, o scroll do mouse
-// funciona normalmente enquanto o usuário arrasta um herói.
-//
-// Fluxo:
-// 1. pointerdown num elemento arrastável → startHeroDrag(data, e, dispatch)
-// 2. pointermove → se distancia > 5px, inicia drag real (mostra ghost)
-// 3. wheel → funciona normalmente (não há drag nativo bloqueando)
-// 4. pointerup → detecta alvo via elementFromPoint, despacha action
-// 5. click suprimido se houve drag (evita placement fantasma)
+/**
+ * @file useHeroDrag.js
+ * @description Motor reativo customizado de Drag & Drop baseado na W3C Pointer Events API.
+ * 
+ * Racional arquitetural:
+ * - Substitui a API nativa de HTML5 Drag and Drop (DataTransfer), que suprime intencionalmente
+ *   eventos de rolagem de roda do mouse ('wheel') durante operacoes ativas de arrasto.
+ * - Utilizando Pointer Events em conjunto com elementFromPoint e coordenadas clientX/Y,
+ *   a interface mantem rolagem vertical suave desobstruida da pagina enquanto o usuario move unidades.
+ * 
+ * Maquina de estados do ciclo de vida:
+ * 1. pointerdown: captura posicao inicial (startX, startY), dados do heroi e armazena o dispatcher do Context.
+ * 2. pointermove: avalia limiar euclidiano (distancia hipot > 5px). Superando o limiar, projeta elemento
+ *    fantasma flutuante (ghost clone) no DOM e atualiza classe global no document.body.
+ * 3. wheel: preservado integralmente pelo navegador sem interferencia.
+ * 4. pointerup: identifica a celula receptora via document.elementFromPoint, despacha a acao de posicionamento
+ *    ou troca (DROP_CHAR / SWAP_CHARS) e desmonta o elemento fantasma.
+ * 5. debounce/suppression: flags impedem disparos espurios de eventos de clique subsequentes.
+ */
 
 let dragData = null;        // { charId, source, teamType?, index? }
 let dragDispatch = null;
